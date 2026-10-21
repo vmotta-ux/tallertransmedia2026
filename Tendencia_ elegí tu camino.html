@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tendencia: elegí tu camino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#f7f9f9; --elev:#ffffff; --text:#0f1419; --muted:#536471;
+  --line:#eff3f4; --line-strong:#cfd9de; --blue:#1d9bf0; --blue-soft:rgba(29,155,240,.1);
+  --good:#00ba7c; --bad:#f4212e; --hover:rgba(15,20,25,.04);
+  --heat:linear-gradient(90deg,#1d9bf0 0%,#8b5cf6 38%,#ff3d71 70%,#ff9f1c 100%);
+  --display:'Bricolage Grotesque','Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#16181c; --elev:#000000; --text:#e7e9ea; --muted:#71767b;
+    --line:#2f3336; --line-strong:#3e4144; --blue-soft:rgba(29,155,240,.16); --hover:rgba(231,233,234,.04);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#16181c; --elev:#000000; --text:#e7e9ea; --muted:#71767b;
+  --line:#2f3336; --line-strong:#3e4144; --blue-soft:rgba(29,155,240,.16); --hover:rgba(231,233,234,.04);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.42;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+img,svg{max-width:100%}
+.hidden{display:none!important}
+
+/* ---------- start screen ---------- */
+.start{min-height:100vh;display:grid;place-items:center;padding:32px 20px}
+.start-inner{width:100%;max-width:520px}
+.glyph{width:40px;height:40px;display:block}
+.start h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,64px);line-height:.98;letter-spacing:-.03em;margin:28px 0 18px}
+.ticker{font-family:var(--display);font-weight:700;font-size:clamp(22px,4vw,28px);letter-spacing:-.01em;background:var(--heat);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;margin:0 0 6px}
+.start p.lead{color:var(--muted);font-size:17px;margin:0 0 30px;max-width:44ch}
+.field{display:block;border:1px solid var(--line-strong);border-radius:6px;padding:8px 12px 10px;margin-bottom:14px;transition:border-color .15s}
+.field:focus-within{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.field span{display:block;font-size:13px;color:var(--muted)}
+.field:focus-within span{color:var(--blue)}
+.field input{width:100%;border:0;background:transparent;outline:none;font-size:17px;padding:2px 0 0}
+.handle-wrap{display:flex;align-items:baseline;gap:1px}
+.handle-wrap b{font-weight:400;color:var(--muted);font-size:17px}
+.err{color:var(--bad);font-size:14px;min-height:20px;margin:-4px 0 10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;font-weight:700;font-size:16px;padding:0 24px;min-height:48px;transition:filter .15s,background .15s}
+.btn-main{background:var(--text);color:var(--bg);width:100%}
+.btn-main:hover{filter:brightness(.88)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{filter:brightness(.92)}
+.btn-ghost{background:transparent;border:1px solid var(--line-strong);color:var(--text)}
+.btn-ghost:hover{background:var(--hover)}
+
+/* ---------- profile intro ---------- */
+.profile{max-width:600px;margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line);min-height:100vh}
+.banner{height:200px;background:var(--heat);position:relative;overflow:hidden}
+.banner::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(255,255,255,.08) 22px 24px)}
+.pf-body{padding:0 16px 32px}
+.pf-top{display:flex;justify-content:space-between;align-items:flex-end;margin-top:-68px;position:relative}
+.avatar{border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;flex:none;user-select:none}
+.avatar.xl{width:134px;height:134px;font-size:54px;border:4px solid var(--bg);font-family:var(--display)}
+.avatar.md{width:40px;height:40px;font-size:17px}
+.pf-name{font-family:var(--display);font-size:24px;font-weight:800;letter-spacing:-.01em;margin:12px 0 0;display:flex;align-items:center;gap:6px}
+.muted{color:var(--muted)}
+.pf-bio{margin:12px 0}
+.pf-counts{display:flex;gap:20px;margin:10px 0 24px}
+.pf-counts b{font-variant-numeric:tabular-nums}
+.brief{border:1px solid var(--line);border-radius:16px;padding:18px 18px 20px;margin-bottom:20px}
+.brief h2{font-family:var(--display);font-size:21px;margin:0 0 8px;letter-spacing:-.01em}
+.brief p{margin:0 0 10px}
+.brief p:last-child{margin:0}
+.badge{width:20px;height:20px;flex:none}
+
+/* ---------- app ---------- */
+.app{display:grid;grid-template-columns:260px minmax(0,600px) 350px;justify-content:center;min-height:100vh}
+.rail{position:sticky;top:env(safe-area-inset-top,0px);height:calc(100vh - env(safe-area-inset-top,0px));padding:14px 20px 20px 12px;display:flex;flex-direction:column;gap:6px}
+.rail-brand{display:flex;align-items:center;gap:10px;padding:8px 10px 18px}
+.rail-brand span{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.02em}
+.stage-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.stage-list li{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:999px;font-size:17px;color:var(--muted)}
+.stage-list li .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;border:1.5px solid var(--line-strong);flex:none;font-variant-numeric:tabular-nums}
+.stage-list li.done{color:var(--text)}
+.stage-list li.done .n{background:var(--text);color:var(--bg);border-color:var(--text)}
+.stage-list li.now{color:var(--text);font-weight:700}
+.stage-list li.now .n{border:0;background:var(--heat);color:#fff}
+.rail-me{margin-top:auto;display:flex;align-items:center;gap:10px;padding:10px;border-radius:999px}
+.rail-me div{min-width:0}
+.rail-me b,.rail-me span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.main{border-left:1px solid var(--line);border-right:1px solid var(--line);min-height:100vh;min-width:0}
+.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 10px}
+.head h2{font-family:var(--display);font-size:20px;font-weight:800;margin:0;letter-spacing:-.01em}
+.head .sub{font-size:13px;color:var(--muted)}
+.segs{display:flex;gap:4px;padding:0 16px 12px}
+.segs i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.segs i.on{background:var(--heat);background-size:600% 100%}
+.mini-stats{display:none;gap:14px;font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.mini-stats b{display:block;font-size:15px}
+
+/* posts */
+.post{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.post.mine{background:var(--blue-soft)}
+.post-body{min-width:0;flex:1}
+.post-meta{display:flex;align-items:center;gap:4px;min-width:0;white-space:nowrap}
+.post-meta b{overflow:hidden;text-overflow:ellipsis}
+.post-meta .muted{overflow:hidden;text-overflow:ellipsis}
+.post-text{margin:2px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.post-text .mention{color:var(--blue)}
+.actions{display:flex;justify-content:space-between;max-width:430px;margin-top:10px;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.actions span{display:inline-flex;align-items:center;gap:6px}
+.actions svg{width:18px;height:18px}
+.quote{border:1px solid var(--line-strong);border-radius:16px;padding:10px 12px;margin-top:10px;font-size:14px}
+.quote .post-meta{font-size:14px}
+.news{border:1px solid var(--line-strong);border-radius:16px;overflow:hidden;margin-top:10px}
+.news-img{height:120px;background:var(--surface);position:relative;display:flex;align-items:flex-end;padding:10px 12px}
+.news-img .live{background:var(--bad);color:#fff;font-weight:700;font-size:12px;border-radius:4px;padding:2px 7px}
+.news-img .tag{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.02em;color:var(--muted);position:absolute;right:12px;top:10px;opacity:.6}
+.news-txt{padding:10px 12px 12px;border-top:1px solid var(--line)}
+.news-txt small{color:var(--muted)}
+.news-txt div{font-weight:600}
+.dm{border:1px solid var(--line-strong);border-radius:16px;padding:12px;margin-top:10px;display:flex;gap:10px;align-items:flex-start}
+.dm-bubble{background:var(--surface);border-radius:18px 18px 18px 4px;padding:10px 14px;font-size:14px}
+.big-counts{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0 0;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.big-counts b{color:var(--text);font-variant-numeric:tabular-nums}
+
+/* composer / choices */
+.composer{padding:16px;border-bottom:1px solid var(--line)}
+.composer h3{font-family:var(--display);font-size:22px;letter-spacing:-.01em;margin:0 0 4px}
+.composer > p{margin:0 0 14px;color:var(--muted)}
+.choices{display:grid;gap:10px}
+.choice{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;background:transparent;border:1px solid var(--line-strong);border-radius:14px;padding:14px;transition:background .15s,border-color .15s,opacity .2s}
+.choice:hover:not(:disabled){background:var(--hover);border-color:var(--blue)}
+.choice .ic{font-size:22px;line-height:1.1;flex:none;width:28px;text-align:center}
+.choice b{display:block;font-size:16px}
+.choice span.d{display:block;color:var(--muted);margin-top:2px}
+.choice:disabled{cursor:default}
+.choice.picked{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);background:var(--blue-soft)}
+.choice.dim{opacity:.4}
+
+/* result */
+.result{border-bottom:1px solid var(--line)}
+.result-head{padding:14px 16px 0;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.result-head::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--heat)}
+.deltas{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px}
+.chip{font-size:14px;font-weight:600;padding:5px 11px;border-radius:999px;border:1px solid var(--line-strong);font-variant-numeric:tabular-nums}
+.chip.up{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,transparent)}
+.chip.down{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.concept{margin:4px 16px 16px;border-radius:16px;padding:14px 16px;background:var(--surface);display:flex;gap:12px}
+.concept .ic{font-size:20px;line-height:1.2}
+.concept small{color:var(--muted);display:block}
+.concept b{display:block;font-size:16px;margin:1px 0 3px}
+.concept p{margin:0}
+.next{display:flex;justify-content:flex-end;padding:0 16px 18px}
+
+/* side */
+.side{padding:12px 0 24px 24px;display:flex;flex-direction:column;gap:16px}
+.card{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.card h3{font-family:var(--display);font-size:20px;font-weight:800;margin:0;padding:12px 16px 4px;letter-spacing:-.01em}
+.stat{padding:10px 16px}
+.stat-top{display:flex;justify-content:space-between;align-items:baseline}
+.stat-top b{font-size:15px}
+.stat-top .v{font-variant-numeric:tabular-nums;font-weight:700}
+.followers-big{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:7px}
+.bar i{display:block;height:100%;border-radius:4px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.bar.rep i{background:var(--text)}
+.bar.reach i{background:var(--heat);background-size:350px 100%}
+.stat small{color:var(--muted)}
+.trend{padding:10px 16px}
+.trend small{color:var(--muted);display:block;font-size:13px}
+.trend b{display:block}
+.mapwrap{padding:4px 8px 8px}
+.map-cap{padding:0 16px 14px;color:var(--muted);font-size:14px}
+.map text{font-family:var(--body);font-size:11px;fill:var(--muted)}
+.map text.on{fill:var(--text);font-weight:600}
+@keyframes pulse{0%{r:8;opacity:.7}100%{r:20;opacity:0}}
+.map .ping{animation:pulse 1.8s ease-out infinite;fill:none;stroke:#ff3d71;stroke-width:1.5}
+
+/* menú + posteo eliminado */
+.head-left{display:flex;align-items:center;gap:12px;min-width:0}
+.menu-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-strong);background:transparent;border-radius:999px;padding:0 12px 0 8px;min-height:34px;font-weight:600;font-size:14px;flex:none}
+.menu-btn:hover{background:var(--hover)}
+.menu-btn svg{width:18px;height:18px}
+.rail-menu{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:999px;border:0;background:transparent;font-size:17px;text-align:left;margin-top:14px}
+.rail-menu:hover{background:var(--hover)}
+.rail-menu svg{width:22px;height:22px;flex:none}
+.tomb{border:1px solid var(--line-strong);border-radius:12px;padding:12px 14px;color:var(--muted);background:var(--surface)}
+@media (max-width:480px){.menu-btn span{display:none}.menu-btn{padding:0 8px}}
+
+/* lo tuyo, el narrador y las respuestas */
+.post.mine{background:linear-gradient(90deg,rgba(29,155,240,.14),rgba(255,61,113,.06));box-shadow:inset 4px 0 0 #1d9bf0}
+.mine-label{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#1d9bf0;margin-bottom:2px}
+.mine-label::before{content:"";width:7px;height:7px;border-radius:50%;background:#1d9bf0}
+.narr{margin:12px 16px;border-radius:14px;background:var(--surface);border:1px dashed var(--line-strong);padding:12px 14px}
+.narr-head{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:4px}
+.narr-head b{font-weight:700}
+.narr-glyph{width:20px;height:20px;flex:none}
+.narr p{margin:0;font-size:16px;line-height:1.45}
+.replies-label{padding:10px 16px 8px;font-size:13px;font-weight:700;color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.reply-to{font-size:14px;color:var(--muted)}
+.reply-to span{color:var(--blue)}
+.compose-row{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.compose-ph{font-size:20px;color:var(--muted)}
+.choice .draft{display:block;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--surface);font-size:14px}
+.choice .draft .mention{color:var(--blue)}
+.disclaimer{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* ending */
+
+.ending{padding:28px 16px 8px}
+.ending .emoji{font-size:44px}
+.ending h2{font-family:var(--display);font-weight:800;font-size:clamp(36px,7vw,52px);line-height:1;letter-spacing:-.03em;margin:10px 0 12px}
+.ending p{font-size:17px;margin:0 0 18px;max-width:52ch}
+.final-stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;margin:0 0 26px}
+.final-stats div{padding:12px 14px}
+.final-stats div+div{border-left:1px solid var(--line)}
+.final-stats small{color:var(--muted);display:block}
+.final-stats b{font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
+.sb-title{font-family:var(--display);font-size:22px;font-weight:800;margin:0 16px 4px;letter-spacing:-.01em}
+.sb-sub{margin:0 16px 12px;color:var(--muted)}
+.storyboard{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:12px;overflow-x:auto;padding:4px 16px 18px;scroll-snap-type:x mandatory}
+.frame{scroll-snap-align:start;border:1px solid var(--line-strong);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px;min-height:200px}
+.frame-n{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.frame-n i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--heat);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px}
+.frame b{font-size:15px}
+.frame p{margin:0;font-size:14px;color:var(--muted);flex:1}
+.frame .fx{display:flex;flex-wrap:wrap;gap:4px}
+.frame .fx .chip{font-size:12px;padding:2px 8px}
+.end-actions{display:flex;gap:10px;flex-wrap:wrap;padding:6px 16px 32px}
+
+@media (max-width:1180px){
+  .app{grid-template-columns:minmax(0,600px) 330px}
+  .rail{display:none}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr);max-width:640px;margin:0 auto}
+  .main{border:0}
+  .side{padding:16px}
+  .mini-stats{display:flex}
+  .side .stats-card{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-heat" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d9bf0"/><stop offset=".4" stop-color="#8b5cf6"/>
+      <stop offset=".72" stop-color="#ff3d71"/><stop offset="1" stop-color="#ff9f1c"/>
+    </linearGradient>
+    <symbol id="i-glyph" viewBox="0 0 40 40">
+      <rect width="40" height="40" rx="11" fill="url(#g-heat)"/>
+      <path d="M8 23h6l3-9 5 15 3-9h7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-badge" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="9" fill="#1d9bf0"/>
+      <path d="M6 10.3l2.6 2.6L14.2 7.3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-reply" viewBox="0 0 24 24"><path d="M4 11.5c0-4 3.4-7 8-7s8 3 8 7-3.4 7-8 7c-1 0-2-.1-2.8-.4L5 20l1-3.7C4.7 15 4 13.3 4 11.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-repost" viewBox="0 0 24 24"><path d="M7 7h9a3 3 0 0 1 3 3v2M17 17H8a3 3 0 0 1-3-3v-2M16 4l3 3-3 3M8 20l-3-3 3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-like" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-views" viewBox="0 0 24 24"><path d="M5 20V12M10 20V6M15 20v-9M20 20V9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- Pantalla 1: nombre -->
+<section class="start" id="screen-start">
+  <div class="start-inner">
+    <svg class="glyph"><use href="#i-glyph"/></svg>
+    <h1>Un posteo. Seis decisiones. Todo el país mirando.</h1>
+    <p class="ticker" id="ticker" aria-hidden="true">0 vistas</p>
+    <p class="lead">Un juego sobre cómo un posteo en X se vuelve viral, cambia de sentido y termina en la tele, los portales y los diarios. Vos decidís cada paso.</p>
+    <form id="start-form" novalidate>
+      <label class="field"><span>Tu nombre</span><input id="in-name" maxlength="30" autocomplete="off" placeholder="Ej.: Sofía Ríos"></label>
+      <label class="field"><span>Tu usuario</span><span class="handle-wrap"><b>@</b><input id="in-handle" maxlength="15" autocomplete="off" placeholder="sofiarios"></span></label>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn btn-main" type="submit">Crear mi perfil</button>
+    </form>
+  </div>
+</section>
+
+<!-- Pantalla 2: perfil -->
+<section class="profile hidden" id="screen-profile">
+  <div class="banner"></div>
+  <div class="pf-body">
+    <div class="pf-top">
+      <div class="avatar xl" id="pf-avatar"></div>
+      <button class="btn btn-ghost" id="btn-edit" type="button" style="min-height:36px;font-size:15px;padding:0 16px">Cambiar nombre</button>
+    </div>
+    <div class="pf-name"><span id="pf-name"></span><svg class="badge"><use href="#i-badge"/></svg></div>
+    <div class="muted" id="pf-handle"></div>
+    <p class="pf-bio">Creador de contenido. Opino de todo, a veces de más. 📍 Buenos Aires</p>
+    <div class="pf-counts"><span><b>812</b> <span class="muted">Siguiendo</span></span><span><b id="pf-followers"></b> <span class="muted">Seguidores</span></span></div>
+    <div class="brief">
+      <h2 id="pf-hello"></h2>
+      <p>Tenés 200 mil seguidores. No sos periodista ni figura de la tele, pero en esta época cualquiera con una cuenta grande se vuelve “comunicador”. Y eso tiene un costo: lo que publicás puede sacarse de contexto, discutirse en miles de citas y terminar como noticia en un portal.</p>
+      <p>En las próximas seis etapas vas a decidir qué publicar y cómo reaccionar cuando todo se descontrole. Cada elección mueve tus seguidores, tu reputación y hasta dónde llega la historia.</p>
+      <p class="muted">Si tu reputación toca fondo o te quedás sin audiencia, el juego termina antes.</p>
+      <p class="disclaimer">Las personas, cuentas y comercios del juego son inventados. Los medios reales que aparecen (TN, Telefe, LAM, LUZU, OLGA y Blender) están en situaciones ficticias.</p>
+    </div>
+    <button class="btn btn-blue" id="btn-play" type="button" style="width:100%">Empezar</button>
+  </div>
+</section>
+
+<!-- Pantalla 3: juego -->
+<div class="app hidden" id="screen-game">
+  <nav class="rail" aria-label="Etapas">
+    <div class="rail-brand"><svg class="glyph" style="width:32px;height:32px"><use href="#i-glyph"/></svg><span>Tendencia</span></div>
+    <ol class="stage-list" id="stage-list"></ol>
+    <button class="rail-menu" type="button" id="btn-menu-rail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Menú principal</button>
+    <div class="rail-me" id="rail-me"></div>
+  </nav>
+
+  <main class="main">
+    <header class="head">
+      <div class="head-row">
+        <div class="head-left"><button class="menu-btn" type="button" id="btn-menu" aria-label="Volver al menú principal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Menú</span></button><div><h2 id="head-title"></h2><div class="sub" id="head-sub"></div></div></div>
+        <div class="mini-stats" id="mini-stats"></div>
+      </div>
+      <div class="segs" id="segs"></div>
+    </header>
+    <div id="feed" tabindex="-1"></div>
+  </main>
+
+  <aside class="side">
+    <section class="card stats-card" aria-label="Tus números">
+      <h3>Tus números</h3>
+      <div class="stat"><small>Seguidores</small><div class="followers-big" id="st-followers"></div></div>
+      <div class="stat"><div class="stat-top"><b>Reputación</b><span class="v" id="st-rep"></span></div><div class="bar rep"><i id="bar-rep"></i></div></div>
+      <div class="stat" style="padding-bottom:16px"><div class="stat-top"><b>Alcance</b><span class="v" id="st-reach"></span></div><div class="bar reach"><i id="bar-reach"></i></div><small>Cuánto circula la historia fuera de tu cuenta</small></div>
+    </section>
+    <section class="card" aria-label="Propagación">
+      <h3>Hasta dónde llegó</h3>
+      <div class="mapwrap" id="map"></div>
+      <div class="map-cap" id="map-cap"></div>
+    </section>
+    <section class="card" aria-label="Tendencias">
+      <h3>Tendencias en Argentina</h3>
+      <div id="trends" style="padding-bottom:8px"></div>
+    </section>
+  </aside>
+</div>
+
+<script>
+(function(){
+"use strict";
+const START_FOLLOWERS = 200000;
+const F_SCALE = 0.25; /* escala de las variaciones de seguidores para una cuenta de 200 mil */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+
+const S = { name:'', handle:'', followers:START_FOLLOWERS, rep:60, reach:10, tag:null, flags:{}, stage:0, history:[] };
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function sub(t){ return t.replace(/\{h\}/g, S.handle).replace(/\{n\}/g, S.name).replace(/\{N\}/g, S.name.replace(/\s+/g,'')); }
+function rich(t){ return esc(sub(t)).replace(/(@[A-Za-z0-9_]+|#[\wÁÉÍÓÚáéíóúÑñ]+)/g, '<span class="mention">$1</span>'); }
+function fmt(n){
+  n = Math.max(0, Math.round(n));
+  if (n >= 1e6) return (n/1e6).toFixed(n >= 1e7 ? 0 : 1).replace('.', ',') + ' M';
+  if (n >= 1e4) return Math.round(n/1e3) + ' K';
+  if (n >= 1e3) return (n/1e3).toFixed(1).replace('.', ',') + ' K';
+  return String(n);
+}
+function fmtFull(n){ return Math.max(0,Math.round(n)).toLocaleString('es-AR'); }
+function clamp(v){ return Math.max(0, Math.min(100, v)); }
+function hue(s){ let h=0; for (const c of s) h = (h*31 + c.charCodeAt(0)) % 360; return h; }
+function slug(s){
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,15);
+}
+function initial(s){ return (s.trim()[0] || '?').toUpperCase(); }
+function avatarHTML(name, handle, size, mine){
+  const bg = mine ? 'background:linear-gradient(135deg,#1d9bf0,#ff3d71)' : `background:hsl(${hue(handle)} 55% 45%)`;
+  return `<div class="avatar ${size}" style="${bg}" aria-hidden="true">${esc(initial(name))}</div>`;
+}
+
+/* ---------- start ticker (único momento animado) ---------- */
+(function ticker(){
+  const el = $('#ticker');
+  if (reduceMotion){ el.textContent = '2.400.000 vistas en 3 horas'; return; }
+  let v = 0, t0 = performance.now();
+  function step(t){
+    const p = Math.min(1, (t - t0) / 2600);
+    v = Math.round(2400000 * (1 - Math.pow(1 - p, 3)));
+    el.textContent = fmtFull(v) + ' vistas' + (p === 1 ? ' en 3 horas' : '');
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+
+/* ---------- contenido ---------- */
+const POSTS = {
+  rumor: '🚨 Me confirmaron del sistema financiero que el lunes cierran todos los cajeros del país por 72 HORAS!! Saquen la plata HOY YA YA',
+  polemica: 'Primera semana volviendo a la oficina después de un año de trabajar remoto y posta, rindo el doble!! En casa terminaba boludeando. A alguien más le pasó?',
+  chiste: 'Recién llegué a Corrientes y ya necesito subtítulos para entender al del uber 😂 Alguien me traduce? Qué es guaina??',
+  denuncia: 'Así te roban en Palermooo, me cobraron 11k un café ☕💸 Por las dudas si están en la zona NO vayan a @santaydiabolicacafeok, hay mejores!'
+};
+const TRENDS = {
+  rumor: ['Cajeros','Corralito','Banco Central'],
+  polemica: ['Home office','Boludeando','Presencialidad'],
+  chiste: ['Corrientes','Guaina','Ramón'],
+  denuncia: ['Palermo','Santa y Diabólica','Café a 11 mil']
+};
+const HEADLINES = {
+  rumor: ['Pánico bancario por un posteo: quién es el influencer que anunció el cierre de cajeros', 'Filas en cajeros por una noticia falsa que se viralizó en X'],
+  polemica: ['Polémica: un influencer dijo que trabajar desde casa “es boludear”', 'Home office o presencialidad: el debate que encendió un posteo'],
+  chiste: ['Correntinos indignados por el posteo de un influencer porteño', 'Qué significa “guaina”, la palabra que se volvió tendencia'],
+  denuncia: ['Escrache viral: el café de Palermo que cobra $11.000 y la pelea en redes', 'Cuánto cuesta un café en Buenos Aires: el debate que abrió un posteo']
+};
+
+/* elenco: cada cuenta tiene su voz */
+const U = {
+  caro:{name:'Caro 🌻', handle:'carolinaok'},
+  eco:{name:'Economía en criollo', handle:'economiaencriollo', verified:true},
+  trinchera:{name:'La Trinchera 🇦🇷', handle:'latrinchera_ok'},
+  lu:{name:'Lu Ferreyra', handle:'luferreyra_dev'},
+  gerente:{name:'Gerente Motivado 🚀', handle:'liderazgo_ya'},
+  opino:{name:'Opinólogo Serial', handle:'opinologo_ok', verified:true},
+  agus:{name:'Agus Correntina 💚', handle:'aguscorrentina'},
+  mati:{name:'Mati de Caballito', handle:'matidecaballito'},
+  orgullo:{name:'Orgullo del Interior', handle:'orgullointerior'},
+  abuela:{name:'Abuela Chamamé', handle:'abuelachamame'},
+  vecinos:{name:'Vecinos de Palermo', handle:'vecinospalermo'},
+  toto:{name:'Toto Gastronómico ☕', handle:'totogastro'},
+  jorge:{name:'Jorge', handle:'jorge_1962'},
+  santa:{name:'Santa y Diabólica Café', handle:'santaydiabolicacafeok'},
+  chusme:{name:'Chusmerío Web 👀', handle:'chusmerioweb'},
+  archivo:{name:'Archivo Eterno 📸', handle:'archivoeterno'},
+  laura:{name:'Profe Laura', handle:'profelaura'},
+  sofi:{name:'Sofi R.', handle:'sofi_rr'},
+  fan:{name:'Team {n} 🔥', handle:'team_{h}'},
+  rrhh:{name:'RRHH Hoy', handle:'rrhhhoy', verified:true},
+  indig:{name:'Indignados AR', handle:'indignados_ar'},
+  mkt:{name:'Marketing Sin Filtro', handle:'mktsinfiltro'},
+  chequeo:{name:'Chequeado del Barrio', handle:'chequeadobarrio'},
+  juli:{name:'Juli Paz', handle:'julipaz'},
+  zapping:{name:'Zapping', handle:'zappingtw'},
+  exfan:{name:'ex fan', handle:'exfan_2019'},
+  tn:{name:'TN', handle:'tn', verified:true},
+  telefe:{name:'Telefe Noticias', handle:'telefenoticias', verified:true},
+  lam:{name:'LAM', handle:'lamtv', verified:true},
+  luzu:{name:'LUZU TV', handle:'luzutv', verified:true},
+  olga:{name:'OLGA', handle:'olga', verified:true},
+  blender:{name:'Blender', handle:'blender', verified:true}
+};
+/* respuesta: R('lu', 'texto', 'a quién responde (clave del elenco o "me")') */
+function R(who, text, to, extra){ return Object.assign({}, U[who], { text, to: to || 'me' }, extra || {}); }
+
+/* tus posteos después de cada decisión, con tu voz */
+const REPLY_POSTS = {
+  doblar:{quote:true, scale:1.2, all:'Lo sostengo, si se sintieron afectados no es problema mío 🤷'},
+  aclarar:{quote:true, scale:.15,
+    rumor:'🧵 ok, a ver. El dato me llegó por un grupo de WhatsApp y no lo chequeé. Posta, no tengo ninguna confirmación. NO saquen plata por lo que dije, perdón por el quilombo (1/4)',
+    polemica:'🧵 aclaro porque se fue de las manos: nunca dije que trabajar en casa sea boludear. Conté que YO me distraía, yo!! Esa frase la puso otra cuenta (1/3)',
+    chiste:'🧵 che, el chiste era sobre mí y lo perdido que estaba jaja, no sobre Corrientes ni sobre el chofer. Ya aprendí que guaina es muchacha 💚 (1/3)',
+    denuncia:'🧵 bueno, aclaro: me pareció caro y lo dije, pero no quería que le llenen de odio el café a nadie. Era una opinión, no un pedido de linchamiento (1/3)'},
+  meme:{scale:.8,
+    rumor:'Quieren corralito?? tengo remeras 😎 “Saquen la plata HOY YA YA” edición limitada, link en la bio 👕',
+    polemica:'ya que me hacen decir cosas que no dije... remera oficial “Rindo el doble” 💼👕 link en la bio jaja',
+    chiste:'Remera oficial “¿Qué es guaina??” 🧉👕 pa los que se sintieron identificados, link en la bio',
+    denuncia:'Taza oficial “El café de 11k” ☕💸 la polémica más cara del año, link en la bio jaja'},
+  corregir:{quote:true, scale:.3,
+    rumor:'CORRECCIÓN: no hay ningún cierre de cajeros. El banco lo desmintió y me equivoqué feo al compartirlo. Dejen de difundir mi posteo por favor 🙏',
+    polemica:'La placa que circula pone en mi boca una frase que nunca escribí. Acá mi posteo original 👇 hablaba de MI experiencia, nada más',
+    chiste:'El video que circula está recortado. Acá el original completo: el chiste era sobre mí, no sobre Ramón 👇',
+    denuncia:'Me fijé bien: el precio estaba en la carta y es café de especialidad. Exageré con lo de “robo”. Perdón Santa y Diabólica 🙏'},
+  culpar:{scale:.9,
+    rumor:'si la gente sale corriendo al cajero por un posteo el problema no soy yo eh. Lean bien antes de actuar 🤷',
+    polemica:'el problema es que la gente no sabe leer. Conté algo que me pasó A MÍ, no di un decreto. Relajen',
+    chiste:'si no entienden un chiste no es mi culpa 🙄 aprendan a leer el tono, es humor',
+    denuncia:'yo solo dije que me pareció caro. Si otros pintan persianas es problema de ellos, no mío'},
+  contactar:{scale:.25,
+    rumor:'Hablé con un economista y con gente de una asociación bancaria. Les dejo lo que me explicaron sobre cómo nacen estos rumores y el daño que hacen 👇',
+    polemica:'Me junté con Lu (@luferreyra_dev) y dos personas más que trabajan remoto para que me cuenten su día. Posta, aprendí un montón. La charla completa 👇',
+    chiste:'Hablé con Ramón!! nos reímos un montón, me enseñó cinco palabras en guaraní y me contó lo que le molestó del recorte. Video juntos 👇💚',
+    denuncia:'Fui a Santa y Diabólica y hablé con Martina y su hermana. Les pedí perdón en persona. Posta, el café es buenísimo ☕ dejen de escribirles, el error fue mío'},
+  tv:{scale:.5, all:'Esta noche voy a estar en vivo en TN para contar mi versión. 21 h 📺 no se lo pierdan!!'},
+  stream:{scale:.6, all:'Hoy a las 18 me sumo a LUZU a hablar de todo lo que pasó. Sin filtro, como siempre 🎙️'},
+  comunicado:{scale:.5,
+    rumor:'📄 Comunicado. Reconozco haber difundido información falsa sobre el sistema bancario sin verificarla. Lamento la preocupación causada.',
+    polemica:'📄 Comunicado. Nunca afirmé que trabajar desde casa sea “boludear”. Compartí una experiencia personal y respeto a quienes trabajan de forma remota.',
+    chiste:'📄 Comunicado. Lamento que mi publicación haya ofendido a la comunidad correntina. Valoro profundamente su cultura y su lengua.',
+    denuncia:'📄 Comunicado. Mi publicación sobre un comercio de Palermo generó consecuencias que no busqué. Lamento el daño causado a sus dueñas.'},
+  pausa:{scale:.7, all:'me tomo unos días. necesito desconectar de todo esto. nos vemos pronto 🤍'},
+  disculpa:{scale:.6,
+    rumor:'Les debo una disculpa. Difundí algo falso, hice que gente hiciera filas con miedo y después me defendí en vez de reconocerlo. Lo que publiqué hace años tampoco tiene excusa. Perdón, posta.',
+    polemica:'Perdón. Mi posteo no decía lo que circuló, pero cuando se descontroló me puse a la defensiva y me burlé de los que trabajan en casa. Lo de mis posteos viejos tampoco tiene excusa.',
+    chiste:'Perdón, Corrientes. Me reí de cómo hablan desde un lugar cómodo, y mis posteos viejos muestran que no fue la primera vez. Estoy aprendiendo 💚',
+    denuncia:'Perdón Martina, perdón a tu hermana. Escraché un café chico por un precio que estaba en la carta, y lo que pasó después fue gravísimo. Lo de mis posteos viejos tampoco tiene excusa.'},
+  nodisculpa:{scale:.9, all:'Pido disculpas a quienes se sintieron ofendidos. Nunca fue mi intención lastimar a nadie. Sigamos adelante 🙏✨'},
+  contraataque:{scale:1.1, all:'raro que JUSTO ahora aparezcan posteos de hace diez años no? hay gente con poder que me quiere callar. No lo van a lograr 💪'},
+  reparar:{scale:.3,
+    rumor:'Un mes después: armé con economistas una guía gratis para detectar rumores financieros antes de compartirlos. Lo que aprendí: chequear antes de postear. Siempre.',
+    polemica:'Un mes después: arranco una serie sobre cómo trabaja de verdad la gente en remoto. La primera invitada es Lu, la primera que me cruzó jaja. Aprendí a escuchar.',
+    chiste:'Un mes después: me fui una semana a Corrientes con Ramón de guía. Sale el primer video el viernes. Ndeee, qué lugar 💚',
+    denuncia:'Un mes después: voy todos los sábados a Santa y Diabólica ☕ y doné lo que generó ese posteo para arreglar su persiana. Aprendí que un escrache nunca es solo un posteo.'},
+  monetizar:{scale:1, all:'📚 “Me cancelaron y volví”. Mi primer libro + gira por todo el país!! Entradas mañana a las 10. Gracias a los que nunca me soltaron la mano 🙌'},
+  desconectar:{scale:.3, all:'Me voy unos meses de las redes. Gracias a los que se quedaron. Nos vemos a la vuelta 🌙'},
+  tapar:{scale:1.2, all:'Opinión impopular número dos: el mate compartido es un asco. Ahí lo dije 🧉🤢'}
+};
+
+function minePost(extra){
+  const v = Math.round(S.followers * (0.35 + S.reach / 11) * ((extra && extra.scale) || 1));
+  return Object.assign({ name:S.name, handle:S.handle, verified:true, mine:true, text:POSTS[S.tag],
+    counts:{ r:v*0.006, rt:v*0.013, l:v*0.045, v:v } }, extra || {});
+}
+
+const STAGES = [
+  /* 1 */
+  { title:'El posteo', time:'Domingo, 21:40',
+    intro: () => ({ narr:'Domingo a la noche. Tenés el celular en la mano y 200 mil seguidores que leen todo lo que publicás. Lo que subas ahora va a marcar las próximas semanas.', replies:[] }),
+    q:'¿Qué está pasando?', qsub:'Elegí el posteo con el que arranca todo.', composer:true,
+    choices:[
+      { id:'rumor', ic:'🚨', label:'Compartir un dato urgente', desc:'Te llegó por un grupo de WhatsApp. No lo chequeaste, pero suena a primicia.', fx:{f:40000,r:-10,a:30},
+        result:()=>({ text:'En diez minutos, 15 mil reposteos y capturas en cientos de grupos de WhatsApp. Nadie preguntó cuál era la fuente.',
+          replies:[ R('caro','NOOO ya mismo voy al cajero!!! 😱😱 gracias por avisar @{h} 🙏🙏'),
+                    R('eco','¿“Me confirmaron del sistema financiero”? ¿Quién? Un cierre así lo anunciaría el Banco Central. No compartan esto sin fuente.'),
+                    R('caro','Vos decís eso y después nos agarra el corralito como en 2001. Prefiero prevenir 🤷‍♀️','eco') ],
+          concept:{t:'Economía de la atención',d:'El algoritmo prioriza lo que genera reacciones rápidas. Lo urgente, lo indignante y lo gracioso viajan más lejos que lo verificado.'} }) },
+      { id:'polemica', ic:'💬', label:'Tirar una opinión de algo que te pasó', desc:'Contás tu experiencia al volver a la oficina después de trabajar remoto.', fx:{f:20000,r:0,a:15},
+        result:()=>({ text:'Al principio, respuestas tranquilas: algunos coinciden y otros cuentan lo contrario. Hasta que una cuenta grande te cita con otro tono.',
+          replies:[ R('gerente','Esto. La oficina es cultura, es energía, es mindset 🚀💼 Gran reflexión @{h}'),
+                    R('lu','A mí me pasa al revés, en la oficina me interrumpen cada cinco minutos 🙃 pero bueno, cada uno con lo suyo'),
+                    R('opino','O sea que según @{h} los que trabajan desde casa están boludeando. Interesante 🍿', null, {to:null, quoteMine:true}) ],
+          concept:{t:'De la experiencia a la discusión',d:'Un comentario personal puede leerse como una opinión sobre todos. Cuando otra cuenta lo cita con un tono distinto, el sentido empieza a cambiar sin que vos hayas escrito nada nuevo.'} }) },
+      { id:'chiste', ic:'😂', label:'Subir un video gracioso', desc:'Tu primer viaje en uber en Corrientes, con un chiste sobre la tonada.', fx:{f:15000,r:0,a:15},
+        result:()=>({ text:'En diez minutos, 20 mil “me gusta”. La mayoría se ríe, pero en Corrientes lo están leyendo de otra manera.',
+          replies:[ R('agus','Guaina es chica, muchacha, che 😂 bienvenide a Corrientes, acá se habla así y con orgullo 💚'),
+                    R('mati','JAJAJA me pasó igual en Goya, me dijeron “ndeee” y pensé que me estaban retando 😂'),
+                    R('orgullo','Ya empezamos. Para los porteños todo lo que no es Buenos Aires necesita “subtítulos”. Después se quejan.') ],
+          concept:{t:'El humor viaja rápido',d:'Los chistes se comparten sin pensar demasiado. Pero el humor depende del contexto, y el contexto es lo primero que se pierde.'} }) },
+      { id:'denuncia', ic:'📸', label:'Escrachar a un bar', desc:'Te pareció carísimo el café y querés avisarle a tus seguidores.', fx:{f:35000,r:0,a:25},
+        result:()=>({ text:'En diez minutos, cientos de respuestas. Alguien ya etiquetó al café en todas partes y la cuenta del local recibe sus primeras reseñas de una estrella.',
+          replies:[ R('vecinos','Palermo está imposible. 11 lucas un café es un robo, apoyo el escrache 👏'),
+                    R('toto','Che, Santa y Diabólica es de especialidad, tuestan ellos. 11k está en precio para la zona, eh. No sé si da para escrache.'),
+                    R('vecinos','@totogastro defendé lo que quieras, pero un café no puede salir lo mismo que un almuerzo.','toto') ],
+          concept:{t:'El escrache como contenido',d:'Las denuncias en redes movilizan rápido porque apelan a la indignación colectiva. Rara vez alguien verifica antes de sumarse.'} }) }
+    ] },
+
+  /* 2 */
+  { title:'Explota', time:'3 horas después',
+    intro: s => ({
+      narr: {
+        rumor:'Tu posteo tiene 2,4 millones de vistas: doce veces tus seguidores. Hay filas en cajeros de Rosario y Córdoba. El Banco Central todavía no dijo nada.',
+        polemica:'La cita de Opinólogo Serial ya es más famosa que tu posteo. Miles de personas te responden como si hubieras dicho que trabajar en casa es boludear.',
+        chiste:'El video tiene 900 mil vistas. En Corrientes ya es tema: unos se ríen con vos y otros sienten que te burlaste de cómo hablan.',
+        denuncia:'El café es tendencia. En una noche recibió 2.000 reseñas de una estrella, casi todas de gente que nunca fue. La dueña respondió con una foto de la carta.'
+      }[s.tag],
+      replies: {
+        rumor:[ R('caro','Estoy en la fila hace 40 minutos y el cajero ya no tiene plata 😭😭 @{h} es verdad lo que dijiste???'),
+                R('eco','🧵 Por qué el posteo de @{h} es falso y por qué igual está generando un problema real: corridas en cajeros.'),
+                R('trinchera','El Banco Central no desmiente porque es VERDAD. Despierten 🇦🇷','eco'),
+                R('eco','No desmiente porque es domingo a la noche. Mañana lo van a desmentir y vas a decir que es una operación.','trinchera') ],
+        polemica:[ R('lu','Hoy trabajé de 8 a 19 desde mi cocina. Pero según @{h} estoy boludeando como si estuviese de vacas 🙃'),
+                   R('gerente','Lo que dice @{h} es lo que pensamos muchos líderes y no nos animamos a decir 💼🔥'),
+                   R('lu','Claro, lo que no se animan a decir es que quieren controlarnos 🙃','gerente'),
+                   R('opino','Yo solo pregunté 🍿 el debate está buenísimo','lu') ],
+        chiste:[ R('orgullo','El guaraní es lengua oficial en Corrientes. No es un chiste, es nuestra identidad. Respeten.'),
+                 R('mati','Bueno, tampoco es para tanto, es un chiste 😂 hay que ser más canchero','orgullo'),
+                 R('agus','A vos te parece canchero porque nunca te cargaron la tonada en un laburo. A mí sí 🙄','mati'),
+                 R('abuela','Guaina es muchacha, mi querido. Venga que le enseño más palabras y le convido chipá 💚') ],
+        denuncia:[ R('santa','Hola @{h}. El precio está en la carta y en la pizarra 🙏 Somos un café chico, de dos personas. Nos están llenando de insultos.'),
+                   R('vecinos','Ahora se hacen las víctimas 🙄 11 lucas es un robo y punto.','santa'),
+                   R('toto','El grano de especialidad cuesta lo que cuesta. Si querés café de máquina, andá a otro lado, pero no les destruyas el negocio.','vecinos'),
+                   R('jorge','En mi época el café venía con medialuna y soda. Esto es un disparate. Todo el país está así.') ]
+      }[s.tag] }),
+    q:'¿Cómo reaccionás?', qsub:'Tu teléfono no para de vibrar.',
+    choices:[
+      { id:'doblar', ic:'🔥', label:'Doblar la apuesta', desc:'Citás tu propio posteo: “Lo sostengo, si se sintieron afectados no es problema mío”.', fx:{f:80000,r:-15,a:20},
+        result:()=>({ text:'Tu respuesta junta más interacción que el posteo original. La bronca también suma: el algoritmo no distingue entre amor y odio.',
+          replies:[ R('fan','NO TE RETRACTES NUNCA 🔥🔥🔥 estamos con vos'),
+                    R('sofi','Lo único peor que equivocarse es redoblar. Te seguía desde 2020, unfollow.'),
+                    R('fan','chau, nadie te extraña 👋','sofi') ],
+          concept:{t:'Engagement por indignación',d:'Las plataformas miden interacción, no acuerdo. Cada cita enojada empuja tu posteo a más pantallas.'} }) },
+      { id:'aclarar', ic:'🧵', label:'Aclarar con contexto', desc:'Un hilo explicando qué quisiste decir y qué no.', fx:{f:-20000,r:10,a:5},
+        result:()=>({ text:'Tu hilo lo leen 40 mil personas. El posteo original ya va por 3 millones de vistas.',
+          replies:[ R('laura','Está bien aclarar, aunque las aclaraciones nunca viajan tan rápido como el primer posteo. Lo voy a usar de ejemplo en clase.'),
+                    R('chusme','👀 ATENCIÓN: @{h} salió a aclarar. ¿Le creemos? 🔥'),
+                    R('sofi','Bien ahí reconocerlo. Llega tarde, pero llega.') ],
+          concept:{t:'La aclaración llega tarde',d:'Una corrección casi nunca alcanza la difusión del mensaje original: el contenido emocional viaja más rápido que el matiz.'} }) },
+      { id:'silencio', ic:'🤐', label:'Silencio total', desc:'Apagás las notificaciones y esperás que pase.', fx:{f:-10000,r:-5,a:-5},
+        result:()=>({ text:'Tu silencio no frena nada. Sin tu versión, cada usuario completa la historia a su manera.',
+          replies:[ R('chusme','Hace 6 horas que @{h} no dice NADA 👀 ¿qué está pasando? Abro hilo 🧵'),
+                    R('opino','El que calla otorga 🍿','chusme'),
+                    R('laura','O el que calla está pensando qué decir, cosa que te vendría bien probar.','opino') ],
+          concept:{t:'Vacío informativo',d:'Cuando el protagonista no habla, la conversación se llena de suposiciones, y esas suposiciones se vuelven “la versión oficial”.'} }) },
+      { id:'borrar', ic:'🗑️', label:'Borrar el posteo', desc:'Si no está, no pasó. ¿O sí?', fx:{f:-15000,r:-10,a:10}, flag:'deleted',
+        result:()=>({ text:'Lo borraste. En segundos aparece la captura. Ahora hay 200 capturas circulando y un tema nuevo: “¿por qué lo borró?”.',
+          replies:[ R('archivo','@{h} borró esto. Por las dudas, lo dejo acá 📸👇', null, {to:null, quoteMine:true}),
+                    R('chusme','LO BORRÓ 👀👀 ¿por qué será?','archivo'),
+                    R('fan','lo borró porque lo están acosando, déjenlo en paz 😡','chusme') ],
+          concept:{t:'Efecto Streisand',d:'Intentar ocultar algo en internet suele darle más visibilidad. Una captura de pantalla es mucho más difícil de borrar que el original.'} }) }
+    ] },
+
+  /* 3 */
+  { title:'Cambia de sentido', time:'Día 2',
+    intro: s => ({
+      narr: {
+        rumor:'Tu posteo ya no es tuyo. Unas cuentas lo usan como prueba de que “se viene el corralito”; otras, como ejemplo de una operación para generar pánico. Un banco lo desmintió oficialmente.',
+        polemica:'Una cuenta de recursos humanos hizo una placa con la frase “Trabajar en casa es boludear” y tu nombre abajo. Un sindicato la usa en un flyer contra vos. Ya existe el meme “modo {n}”.',
+        chiste:'Alguien recortó el video justo cuando aparece el chofer. Ahora circula como “Influencer porteño se burla de un uber correntino” y ya identificaron al conductor: se llama Ramón.',
+        denuncia:'Tu posteo cambió de sentido: ahora es una discusión sobre la inflación. Unas cuentas lo usan para hablar de “un país donde un café cuesta 11 mil” y otras te acusan de atacar a un comercio chico. La dueña, Martina, cuenta que pensó en cerrar.'
+      }[s.tag] + (s.flags.deleted ? ' Aunque lo borraste, las capturas circulan solas.' : ''),
+      replies: {
+        rumor:[ R('trinchera','Hasta los influencers lo saben: se viene el corralito. Compartan antes de que lo censuren 👇🇦🇷', null, {to:null, quoteMine:true}),
+                R('eco','El banco ya lo desmintió. Lo de @{h} es un manual de cómo nace una noticia falsa: “me confirmaron”, mayúsculas y urgencia.','trinchera'),
+                R('caro','Ya no sé a quién creerle 😩 saqué toda la plata y ahora la tengo abajo del colchón','eco') ],
+        polemica:[ R('rrhh','Frase del día para líderes 💼✨ “Trabajar en casa es boludear.”', null, {to:null, quoteMine:true}),
+                   R('lu','Esa frase no la dijo, eh. Yo lo critiqué, pero esto ya es inventar 🙃','rrhh'),
+                   R('gerente','Ya la imprimí y la pegué en la oficina 🚀','rrhh') ],
+        chiste:[ R('indig','Así nos ven desde Buenos Aires 😡 Repudiable.', null, {to:null, quoteMine:true}),
+                 R('agus','Conozco a Ramón, es un divino. Ahora le escriben desconocidos. Esto ya no es gracioso.','indig'),
+                 R('mati','Pero nadie le hizo nada a Ramón, es un posteo...','agus'),
+                 R('orgullo','Le subieron la cara a todo el país. Eso es hacerle algo.','mati') ],
+        denuncia:[ R('trinchera','Un café 11 mil pesos. Este es el país que nos dejaron 🇦🇷', null, {to:null, quoteMine:true}),
+                   R('santa','Soy Martina, la dueña. Abrimos hace un año con mi hermana. Hoy no pudimos abrir: nos pintaron la persiana. Por favor, paren.'),
+                   R('toto','Esto pasa cuando un escrache se va de las manos. Mañana voy a tomar un café ahí ☕','santa'),
+                   R('jorge','Yo sigo diciendo que 11 mil es caro. Pero pintar una persiana es de delincuentes.','toto') ]
+      }[s.tag] }),
+    q:'Tu posteo significa otra cosa. ¿Qué hacés?', qsub:'Ya no controlás cómo se interpreta.',
+    choices:[
+      { id:'meme', ic:'👕', label:'Subirte al meme', desc:'Lanzás remeras y tazas con tu frase.', fx:{f:50000,r:-10,a:15},
+        result:()=>({ text:'Las remeras se agotan en dos horas. Para muchos, ahora sos quien hace negocio con el lío que armó.',
+          replies:[ R('mkt','Lo de @{h} es de manual: convertir la polémica en producto en 24 horas 📈'),
+                    R('fan','YA COMPRÉ DOS 🔥🔥'),
+                    R('sofi','Hacer plata con esto es lo más bajo que vi.','fan') ],
+          concept:{t:'Apropiación y resignificación',d:'Cuando un mensaje se vuelve meme, pierde su sentido original y adopta el que le da cada comunidad. Subirte al meme lo convierte en tu marca.'} }) },
+      { id:'corregir', ic:'🔎', label:'Corregir la versión distorsionada', desc:'Publicás el original completo y explicás qué cambió.', fx:{f:-5000,r:10,a:5},
+        result:()=>({ text:'Algunos portales levantan tu corrección. Muchas cuentas siguen compartiendo el recorte.',
+          replies:[ R('chequeo','Ojo: lo que circula está sacado de contexto. Acá el original 👇'),
+                    R('opino','Ahora se hace el que no dijo nada 🍿'),
+                    R('laura','Lo podés leer vos mismo: el original está ahí arriba.','opino') ],
+          concept:{t:'Descontextualización',d:'El recorte es más fácil de compartir que el contexto. Corregir sirve, pero competís contra una versión más simple y más emocional.'} }) },
+      { id:'culpar', ic:'🙄', label:'Culpar a “los que no entienden”', desc:'“El problema es que la gente no sabe leer.”', fx:{f:20000,r:-15,a:10},
+        result:()=>({ text:'Tu frase se vuelve el nuevo motivo de enojo. Ahora la discusión no es el posteo: sos vos.',
+          replies:[ R('laura','Si miles de personas “no entienden”, quizás el problema no son ellas, @{h}.'),
+                    R('fan','tiene razón!! la gente no sabe leer 😤','laura'),
+                    R('sofi','La gente sabe leer perfectamente, por eso se enojó.','fan') ],
+          concept:{t:'Colapso de contexto',d:'Una cuenta con 200 mil seguidores llega a públicos con códigos muy distintos. Culpar a la audiencia ignora que ya no le hablás a un grupo de amigos.'} }) },
+      { id:'contactar', ic:'🤝', label:'Hablar con los afectados', desc:'Escribís en privado a quienes salieron perjudicados.', fx:{f:-10000,r:15,a:-5},
+        result:()=>({ text:'Después de una charla, publican juntos un mensaje. No es tendencia, pero cambia el tono de la conversación.',
+          replies:[ R('juli','Esto sí. Hablar con la gente antes de seguir posteando 👏'),
+                    R('chusme','Giro inesperado 👀'),
+                    R('opino','Todo armado para la foto 🍿','juli') ],
+          concept:{t:'Reparación directa',d:'Las respuestas que incluyen a los afectados suelen bajar la temperatura más que cualquier comunicado, aunque generan menos clics.'} }) }
+    ] },
+
+  /* 4 */
+  { title:'Salta a los medios', time:'Día 3',
+    intro: s => ({
+      narr:'Lo que empezó en X ya está en todas partes: los noticieros, los programas de espectáculos, los streams. No sos periodista ni figura de la tele, pero eso ya no importa: te presentan como “comunicador” y tu posteo es noticia. Tres productores te escriben a la vez.',
+      label:'Los medios levantaron tu posteo',
+      replies:[
+        Object.assign({}, U.tn, {text:'Lo más visto de hoy 👇', news:{outlet:'TN', headline:HEADLINES[s.tag][0]}}),
+        Object.assign({}, U.telefe, {text:'Ahora en Telefe Noticias.', news:{outlet:'Telefe Noticias', headline:HEADLINES[s.tag][1], live:true}}),
+        Object.assign({}, U.lam, {text:'Esta noche en #LAM: {n}, el influencer del momento, y la polémica que no para 🔥'}),
+        Object.assign({}, U.luzu, {text:'En la mesa de hoy: ¿hay que dejar de seguir a @{h}? 🎙️ Entrá al vivo'}),
+        Object.assign({}, U.olga, {text:'Clip: lo que opinamos de lo de @{h} 😂👇'})
+      ] }),
+    q:'Los medios quieren tu versión. ¿Qué hacés?', qsub:'Lo que digas acá se va a recortar, citar y volver a X.',
+    choices:[
+      { id:'tv', ic:'📺', label:'Ir en vivo a TN', desc:'Una entrevista en el noticiero de la noche, en horario central.',
+        fx: s => s.rep >= 50 ? {f:30000,r:10,a:20} : {f:10000,r:-10,a:20},
+        result: s => ({ text: s.rep >= 50
+            ? 'Llegás con calma y con datos. El clip de la entrevista suma tu versión a la historia.'
+            : 'Te ponen nervioso con dos preguntas y editan tus 15 segundos más tensos. El clip circula más que la entrevista completa.',
+          replies:[ R('zapping','El clip de @{h} en TN 👀 qué momento'),
+                    R('jorge','La vi. Por lo menos dio la cara.'),
+                    R('opino','Todo guionado 🍿','jorge') ],
+          concept:{t:'Agenda setting y circuito híbrido',d:'La tele toma lo que es tendencia en X y lo devuelve amplificado. Después, el clip vuelve a X: el ciclo se retroalimenta.'} }) },
+      { id:'stream', ic:'🎙️', label:'Ir a LUZU en vivo', desc:'Dos horas de charla relajada en la mesa del stream.', fx:{f:60000,r:-5,a:15},
+        result:()=>({ text:'La charla fue larga y amable. Pero lo único que se viraliza son los 20 segundos donde te reís de todo el lío.',
+          replies:[ Object.assign({}, U.luzu, {text:'El momento en que @{h} se ríe de todo en vivo 😳👇'}),
+                    Object.assign({}, U.blender, {text:'Mañana lo analizamos en Blender: ¿se puede volver de esto?'}),
+                    R('sofi','Se rió. Listo, no hay nada más que decir.','luzu') ],
+          concept:{t:'El clip manda',d:'En el streaming el contenido se consume en fragmentos. Lo que define la percepción no es la charla completa sino el recorte más compartido.'} }) },
+      { id:'comunicado', ic:'📝', label:'Mandar un comunicado', desc:'Un texto escrito, revisado, sin preguntas.', fx:{f:0,r:5,a:5},
+        result:()=>({ text:'Tu comunicado aparece citado textual en tres portales. Es prolijo, pero no suena a vos.',
+          replies:[ Object.assign({}, U.tn, {text:'ÚLTIMO MOMENTO | @{h} rompió el silencio con un comunicado'}),
+                    R('chusme','Comunicado escrito por un abogado, se nota a kilómetros 👀'),
+                    R('laura','Prolijo. Le faltó algo de humanidad.','chusme') ],
+          concept:{t:'Los medios citan posteos',d:'Muchos portales arman notas con capturas y comunicados. Lo que escribís se convierte directamente en titular.'} }) },
+      { id:'nada', ic:'🚫', label:'No hablar con nadie', desc:'Que digan lo que quieran.', fx:{f:-10000,r:-5,a:-10},
+        result:()=>({ text:'Sin tu voz, los programas arman paneles con “especialistas en redes” que analizan hasta tu foto de perfil.',
+          replies:[ Object.assign({}, U.lam, {text:'Esta noche en #LAM analizamos el silencio de {n}. ¿Qué esconde? 🔥'}),
+                    Object.assign({}, U.olga, {text:'Le escribimos a @{h} para invitarle al stream y nos clavó el visto 😂'}),
+                    R('chusme','Tengo info exclusiva de por qué no habla 👀 mañana la cuento','lam') ],
+          concept:{t:'El panel sin protagonista',d:'Los medios no necesitan tu participación para hablar de vos. Si no das tu versión, la construyen otros.'} }) }
+    ] },
+
+  /* 5 */
+  { title:'La crisis', time:'Una semana después',
+    intro: () => ({
+      narr:'Justo cuando parecía bajar, alguien desentierra tu pasado. Y tu sponsor principal te escribe por privado.',
+      replies:[
+        R('archivo','🧵 Hilo: todo lo que @{h} publicó entre 2014 y 2017 y que nadie recuerda. Agarrate. (1/23)', null, {to:null}),
+        R('chusme','No puedo creer el tuit 14 del hilo 😳👀','archivo'),
+        R('fan','Eran otros tiempos!! la gente cambia 😤','chusme'),
+        { name:'Bebidas Andes', handle:'bebidasandes', verified:true, text:'Mensaje directo', dm:'Hola {n}, necesitamos una reunión urgente para revisar la continuidad de nuestro acuerdo.' }
+      ] }),
+    q:'La presión es máxima. ¿Qué hacés?', qsub:'Esta decisión puede definir tu carrera.',
+    choices:[
+      { id:'pausa', ic:'⏸️', label:'Desactivar la cuenta unos días', desc:'Desaparecer hasta que baje la espuma.', fx:{f:-150000,r:5,a:-15},
+        result:()=>({ text:'Durante cuatro días, #Volvé{N} y #Chau{N} son tendencia al mismo tiempo. Al volver, muchos ya no están.',
+          replies:[ R('exfan','ya fue, me hice fan de otro. El algoritmo no espera a nadie'),
+                    R('fan','#Volvé{N} 😭😭😭','exfan'),
+                    R('opino','Huyó 🍿') ],
+          concept:{t:'La ausencia también comunica',d:'Desaparecer baja la exposición, pero las audiencias se mueven rápido: muchos seguidores no vuelven.'} }) },
+      { id:'disculpa', ic:'🙏', label:'Pedir disculpas de verdad', desc:'Un video sin excusas ni “pero”, diciendo qué hiciste mal.', fx:{f:-30000,r:20,a:5},
+        result:()=>({ text:'Muchos no la aceptan, pero el tono empieza a cambiar. Bebidas Andes decide esperar antes de cortar el contrato.',
+          replies:[ R('sofi','No lo esperaba, pero esto es una disculpa como corresponde.'),
+                    R('opino','Disculpa por obligación del sponsor 🍿','sofi'),
+                    R('laura','Puede ser las dos cosas: por obligación y sincera.','opino') ],
+          concept:{t:'Disculpa efectiva',d:'Las disculpas que se perciben como genuinas reconocen el daño concreto, no explican intenciones y proponen algo para reparar.'} }) },
+      { id:'nodisculpa', ic:'🫤', label:'Disculparte “a quienes se sintieron ofendidos”', desc:'Pedir perdón sin admitir nada.', fx:{f:-20000,r:-15,a:10},
+        result:()=>({ text:'La frase se vuelve un meme en sí misma: ahora te critican por la disculpa. Bebidas Andes rescinde el contrato.',
+          replies:[ R('laura','“Perdón si te ofendiste” no es una disculpa, @{h}.'),
+                    R('chusme','La no-disculpa del año 👀🏆'),
+                    R('fan','¿¿y qué más quieren que haga??','laura') ],
+          concept:{t:'La no-disculpa',d:'Pedir perdón por cómo se sintieron los demás, y no por lo que hiciste, suele leerse como evasión y reactiva la polémica.'} }) },
+      { id:'contraataque', ic:'⚔️', label:'Denunciar una “operación”', desc:'“Hay gente con poder que me quiere callar.”', fx:{f:40000,r:-20,a:15},
+        result:()=>({ text:'Una parte de tu audiencia cierra filas y te defiende; la otra te ve como enemigo. Bebidas Andes rescinde el contrato.',
+          replies:[ R('trinchera','Fuerza @{h}. Te quieren callar porque decís lo que nadie dice 🇦🇷'),
+                    R('eco','La “operación” es que la gente lee lo que publicaste vos.','trinchera'),
+                    R('fan','BANCAMOS 💪💪💪') ],
+          concept:{t:'Polarización como estrategia',d:'Presentarse como víctima de un ataque fideliza a los propios y endurece a los ajenos. Sube el alcance; baja la confianza general.'} }) }
+    ] },
+
+  /* 6 */
+  { title:'El cierre', time:'Un mes después',
+    intro: () => ({
+      narr:'El tema salió del top de tendencias. Pero si alguien busca tu nombre, lo primero que aparece es esto.',
+      replies:[ R('chusme','¿Alguien sabe qué fue de @{h}? 👀 un mes y nada'),
+                R('juli','Ojalá haya aprendido algo de todo esto','chusme') ] }),
+    q:'¿Cómo cerrás esta historia?', qsub:'Tu última decisión.',
+    choices:[
+      { id:'reparar', ic:'🌱', label:'Reparar y contar lo aprendido', desc:'Compensás a quien salió perjudicado y hablás de responsabilidad en redes.', fx:{f:-20000,r:15,a:0},
+        result:()=>({ text:'Tu posteo lo comparten docentes y periodistas. No explota, pero queda.',
+          replies:[ R('laura','Esto lo voy a usar en clase. Así se cierra una crisis.'),
+                    R('opino','Lavado de imagen 🍿','laura'),
+                    R('juli','Dejalo. Hizo lo que tenía que hacer.','opino') ],
+          concept:{t:'El algoritmo olvida, los buscadores no',d:'La tendencia dura días; el registro dura años. Lo que hacés después de la crisis también queda asociado a tu nombre.'} }) },
+      { id:'monetizar', ic:'💸', label:'Monetizar la polémica', desc:'Anunciás un libro y una gira: “Me cancelaron y volví”.', fx:{f:100000,r:-10,a:15},
+        result:()=>({ text:'Las entradas se agotan. Tu nombre queda para siempre pegado a la polémica, ahora como producto.',
+          replies:[ R('fan','YA TENGO MI ENTRADA 🔥🔥'),
+                    R('sofi','Lo que faltaba: el libro.'),
+                    R('mkt','Caso de estudio. Del escándalo a la gira en 30 días 📈') ],
+          concept:{t:'Monetización del escándalo',d:'La atención es un recurso económico: muchas figuras convierten un escándalo en contratos o giras. Funciona, pero fija tu imagen en la polémica.'} }) },
+      { id:'desconectar', ic:'🌙', label:'Desconectarte un tiempo largo', desc:'Pausa de redes por tres meses.', fx:{f:-60000,r:5,a:-20},
+        result:()=>({ text:'Te vas en silencio. En dos semanas, el feed ya habla de otra cosa.',
+          replies:[ R('fan','te vamos a esperar 💙'),
+                    R('chusme','Y así terminó la novela de @{h} 👀'),
+                    R('juli','A veces irse es lo más sano.','chusme') ],
+          concept:{t:'Ciclo de vida de una noticia',d:'Toda tendencia tiene pico y caída. Alejarse acelera el olvido, para bien y para mal.'} }) },
+      { id:'tapar', ic:'🎭', label:'Tapar con otra polémica', desc:'Un posteo nuevo, todavía más picante, para que hablen de otra cosa.', fx:{f:30000,r:-20,a:20},
+        result:()=>({ text:'Funciona por 48 horas. Después, los medios conectan las dos polémicas en una sola nota: “El influencer que no aprende”.',
+          replies:[ R('jorge','El mate compartido es sagrado. Esto ya es el colmo.'),
+                    R('opino','¿Otra vez? 🍿','jorge'),
+                    R('eco','Cortina de humo de manual.') ],
+          concept:{t:'Cortina de humo',d:'Generar una polémica nueva para desplazar la anterior es una táctica habitual, pero suma otro capítulo al archivo y desgasta la credibilidad.'} }) }
+    ] }
+];
+
+const ENDINGS = {
+  cancelado:{e:'🚫',t:'Te cancelaron',d:'Las marcas se fueron, tu nombre es sinónimo de lo que pasó y cada nuevo posteo revive la polémica. La cancelación no fue un evento: fue la suma de cada respuesta.'},
+  sinseguidores:{e:'📉',t:'Te quedaste sin seguidores',d:'Tu audiencia se fue de a poco hasta convertirse en un éxodo. No hubo un escándalo final: simplemente dejaste de importarle al algoritmo.'},
+  arreglado:{e:'✅',t:'Lo pudiste arreglar',d:'No borraste lo que pasó, pero lo convertiste en otra cosa. Hoy te citan como ejemplo de cómo responder a una crisis en redes.'},
+  leyenda:{e:'🔥',t:'Leyenda viral',d:'Sobreviviste y saliste más grande. Los medios te llaman cada vez que algo explota en X, y tu audiencia todavía confía en vos.'},
+  villano:{e:'😈',t:'Famoso por lo peor',d:'Nunca tuviste tanto alcance, y nunca fue tan negativo. Sos el villano favorito de internet: rentable, pero frágil.'},
+  creible:{e:'🧭',t:'Menos seguidores, más credibilidad',d:'Perdiste audiencia, pero la que quedó confía en vos. Elegiste la reputación por sobre los números.'},
+  olvidado:{e:'💤',t:'El algoritmo te olvidó',d:'La tormenta pasó y vos también. Ni cancelado ni redimido: el feed simplemente siguió de largo.'}
+};
+function finalEnding(){
+  if (S.rep >= 65) return 'arreglado';
+  if (S.reach >= 70 && S.rep >= 40) return 'leyenda';
+  if (S.reach >= 70) return 'villano';
+  if (S.followers < START_FOLLOWERS && S.rep >= 50) return 'creible';
+  return 'olvidado';
+}
+function earlyEnding(){
+  if (S.rep <= 10) return 'cancelado';
+  if (S.followers < 150000) return 'sinseguidores';
+  return null;
+}
+
+/* ---------- render: posts ---------- */
+function actionsHTML(c){
+  if (!c) return '';
+  return `<div class="actions" aria-label="Interacciones">
+    <span><svg><use href="#i-reply"/></svg>${fmt(c.r)}</span>
+    <span><svg><use href="#i-repost"/></svg>${fmt(c.rt)}</span>
+    <span><svg><use href="#i-like"/></svg>${fmt(c.l)}</span>
+    <span><svg><use href="#i-views"/></svg>${fmt(c.v)}</span></div>`;
+}
+function fakeCounts(handle){
+  const b = 200 + hue(handle) * 40;
+  return { r:b*0.08, rt:b*0.3, l:b*1.4, v:b*28 };
+}
+function quoteMineHTML(){
+  return `<div class="quote"><div class="post-meta"><b>${esc(S.name)}</b><svg class="badge" style="width:16px;height:16px"><use href="#i-badge"/></svg><span class="muted">@${esc(S.handle)}</span></div><div class="post-text">${rich(POSTS[S.tag])}</div></div>`;
+}
+function replyToHTML(p){
+  if (!p.to) return '';
+  const h = p.to === 'me' ? S.handle : sub(U[p.to].handle);
+  return `<div class="reply-to">Respondiendo a <span>@${esc(h)}</span></div>`;
+}
+function postHTML(p){
+  const av = avatarHTML(sub(p.name), sub(p.handle), 'md', p.mine);
+  let extra = '';
+  if (p.quoteMine) extra += quoteMineHTML();
+  if (p.news) extra += `<div class="news"><div class="news-img">${p.news.live?'<span class="live">EN VIVO</span>':''}<span class="tag">#${esc(TRENDS[S.tag][0].replace(/\s/g,''))}</span></div><div class="news-txt"><small>${esc(p.news.outlet)}</small><div>${esc(p.news.headline)}</div></div></div>`;
+  if (p.dm) extra += `<div class="dm"><div class="dm-bubble">${rich(p.dm)}</div></div>`;
+  const counts = p.big
+    ? `<div class="big-counts"><span><b>${fmt(p.counts.v)}</b> vistas</span><span><b>${fmt(p.counts.rt)}</b> reposteos</span><span><b>${fmt(p.counts.l)}</b> me gusta</span></div>`
+    : actionsHTML(p.counts || fakeCounts(sub(p.handle)));
+  return `<article class="post${p.mine?' mine':''}">${av}<div class="post-body">
+    ${p.mineLabel ? `<div class="mine-label">${esc(p.mineLabel)}</div>` : ''}
+    <div class="post-meta"><b>${esc(sub(p.name))}</b>${p.verified?'<svg class="badge" style="width:17px;height:17px"><use href="#i-badge"/></svg>':''}<span class="muted">@${esc(sub(p.handle))}${p.time?' · '+esc(p.time):''}</span></div>
+    ${replyToHTML(p)}<div class="post-text">${rich(p.text)}</div>${extra}${counts}</div></article>`;
+}
+function mineEmptyHTML(label, msg){
+  return `<article class="post mine">${avatarHTML(S.name, S.handle, 'md', true)}<div class="post-body"><div class="mine-label">${esc(label)}</div><div class="post-meta"><b>${esc(S.name)}</b><span class="muted">@${esc(S.handle)}</span></div><div class="tomb" style="margin-top:6px">${esc(msg)}</div></div></article>`;
+}
+function currentMineHTML(time){
+  if (S.flags.deleted) return mineEmptyHTML('Tu posteo', 'Este posteo no está disponible porque su autor lo eliminó.');
+  return postHTML(minePost({ big:true, mineLabel:'Tu posteo', time }));
+}
+function narrHTML(text, time){
+  return `<aside class="narr" aria-label="Lo que está pasando"><div class="narr-head"><svg class="narr-glyph" aria-hidden="true"><use href="#i-glyph"/></svg><b>Lo que está pasando</b>${time?`<span class="muted">${esc(time)}</span>`:''}</div><p>${rich(text)}</p></aside>`;
+}
+function repliesHTML(list, label){
+  if (!list || !list.length) return '';
+  return `<div class="replies-label">${esc(label || 'Respuestas y citas')}</div>` + list.map(r => postHTML(Object.assign({time: r.time || rTime()}, r))).join('');
+}
+let tIdx = 0;
+function rTime(){ const t = ['2 min','5 min','12 min','20 min','34 min','1 h']; return t[(tIdx++) % t.length]; }
+
+/* ---------- render: panel ---------- */
+function renderRail(){
+  const list = STAGES.map((st,i)=>{
+    const cls = i < S.history.length ? 'done' : (i === S.stage ? 'now' : '');
+    return `<li class="${cls}"${i===S.stage?' aria-current="step"':''}><span class="n">${i < S.history.length ? '✓' : i+1}</span>${esc(st.title)}</li>`;
+  }).join('');
+  $('#stage-list').innerHTML = list;
+  $('#rail-me').innerHTML = avatarHTML(S.name, S.handle, 'md', true) + `<div><b>${esc(S.name)}</b><span class="muted">@${esc(S.handle)}</span></div>`;
+  $('#segs').innerHTML = STAGES.map((_,i)=>`<i class="${i <= S.stage ? 'on':''}"></i>`).join('');
+}
+function renderHeader(title, subt){
+  $('#head-title').textContent = title;
+  $('#head-sub').textContent = subt;
+}
+let shown = { f:START_FOLLOWERS };
+function renderStats(){
+  $('#st-rep').textContent = S.rep + '/100';
+  $('#st-reach').textContent = S.reach + '/100';
+  $('#bar-rep').style.width = S.rep + '%';
+  $('#bar-reach').style.width = Math.max(2,S.reach) + '%';
+  $('#mini-stats').innerHTML = `<div><b>${fmt(S.followers)}</b>seguidores</div><div><b>${S.rep}</b>reputación</div><div><b>${S.reach}</b>alcance</div>`;
+  const el = $('#st-followers'), from = shown.f, to = S.followers;
+  shown.f = to;
+  if (reduceMotion || from === to){ el.textContent = fmtFull(to); return; }
+  const t0 = performance.now();
+  (function step(t){
+    const p = Math.min(1,(t-t0)/800), v = from + (to-from)*(1-Math.pow(1-p,3));
+    el.textContent = fmtFull(v);
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+function renderTrends(){
+  const base = S.tag
+    ? [{c:'Tendencia en Argentina', t:'#' + S.name.replace(/\s+/g,''), n: Math.round(18 + S.reach*3.4) + ' mil posteos'},
+       ...TRENDS[S.tag].map((t,i)=>({c:i===0?'Política y economía · Tendencia':'Tendencia', t, n: Math.round(6 + S.reach*(1.8-i*.4)) + ' mil posteos'}))]
+    : [{c:'Deportes · Tendencia', t:'Superclásico', n:'48 mil posteos'},{c:'Tendencia', t:'Lunes', n:'12 mil posteos'},{c:'Economía · Tendencia', t:'Dólar hoy', n:'9 mil posteos'}];
+  $('#trends').innerHTML = base.map(x=>`<div class="trend"><small>${esc(x.c)}</small><b>${esc(x.t)}</b><small>${esc(x.n)}</small></div>`).join('');
+}
+
+/* mapa de propagación: anillos desde X hacia medios tradicionales */
+const NODES = [
+  {l:'X', ring:0, a:0, at:0},
+  {l:'WhatsApp', ring:1, a:200, at:1}, {l:'TikTok', ring:1, a:320, at:1}, {l:'Instagram', ring:1, a:80, at:2},
+  {l:'Streaming', ring:2, a:150, at:2}, {l:'Cuentas políticas', ring:2, a:30, at:2}, {l:'Portales', ring:2, a:270, at:3},
+  {l:'TV', ring:3, a:225, at:3}, {l:'Radio', ring:3, a:110, at:3}, {l:'Diarios', ring:3, a:340, at:4}, {l:'Medios del exterior', ring:3, a:60, at:4, reach:65}
+];
+function renderMap(){
+  const cx=170, cy=135, R=[0,58,96,128], ky=.82, done=S.history.length;
+  const isOn = n => done > 0 && n.at <= done && (!n.reach || S.reach >= n.reach);
+  let lines='', dots='', labels='', rings='', on=0;
+  for (let i=1;i<4;i++) rings += `<ellipse cx="${cx}" cy="${cy}" rx="${R[i]}" ry="${R[i]*ky}" fill="none" stroke="var(--line)" stroke-width="1"/>`;
+  NODES.forEach(n=>{
+    const rad = n.a*Math.PI/180, x = cx + R[n.ring]*Math.cos(rad), y = cy + R[n.ring]*ky*Math.sin(rad);
+    const lit = isOn(n); if (lit) on++;
+    if (n.ring>0) lines += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${lit?'url(#g-line)':'var(--line-strong)'}" stroke-width="${lit?2:1}" ${lit?'':'stroke-dasharray="3 4"'}/>`;
+    const r = n.ring===0 ? 13 : (lit?6.5:4.5);
+    dots += (lit && n.at === done ? `<circle class="ping" cx="${x}" cy="${y}" r="8"/>` : '') +
+      `<circle cx="${x}" cy="${y}" r="${r}" fill="${lit?'url(#g-heat)':'var(--line-strong)'}"/>`;
+    if (n.ring===0) dots += `<text x="${cx}" y="${cy+4}" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:12px">X</text>`;
+    else {
+      const below = y > cy - 4;
+      labels += `<text class="${lit?'on':''}" x="${x}" y="${below? y+17 : y-11}" text-anchor="middle">${esc(n.l)}</text>`;
+    }
+  });
+  $('#map').innerHTML = `<svg class="map" viewBox="0 0 340 270" role="img" aria-label="Mapa de propagación: ${on} de ${NODES.length} canales alcanzados">
+    <defs><radialGradient id="g-line" gradientUnits="userSpaceOnUse" cx="${cx}" cy="${cy}" r="130"><stop offset="0" stop-color="#1d9bf0"/><stop offset=".5" stop-color="#ff3d71"/><stop offset="1" stop-color="#ff9f1c"/></radialGradient></defs>
+    ${rings}${lines}${dots}${labels}</svg>`;
+  $('#map-cap').textContent = done === 0
+    ? 'Todavía no publicaste nada. Cada etapa puede llevar tu posteo a un canal nuevo.'
+    : `Tu historia ya circula en ${on} de ${NODES.length} canales, desde X hasta los medios tradicionales.`;
+}
+
+/* ---------- flujo del juego ---------- */
+function startStage(i){
+  S.stage = i; tIdx = 0;
+  const st = STAGES[i];
+  renderRail(); renderHeader(st.title, `Etapa ${i+1} de 6 · ${st.time}`); renderMap(); renderTrends();
+  const it = st.intro(S);
+  const feed = $('#feed');
+  const top = i === 0 ? '' : currentMineHTML(st.time.toLowerCase());
+  const composerTop = st.composer
+    ? `<div class="compose-row">${avatarHTML(S.name, S.handle, 'md', true)}<div class="compose-ph">${esc(st.q)}</div></div>`
+    : `<h3 id="q-title">${esc(st.q)}</h3>`;
+  feed.innerHTML = top + narrHTML(it.narr, st.time) + repliesHTML(it.replies, it.label) +
+    `<section class="composer" aria-label="${esc(st.q)}">${composerTop}<p>${esc(st.qsub)}</p>
+      <div class="choices">${st.choices.map((c,k)=>`<button class="choice" type="button" data-k="${k}"><span class="ic" aria-hidden="true">${c.ic}</span><span><b>${esc(c.label)}</b><span class="d">${esc(c.desc)}</span>${st.composer?`<span class="draft">${rich(POSTS[c.id])}</span>`:''}</span></button>`).join('')}</div></section>`;
+  feed.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => choose(+b.dataset.k)));
+  window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+  feed.focus({preventScroll:true});
+}
+
+function choose(k){
+  const st = STAGES[S.stage], c = st.choices[k];
+  document.querySelectorAll('.choice').forEach((b,j)=>{ b.disabled = true; b.classList.add(j===k ? 'picked' : 'dim'); });
+  if (S.stage === 0) S.tag = c.id;
+  const res = c.result(S);
+  const fx0 = typeof c.fx === 'function' ? c.fx(S) : c.fx;
+  const fx = Object.assign({}, fx0, { f: Math.round(fx0.f * F_SCALE) });
+  if (c.flag) S.flags[c.flag] = true;
+  S.followers = Math.max(0, S.followers + fx.f);
+  S.rep = clamp(S.rep + fx.r);
+  S.reach = clamp(S.reach + fx.a);
+  S.history.push({ stage:st.title, label:c.label, text:sub(res.text), fx });
+
+  const chips = [];
+  if (fx.f) chips.push(`<span class="chip ${fx.f>0?'up':'down'}">${fx.f>0?'+':'−'}${fmt(Math.abs(fx.f))} seguidores</span>`);
+  if (fx.r) chips.push(`<span class="chip ${fx.r>0?'up':'down'}">${fx.r>0?'+':'−'}${Math.abs(fx.r)} reputación</span>`);
+  if (fx.a) chips.push(`<span class="chip">${fx.a>0?'+':'−'}${Math.abs(fx.a)} alcance</span>`);
+
+  const early = earlyEnding();
+  const last = S.stage === STAGES.length - 1;
+  const btnLabel = (early || last) ? 'Ver cómo termina' : 'Seguir a la etapa ' + (S.stage + 2);
+
+  /* 1) siempre primero lo tuyo */
+  let mine;
+  const rp = REPLY_POSTS[c.id];
+  if (S.stage === 0) mine = postHTML(minePost({time:'10 min', mineLabel:'Publicaste'}));
+  else if (rp) mine = postHTML(minePost({time:'ahora', mineLabel:'Publicaste', text: rp[S.tag] || rp.all, quoteMine: !!rp.quote && !S.flags.deleted, scale: rp.scale || 1}));
+  else if (c.flag === 'deleted') mine = mineEmptyHTML('Borraste tu posteo', 'Este posteo no está disponible porque su autor lo eliminó.');
+  else mine = mineEmptyHTML('Tu decisión', 'No publicaste nada.');
+
+  tIdx = 0;
+  const wrap = document.createElement('section');
+  wrap.className = 'result';
+  wrap.setAttribute('aria-live','polite');
+  wrap.innerHTML = `<div class="result-head">Elegiste: ${esc(c.label)}</div>${mine}
+    ${narrHTML(res.text, 'ahora')}
+    ${repliesHTML(res.replies)}
+    <div class="deltas">${chips.join('')}</div>
+    <div class="concept"><span class="ic" aria-hidden="true">📚</span><div><small>Para entender lo que pasó</small><b>${esc(res.concept.t)}</b><p>${esc(res.concept.d)}</p></div></div>
+    <div class="next"><button class="btn btn-blue" type="button" id="btn-next">${esc(btnLabel)}</button></div>`;
+  $('#feed').appendChild(wrap);
+  renderStats(); renderRail(); renderMap(); renderTrends();
+  wrap.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'});
+  $('#btn-next').addEventListener('click', () => {
+    if (early) return showEnding(early);
+    if (last) return showEnding(finalEnding());
+    startStage(S.stage + 1);
+  });
+}
+
+function showEnding(key){
+  const E = ENDINGS[key];
+  S.stage = STAGES.length;
+  renderRail(); renderMap(); renderTrends();
+  renderHeader('Final', S.history.length < 6 ? `El juego terminó en la etapa ${S.history.length}` : 'Completaste las seis etapas');
+  const df = S.followers - START_FOLLOWERS;
+  const frames = S.history.map((h,i)=>{
+    const ch = [];
+    if (h.fx.f) ch.push(`<span class="chip ${h.fx.f>0?'up':'down'}">${h.fx.f>0?'+':'−'}${fmt(Math.abs(h.fx.f))}</span>`);
+    if (h.fx.r) ch.push(`<span class="chip ${h.fx.r>0?'up':'down'}">${h.fx.r>0?'+':'−'}${Math.abs(h.fx.r)} rep.</span>`);
+    return `<div class="frame"><div class="frame-n"><i>${i+1}</i>${esc(h.stage)}</div><b>${esc(h.label)}</b><p>${esc(h.text)}</p><div class="fx">${ch.join('')}</div></div>`;
+  }).join('');
+  $('#feed').innerHTML = `<section class="ending" aria-labelledby="end-t">
+      <div class="emoji" aria-hidden="true">${E.e}</div>
+      <h2 id="end-t">${esc(E.t)}</h2>
+      <p>${esc(E.d)}</p>
+      <div class="final-stats">
+        <div><small>Seguidores</small><b>${fmt(S.followers)}</b><small>${df>=0?'+':'−'}${fmt(Math.abs(df))}</small></div>
+        <div><small>Reputación</small><b>${S.rep}</b><small>empezaste con 60</small></div>
+        <div><small>Alcance</small><b>${S.reach}</b><small>empezaste con 10</small></div>
+      </div></section>
+    <h3 class="sb-title">Tu storyboard</h3>
+    <p class="sb-sub">Cómo se fue armando la historia, decisión por decisión.</p>
+    <div class="storyboard">${frames}</div>
+    <div class="end-actions">
+      <button class="btn btn-blue" type="button" id="btn-again">Jugar de nuevo</button>
+      <button class="btn btn-ghost" type="button" id="btn-rename">Cambiar nombre</button>
+    </div>`;
+  $('#btn-again').addEventListener('click', () => { reset(); startStage(0); });
+  $('#btn-rename').addEventListener('click', () => { reset(); show('start'); });
+  window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+}
+
+function reset(){
+  Object.assign(S, { followers:START_FOLLOWERS, rep:60, reach:10, tag:null, flags:{}, stage:0, history:[] });
+  shown.f = START_FOLLOWERS; renderStats();
+}
+
+/* ---------- pantallas ---------- */
+function show(which){
+  $('#screen-start').classList.toggle('hidden', which !== 'start');
+  $('#screen-profile').classList.toggle('hidden', which !== 'profile');
+  $('#screen-game').classList.toggle('hidden', which !== 'game');
+  window.scrollTo(0,0);
+}
+const inName = $('#in-name'), inHandle = $('#in-handle');
+let handleTouched = false;
+inName.addEventListener('input', () => { if (!handleTouched) inHandle.value = slug(inName.value); });
+inHandle.addEventListener('input', () => { handleTouched = true; inHandle.value = slug(inHandle.value); });
+$('#start-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = inName.value.trim().replace(/\s+/g,' ');
+  const handle = slug(inHandle.value || name);
+  if (!name){ $('#err').textContent = 'Escribí tu nombre para crear el perfil.'; inName.focus(); return; }
+  if (handle.length < 3){ $('#err').textContent = 'El usuario necesita al menos 3 letras o números.'; inHandle.focus(); return; }
+  $('#err').textContent = '';
+  S.name = name; S.handle = handle;
+  $('#pf-avatar').outerHTML = avatarHTML(name, handle, 'xl', true).replace('class="avatar xl"','class="avatar xl" id="pf-avatar"');
+  $('#pf-name').textContent = name;
+  $('#pf-handle').textContent = '@' + handle;
+  $('#pf-followers').textContent = fmt(START_FOLLOWERS);
+  $('#pf-hello').textContent = 'Hola, ' + name.split(' ')[0] + '.';
+  show('profile');
+});
+$('#btn-edit').addEventListener('click', () => show('start'));
+function toMenu(){ reset(); show('start'); }
+$('#btn-menu').addEventListener('click', toMenu);
+$('#btn-menu-rail').addEventListener('click', toMenu);
+$('#btn-play').addEventListener('click', () => { reset(); show('game'); startStage(0); });
+renderStats();
+})();
+</script>
+</body>
+</html>
