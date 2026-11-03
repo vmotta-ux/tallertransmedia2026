@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un posteo. Miles de caminos. ¿Qué queda realmente de los mensajes?</title>
+<meta name="description" content="Simulador educativo: cómo una campaña de interés público en una red tipo X es capturada por la economía del afecto, distorsionada por el algoritmo y trasladada a TikTok y a los medios masivos.">
+<style>
+:root{
+  --bg:#000; --bg2:#16181c; --bd:#2f3336; --tx:#e7e9ea; --mu:#8b98a5;
+  --blue:#1d9bf0; --red:#f4505a; --yel:#ffd400; --alert:#ffb020; --ins:#ff7a85;
+  --ok:#3ba776; --iro:#e0a030; --agr:#e5484d; --par:#a259c4;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#fff;--bg2:#f4f7f8;--bd:#cfd9de;--tx:#0f1419;--mu:#536471;--blue:#1a7fc7;--red:#d92d3a;--yel:#f0b400;--alert:#a85f00;--ins:#c4202d;color-scheme:light}
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:7rem}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.mu{color:var(--mu)}
+.small{font-size:.82rem;color:var(--mu)}
+[hidden]{display:none!important}
+
+/* ===== Estructura tipo X ===== */
+.app{max-width:1280px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr)}
+.nav{display:none}
+.center{min-width:0;border-left:1px solid var(--bd);border-right:1px solid var(--bd)}
+.right{padding:.9rem}
+@media(min-width:900px){
+  .app{grid-template-columns:minmax(0,1fr) 350px}
+  .center{border-right:0}
+  .right{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:.8rem 1rem 2rem}
+}
+@media(min-width:1100px){
+  .app{grid-template-columns:230px minmax(0,640px) 350px;justify-content:center}
+  .nav{display:flex;flex-direction:column;gap:.2rem;padding:.6rem .8rem;position:sticky;top:0;height:100vh}
+  .center{border-right:1px solid var(--bd)}
+  #minibar{display:none!important}
+}
+.brand{font-weight:900;font-size:1.5rem;letter-spacing:-.03em;padding:.4rem .7rem}
+.ni{font-size:1.15rem;padding:.6rem .8rem;border-radius:999px;color:var(--tx)}
+.ni.on{font-weight:800}
+.navuser{margin-top:auto;display:flex;gap:.6rem;align-items:center;padding:.6rem;border-radius:999px;font-size:.9rem}
+.navuser .av{width:2.4rem;height:2.4rem}
+
+.sticky{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+.hdr{display:flex;align-items:center;gap:.7rem;padding:.55rem .9rem;min-height:3.2rem}
+.hdr .brand{padding:0;font-size:1.2rem}
+@media(min-width:1100px){.hdr .brand{display:none}}
+#htitle{font-weight:800;font-size:1.1rem}
+.steps{display:flex;gap:.3rem;list-style:none;margin:0 0 0 auto;padding:0}
+.steps li{width:1.4rem;height:.35rem;border-radius:9px;background:var(--bd)}
+.steps li.done{background:var(--mu)}
+.steps li[aria-current]{background:var(--blue)}
+.link{background:none;border:0;color:var(--blue);padding:.25rem .3rem;text-decoration:underline;white-space:nowrap}
+#minibar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border-top:1px solid var(--bd)}
+#minibar div{background:var(--bg);padding:.3rem .5rem;font-size:.72rem;line-height:1.2;color:var(--mu)}
+#minibar b{display:block;font-size:1.05rem;color:var(--tx);font-variant-numeric:tabular-nums}
+#view{padding:1rem .9rem 1.5rem}
+.foot{padding:0 .9rem 2rem}
+
+body:not([data-phase=game]):not([data-phase=audit]) .gameonly{display:none}
+
+/* ===== Controles ===== */
+.btn{background:var(--tx);color:var(--bg);border:0;border-radius:999px;padding:.65rem 1.3rem;font-weight:700}
+.btn.sec{background:none;color:var(--tx);border:1.5px solid var(--bd)}
+.btn:disabled{opacity:.6;cursor:default}
+.box{border:1px solid var(--bd);border-radius:16px;padding:1rem;background:var(--bg2)}
+.box + .box{margin-top:.8rem}
+
+/* ===== Portada ===== */
+.intro h1{font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.08;letter-spacing:-.03em;font-weight:800}
+.intro .lead{margin:.9rem 0 1.3rem;color:var(--mu);font-size:1.05rem}
+.intro form h2{font-size:1.25rem;margin-bottom:.8rem}
+label{display:block;font-weight:600;margin:.8rem 0 .3rem;font-size:.95rem}
+.field{display:flex;align-items:center;border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);padding:0 .7rem}
+.field:focus-within{border-color:var(--blue)}
+.field span{color:var(--mu)}
+input{background:transparent;border:0;padding:.65rem .4rem;width:100%;outline:0}
+input[type=number]{border:1.5px solid var(--bd);border-radius:10px;background:var(--bg);padding:.65rem .8rem;width:8rem}
+input[type=number]:focus{border-color:var(--blue)}
+.err{color:var(--red);font-size:.92rem;font-weight:600;margin:.5rem 0}
+.err.on{border:1.5px solid var(--red);border-radius:10px;padding:.5rem .7rem}
+input[aria-invalid=true],.field:has(input[aria-invalid=true]){border-color:var(--red)}
+
+/* ===== Perfil ===== */
+.prof{border:1px solid var(--bd);border-radius:16px;overflow:hidden;background:var(--bg)}
+.banner{height:7.5rem;background:linear-gradient(120deg,#1d9bf055,#8e2de244 60%,#f4505a44),var(--bg2)}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;padding:0 1rem;margin-top:-2.6rem}
+.avbig{width:5.2rem;height:5.2rem;border-radius:50%;border:4px solid var(--bg);display:grid;place-items:center;font-size:2rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#1d9bf0,#7856ff)}
+.pinfo{padding:.6rem 1rem 1rem}
+.pinfo h2{font-size:1.3rem;font-weight:800}
+.bio{margin:.6rem 0 .3rem;min-height:3rem}
+.meta{font-size:.9rem}
+.counts{margin-top:.4rem}
+.counts b{margin-left:.9rem}
+.counts b:first-child{margin-left:0}
+[data-s]{opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s}
+[data-s].show{opacity:1;transform:none}
+.pinned{border-top:1px solid var(--bd);padding:1rem}
+.pinned .pin{font-size:.8rem;color:var(--mu);margin-bottom:.5rem}
+.pinned h3{font-size:1.1rem;margin-bottom:.4rem}
+.pinned p{margin:.45rem 0}
+.edu{border:1.5px solid var(--alert);border-radius:12px;padding:.6rem .8rem;font-size:.9rem;margin:.8rem 0}
+
+/* ===== Tuits ===== */
+.tw{border:1px solid var(--bd);border-radius:14px;padding:.8rem .9rem;background:var(--bg);margin-bottom:.55rem}
+.tw-h{display:flex;gap:.6rem;align-items:center;margin-bottom:.4rem;font-size:.95rem}
+.av{flex:none;width:2.3rem;height:2.3rem;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.85rem}
+.tw p{font-size:1.02rem;margin:.1rem 0 .4rem}
+.acts{color:var(--mu);font-size:.85rem;letter-spacing:.6em}
+.tag{display:inline-block;font-size:.7rem;border:1px solid var(--bd);border-radius:6px;padding:0 .35rem;color:var(--mu)}
+.tw.filler{opacity:.6}
+.tw.mine{border-left:4px solid var(--blue)}
+
+/* Posteo original: destacado */
+.tw.orig{border:2px solid var(--blue);background:var(--bg2);padding:1rem}
+.tw.orig .decay{font-size:1.2rem;line-height:1.6;font-weight:500}
+.decay del{color:var(--mu);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--red)}
+.decay ins{text-decoration:none;color:var(--ins);font-weight:700;margin-left:.15em}
+.ostate{font-size:.85rem;color:var(--mu);border-top:1px dashed var(--bd);padding-top:.5rem;margin-top:.3rem!important}
+
+/* Secciones de la conversación */
+.sec{margin:1.2rem 0 .4rem}
+.sec-h{display:flex;flex-wrap:wrap;align-items:center;gap:.2rem .6rem;font-size:1rem;padding-bottom:.4rem;margin-bottom:.6rem;border-bottom:2px solid var(--bd)}
+.sec-h .dot{width:.8rem;height:.8rem;border-radius:50%}
+.sec-h small{color:var(--mu);font-weight:400;font-size:.82rem}
+.sec.o .dot{background:var(--blue)} .sec.o .sec-h{border-color:var(--blue)}
+.sec.r .dot{background:var(--red)} .sec.r .sec-h{border-color:var(--red)}
+.sec.d .dot{background:var(--yel)} .sec.d .sec-h{border-color:var(--yel)}
+.empty{border:1px dashed var(--bd);border-radius:12px;padding:.9rem;color:var(--mu);font-size:.92rem}
+
+.kick{color:var(--mu);font-size:.9rem}
+.stage-h{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:.1rem 0 .35rem}
+.lead2{color:var(--tx);font-size:1.15rem;line-height:1.4;font-weight:500;margin:.2rem 0 .5rem}
+.more{margin-bottom:.4rem;font-size:.82rem;color:var(--mu)}
+.more summary{cursor:pointer;width:max-content;max-width:100%}
+.more p{margin-top:.3rem;padding-left:.8rem;border-left:2px solid var(--bd)}
+.info{display:flex;gap:.6rem;align-items:flex-start;border-left:3px solid var(--blue);background:var(--bg2);padding:.6rem .8rem;border-radius:0 10px 10px 0;font-size:.9rem;margin-bottom:.9rem}
+.tabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:.6rem}
+.tabs span{flex:1;text-align:center;padding:.55rem;font-weight:600;color:var(--mu)}
+.tabs span.on{color:var(--tx);box-shadow:inset 0 -3px 0 var(--blue)}
+
+/* Memes */
+.memes{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.meme{border-radius:12px;overflow:hidden;border:1px solid var(--bd);background:#222;color:#fff;text-align:center}
+.meme .m1,.meme .m2{font:900 1.1rem/1.1 Impact,"Arial Narrow Bold","Arial Black",sans-serif;text-transform:uppercase;padding:.7rem .6rem;text-shadow:2px 2px 0 #000}
+.meme .pic{height:90px;display:grid;place-items:center;font-size:2.4rem;background:linear-gradient(135deg,#444,#2a2a2a)}
+.meme .cap{background:var(--bg2);color:var(--mu);font:.72rem system-ui;padding:.3rem}
+
+/* TikTok */
+.tiktok{border:2px solid var(--bd);border-radius:26px;padding:.6rem;background:#050505;color:#fff;max-width:420px}
+.tt-top{display:flex;justify-content:center;gap:1.1rem;font-weight:600;font-size:.85rem;margin-bottom:.5rem;color:#bbb}
+.tt-top b{color:#fff;border-bottom:2px solid #fff}
+.reel{display:flex;gap:.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.3rem}
+.clip{flex:0 0 74%;scroll-snap-align:center;aspect-ratio:9/13;border-radius:16px;padding:.7rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;background:linear-gradient(160deg,#25f4ee33,#fe2c5533 70%),#111}
+.clip .badge{position:absolute;top:.6rem;left:.6rem;background:#ffffff22;border-radius:999px;font-size:.72rem;padding:.15rem .55rem}
+.clip .face{position:absolute;top:22%;left:50%;transform:translateX(-50%);font-size:3.2rem}
+.clip p{font-size:.9rem;line-height:1.25;color:#fff}
+.clip small{color:#ccc}
+
+/* TV */
+.tv{border:3px solid var(--bd);border-radius:12px;overflow:hidden;background:#101a2c;color:#fff;margin-bottom:.7rem}
+.tv .screen{padding:1rem;min-height:110px;display:grid;place-items:center;text-align:center;font-size:2.3rem}
+.tv .chy{background:#d4121f;font:800 1.1rem/1.15 system-ui;padding:.6rem .8rem;text-transform:uppercase}
+.tv .tick{background:#f2f2f2;color:#111;font-size:.78rem;padding:.3rem .8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news{display:grid;gap:.45rem;margin:0;padding:0;list-style:none}
+.news li{border:1px solid var(--bd);border-radius:10px;padding:.55rem .7rem;font-weight:600}
+.news li span{display:block;font-weight:400;color:var(--mu);font-size:.8rem}
+
+/* Decisiones */
+.decide{margin-top:1.6rem;padding-top:.9rem;border-top:2px solid var(--tx)}
+.ask{font-size:1.3rem;line-height:1.3;font-weight:800;margin:.1rem 0 .7rem}
+.choices{display:grid;gap:.5rem}
+.ch{display:flex;gap:.7rem;align-items:flex-start;text-align:left;border:1.5px solid var(--bd);border-radius:14px;background:var(--bg);padding:.75rem .85rem;width:100%}
+.ch:hover:not(:disabled){border-color:var(--blue);background:var(--bg2)}
+.ch:disabled{opacity:.55;cursor:default}
+.ch .L{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;border:1.5px solid var(--mu);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+
+/* Panel derecho */
+.right h2{font-size:1.1rem;margin:0 0 .6rem}
+.gauge{border:2px solid var(--tx);margin-bottom:.7rem;background:var(--bg)}
+.gauge h3{background:var(--tx);color:var(--bg);font-size:.88rem;padding:.3rem .6rem}
+.gauge .in{padding:.6rem}
+.num{font-size:2.4rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.num small{font-size:1.2rem}
+.bar{height:.7rem;background:var(--bd);margin:.45rem 0;overflow:hidden}
+.bar i{display:block;height:100%;width:0;transition:width .7s ease,background .7s}
+.read{font-size:.88rem;color:var(--mu)}
+.mix{display:flex;height:.7rem;margin:.45rem 0 .3rem;overflow:hidden}
+.mix span{transition:width .7s}
+.legend{display:flex;flex-wrap:wrap;gap:.2rem .7rem;font-size:.72rem;color:var(--mu)}
+.legend i{display:inline-block;width:.6rem;height:.6rem;margin-right:.25rem;border-radius:2px}
+.graph{border:1px solid var(--bd);border-radius:16px;padding:.7rem;background:var(--bg2);margin-bottom:.8rem}
+.graph svg{width:100%;height:auto;display:block}
+.node{cursor:pointer;opacity:0;pointer-events:none;transition:opacity .5s}
+.node.on{opacity:1;pointer-events:auto}
+.node circle{transition:r .7s ease;stroke:var(--bg);stroke-width:2}
+.node:focus-visible circle,.node.sel circle{stroke:var(--tx);stroke-width:3}
+.node text{font-size:8px;fill:var(--tx);paint-order:stroke;stroke:var(--bg2);stroke-width:2.5px;text-anchor:middle;pointer-events:none}
+.edge{stroke:var(--mu);stroke-width:1;opacity:0;transition:opacity .5s}
+.edge.on{opacity:.45}
+.leg{display:flex;flex-wrap:wrap;gap:.2rem .8rem;font-size:.75rem;color:var(--mu);margin-top:.4rem}
+.leg i{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.3rem;vertical-align:-1px}
+#inspect{min-height:3.2rem;font-size:.85rem;margin-top:.4rem}
+.trends h2{margin-bottom:.4rem}
+.trend{padding:.5rem 0;border-top:1px solid var(--bd)}
+.trend small{display:block;color:var(--mu);font-size:.75rem}
+.trend b{display:block}
+
+/* Modal */
+dialog{border:2px solid var(--alert);border-radius:16px;background:var(--bg);color:var(--tx);padding:0;width:min(520px,calc(100vw - 1.5rem));max-height:calc(100vh - 2rem);overflow:auto}
+dialog::backdrop{background:#000a}
+.mbody{padding:1.1rem 1.2rem}
+.mbody h2{font-size:1.2rem;color:var(--alert);margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0 1rem}
+.chip{font-size:.8rem;border:1px solid var(--bd);border-radius:999px;padding:.15rem .6rem;font-variant-numeric:tabular-nums}
+.chip.up{border-color:var(--red)}
+.chip.down{border-color:var(--ok)}
+
+/* ===== Auditoría ===== */
+.aud h3.t{font-size:1.1rem;margin:1.5rem 0 .6rem}
+.cartel{border:3px solid var(--tx);background:var(--bg)}
+.cartel h2{background:var(--tx);color:var(--bg);font-size:1rem;padding:.4rem .8rem}
+.cartel p{padding:.9rem .9rem 1rem;font-size:1.2rem;line-height:1.35;font-weight:800}
+.cartel p em{font-style:normal;color:var(--red)}
+.mt{width:100%;border-collapse:collapse;font-size:.85rem}
+.mt th,.mt td{text-align:left;padding:.5rem .4rem;border-bottom:1px solid var(--bd);vertical-align:top}
+.mt td b{font-size:1.2rem;font-variant-numeric:tabular-nums}
+.split{display:flex;height:.6rem;border-radius:3px;overflow:hidden;background:var(--bd);margin-top:.3rem;min-width:90px}
+.split i{display:block;height:100%}
+.chart{width:100%;height:auto;border:1px solid var(--bd);border-radius:12px;background:var(--bg2)}
+.stats{display:grid;gap:.5rem}
+.srow{display:grid;grid-template-columns:6.5rem 1fr;gap:.5rem;align-items:center;font-size:.8rem}
+.sb{display:grid;gap:2px}
+.sb div{display:flex;align-items:center;gap:.4rem}
+.sb i{display:block;height:.5rem;background:var(--mu);border-radius:2px;min-width:2px}
+.sb div.me i{background:var(--blue)}
+.sb span{font-size:.7rem;color:var(--mu);font-variant-numeric:tabular-nums}
+.takes{margin:0;padding-left:1.1rem}
+.takes li{margin:.45rem 0}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{.sticky,.nav,.right,.actions{display:none}.app{display:block}}
+</style>
+</head>
+<body data-phase="intro">
+
+<div class="app">
+  <nav class="nav" aria-hidden="true">
+    <div class="brand">Tendencia</div>
+    <div class="ni on">Inicio</div><div class="ni">Explorar</div><div class="ni">Notificaciones</div><div class="ni">Mensajes</div><div class="ni">Perfil</div>
+    <div class="navuser" id="navuser" hidden></div>
+  </nav>
+
+  <div class="center">
+    <div class="sticky">
+      <div class="hdr">
+        <span class="brand">Tendencia</span>
+        <span id="htitle">Inicio</span>
+        <ol class="steps" id="steps" aria-label="Progreso por etapas"></ol>
+        <button class="link" id="restart" hidden>Reiniciar</button>
+      </div>
+      <div id="minibar" hidden aria-hidden="true">
+        <div>Pérdida de sentido<b id="mb0">0%</b></div>
+        <div>Captura afectiva<b id="mb1">0%</b></div>
+        <div>Vulnerabilidad mediática<b id="mb2">0%</b></div>
+      </div>
+    </div>
+    <div id="view"></div>
+    <p class="small foot">Simulación con fines educativos. Personas, cuentas, medios, memes y datos son ficticios. La interfaz imita el formato de X solo como referencia, sin afiliación.</p>
+  </div>
+
+  <aside class="right" aria-label="Indicadores y tendencias">
+    <div class="gameonly" id="meters" aria-live="polite">
+      <section class="gauge" id="g0">
+        <h3>Pérdida de sentido del mensaje</h3>
+        <div class="in"><div class="num"><output>0</output><small>%</small></div>
+        <div class="bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-label="Pérdida de sentido"><i></i></div>
+        <p class="read"></p></div>
+      </section>
+      <section class="gauge" id="g1">
+        <h3>Captura afectiva y polarización</h3>
+        <div class="in"><div class="num"><output>0</output><small>%</small></div>
+        <div class="mix" aria-hidden="true"><span style="background:var(--ok)"></span><span style="background:var(--iro)"></span><span style="background:var(--agr)"></span><span style="background:var(--par)"></span></div>
+        <div class="legend"><span><i style="background:var(--ok)"></i>Debate constructivo</span><span><i style="background:var(--iro)"></i>Ironía</span><span><i style="background:var(--agr)"></i>Agresión</span><span><i style="background:var(--par)"></i>Conflicto partidario</span></div>
+        <div class="bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-label="Captura afectiva"><i></i></div>
+        <p class="read"></p></div>
+      </section>
+      <section class="gauge" id="g2">
+        <h3>Vulnerabilidad mediática</h3>
+        <div class="in"><div class="num"><output>0</output><small>%</small></div>
+        <div class="bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-label="Vulnerabilidad mediática"><i></i></div>
+        <p class="read"></p></div>
+      </section>
+    </div>
+
+    <div class="graph gameonly" id="graphbox">
+      <h2>Hasta dónde llegó</h2>
+      <svg id="net" viewBox="0 0 320 240" role="group" aria-label="Gráfico de red de la circulación del posteo"></svg>
+      <div class="leg">
+        <span><i style="background:var(--blue)"></i>Posteo de la ONG</span>
+        <span><i style="background:var(--red)"></i>Cuentas políticas y de choque</span>
+        <span><i style="background:var(--yel)"></i>Medios y streaming</span>
+      </div>
+      <div id="inspect" class="mu">Tocá un nodo para ver quién es.</div>
+    </div>
+
+    <section class="box trends" id="trends"></section>
+  </aside>
+</div>
+
+<dialog id="modal" aria-labelledby="mt">
+  <div class="mbody">
+    <h2 id="mt">⚠️ Notificación Algorítmica</h2>
+    <p id="mn"></p>
+    <div class="chips" id="mc"></div>
+    <button class="btn" id="mgo">Continuar</button>
+  </div>
+</dialog>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- Configuración ---------- */
+// Para juntar datos de un grupo completo, poné acá la URL de un contador propio.
+// Solo se enviaría { decisiones: [...] }, sin usuario, edad ni ningún identificador.
+const ENDPOINT = '';
+const STORE_KEY = 'tendencia-resonancia-v2';
+
+const $ = s => document.querySelector(s);
+const clamp = (n, a = 0, b = 100) => Math.max(a, Math.min(b, n));
+const POST = 'El 60% de los jóvenes de 18 a 30 años sufre ansiedad por sobreexposición en pantallas. Conocé recursos de ayuda acá';
+const WORDS = POST.split(' ');
+const TH = WORDS.map((_, i) => ((i * 37) % WORDS.length) / WORDS.length * 92 + 4);
+// Palabra del mensaje original -> cómo se deforma al circular
+const REPL = { 1: 'invento', 4: 'nenes de cristal', 10: 'se queja por', 11: 'nada', 13: 'vagancia', 15: 'gasto público.', 17: 'memes', 19: 'chiste' };
+const METRIC = ['Pérdida de sentido', 'Captura afectiva', 'Vulnerabilidad mediática'];
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const READ = [
+  v => v < 20 ? 'El mensaje todavía se entiende.' : v < 50 ? 'El propósito empieza a perderse.' : v < 80 ? 'Ya se lee otra cosa distinta a la campaña.' : 'El mensaje original es irreconocible.',
+  v => v < 25 ? 'Debate mayormente constructivo.' : v < 50 ? 'Aparecen reacciones irónicas y agresivas.' : v < 75 ? 'Domina la agresión y el conflicto partidario.' : 'La conversación ya no trata de salud mental: es una pelea política.',
+  v => v < 30 ? 'Bajo interés de los medios.' : v < 60 ? 'Los portales empiezan a mirar el hilo.' : v < 80 ? 'Alto riesgo de que la TV lo tome como espectáculo.' : 'Los medios ya lo convirtieron en espectáculo.'
+];
+
+/* ---------- Helpers de escena ---------- */
+const av = (c, t) => `<span class="av" style="background:${c}" aria-hidden="true">${t}</span>`;
+const tweet = (n, h, t, o = {}) => `<article class="tw ${o.cls || ''}"><div class="tw-h">${av(o.c || 'var(--blue)', o.a || n[0])}<div><b>${n}</b> <span class="mu">${h}</span>${o.tag ? ` <span class="tag">${o.tag}</span>` : ''}</div></div><p>${t}</p><div class="acts" aria-hidden="true">💬 🔁 ♡ ↗</div></article>`;
+const origCard = () => `<article class="tw orig"><div class="tw-h">${av('var(--blue)', 'S')}<div><b>Red de Salud Mental Joven</b> <span class="mu">@SaludMentalJoven</span> <span class="tag">ONG ficticia</span></div></div><p class="decay" id="decay"></p><p class="ostate" id="ostate"></p><div class="acts" aria-hidden="true">💬 🔁 ♡ ↗</div></article>`;
+const sec = (cls, label, sub, body) => `<section class="sec ${cls}"><h3 class="sec-h"><span class="dot" aria-hidden="true"></span>${label}<small>${sub}</small></h3>${body}</section>`;
+const SEC_O = (sub = 'El que desencadena todo') => sec('o', 'Posteo original', sub, origCard());
+const head = (n, title, lead, theory) => `<p class="kick">Etapa ${n} de 6</p><h2 class="stage-h">${title}</h2><p class="lead2">${lead}</p><details class="more"><summary>Concepto detrás de esta etapa</summary><p>${theory}</p></details>`;
+const meme = (a, b, ico) => `<div class="meme"><div class="m1">${a}</div><div class="pic" aria-hidden="true">${ico}</div><div class="m2">${b}</div><div class="cap">@memes_del_dia (ficticia)</div></div>`;
+const clip = (badge, face, txt, who) => `<div class="clip"><span class="badge">${badge}</span><span class="face" aria-hidden="true">${face}</span><p>${txt}</p><small>${who} · sonido original</small></div>`;
+
+/* ---------- Etapas ---------- */
+// Opción: [texto, notificación algorítmica, [Δsentido, Δcaptura, Δvulnerabilidad]]
+const STAGES = [
+{
+  name: 'El posteo', floor: [0, 0, 0],
+  scene: () => head(1, 'El posteo institucional', 'La campaña de una organización ficticia aparece en tu pestaña “Para ti”.',
+      'Economía del afecto (Lovink): las plataformas capitalizan la atención emocional. Lo que indigna retiene más que lo que informa.') +
+    `<div class="tabs"><span class="on">Para ti</span><span>Siguiendo</span></div>` +
+    tweet('Café de la Esquina', '@cafe_esquina', 'Hoy 2x1 en medialunas hasta las 11. ☕', { c: '#8a6d3b', tag: 'cuenta ficticia', cls: 'filler' }) +
+    SEC_O() +
+    sec('r', 'Respuestas y citas', 'Lo que la gente hace con el posteo', `<div class="empty">Todavía nadie respondió ni citó el posteo. Lo que hagas vos es lo primero que el algoritmo va a leer.</div>`),
+  ask: 'Estás scrolleando en tu feed y te cruzás con este posteo. ¿Qué haces?',
+  c: [
+    ['Citar con ironía o indignación', 'El algoritmo “Para ti” amplificó un 200% tu cita irónica porque la arquitectura de la red prioriza la indignación emocional para retener la atención.', [8, 16, 8]],
+    ['Dar Me gusta o repostear sin abrir el link', 'El sistema mide el gesto, no la comprensión. El repost cuenta como interés, pero el link de ayuda nunca se abre: el mensaje circula sin su contenido.', [10, 8, 6]],
+    ['Pedir fuentes y contexto, con tono racional', 'Las respuestas largas y mesuradas generan poca reacción inmediata. El ranking las deja debajo de las citas más virulentas: tu pregunta legítima queda enterrada.', [3, 4, 3]],
+    ['Ignorar y deslizar', 'Deslizar también es un dato: el tiempo de permanencia casi nulo le dice al sistema que el posteo no retiene. Mientras tanto, quienes sí reaccionan deciden qué circula.', [2, 3, 2]]
+  ]
+},
+{
+  name: 'Explota', floor: [45, 40, 25],
+  scene: () => head(2, 'Explota: captura afectiva en X', 'Cuentas políticas citan el posteo para atacar el gasto público y acusar de “generación de cristal”. La pérdida de sentido sube al 45%.',
+      'Captura afectiva: la polarización no es un desvío del sistema. Es lo que el sistema optimiza.') +
+    sec('r', 'Respuestas y citas', 'Quienes lo usan para otra discusión',
+      tweet('Radar Libertario', '@RadarLibertario_', 'Con la plata de los contribuyentes nos explican que mirar el celular da ansiedad. Generación de cristal total.', { c: 'var(--red)', tag: 'cuenta ficticia' }) +
+      tweet('Tribuna Federal', '@TribunaFederal_', 'Mientras el país se cae, financian campañas sobre “ansiedad”. ¿Para esto pagamos impuestos?', { c: '#8e2de2', tag: 'cuenta ficticia' }) +
+      tweet('El Barbijo Opina', '@ElBarbijoOpina', 'Otra ONG que vive de inventar problemas. Generación de cristal.', { c: '#c0392b', tag: 'cuenta ficticia' })) +
+    SEC_O('Así va quedando el mensaje'),
+  ask: 'El posteo ya es munición política en tu feed. ¿Qué hacés?',
+  c: [
+    ['Defender a la ONG respondiendo a las cuentas políticas', 'Defender es entrar al duelo: cada respuesta reabre el hilo y le da al sistema más actividad. Para la economía del afecto, el conflicto es combustible.', [5, 12, 8]],
+    ['Sumarte con otra cita burlona', 'Las citas sobre citas forman cadenas que el algoritmo empuja a públicos que nunca vieron el posteo original. La burla se premia con alcance.', [8, 14, 10]],
+    ['Compartir una captura de pantalla del posteo', 'Una captura corta el vínculo con el link de ayuda y con el contexto. Es el primer paso para que el contenido salga de X.', [9, 6, 12]],
+    ['Silenciar el hilo y salir de la conversación', 'Silenciar protege tu bienestar, pero deja el campo a quienes más gritan: el tono promedio de lo que queda visible se vuelve más hostil.', [3, 4, 4]]
+  ]
+},
+{
+  name: 'Cambia de sentido', floor: [58, 55, 40],
+  scene: () => head(3, 'Cambia de sentido', 'La frase final de la campaña se vuelve plantilla retórica y meme, ya sin relación con la salud mental.',
+      'Memificación: al circular como plantilla, el enunciado se separa de su autor y de su propósito.') +
+    sec('d', 'Lo que pasa después', 'La frase se vuelve plantilla',
+      `<div class="memes">${meme('Mi jefe: ¿terminaste el informe?', 'Conocé recursos de ayuda acá', '😶')}${meme('Mi cuenta de luz este mes', 'Conocé recursos de ayuda acá', '💸')}</div>`) +
+    SEC_O('Así va quedando el mensaje'),
+  ask: 'La frase ya es un meme y te llega por todos lados. ¿Qué hacés?',
+  c: [
+    ['Hacer tu propio meme con la plantilla', 'Cada versión nueva refuerza la plantilla. El algoritmo detecta el formato repetido y lo trata como tendencia, sin importar su origen.', [10, 10, 6]],
+    ['Compartir el meme de otra persona porque es gracioso', 'Compartir sin autoría es la forma más barata de circulación. El chiste se vuelve la versión oficial del mensaje.', [9, 7, 7]],
+    ['Aclarar en comentarios qué decía realmente la campaña', 'Una aclaración aislada compite con miles de reacciones. Rara vez alcanza a quienes ven el meme fuera de su contexto.', [-2, 3, 2]],
+    ['Dejar de seguir la tendencia', 'Salir reduce tu exposición, pero la plantilla sigue viva. El sistema no necesita tu participación para seguir circulándola.', [3, 3, 4]]
+  ]
+},
+{
+  name: 'TikTok', floor: [70, 66, 56],
+  scene: () => head(4, 'Pista migratoria hacia TikTok', 'Audiencias de 18 a 30 años recrean el conflicto con stitches, parodias y videos de opinión breve, y resignifican el mensaje desde el lenguaje audiovisual.',
+      'Migración transmedia: el conflicto cambia de lenguaje (del texto al audiovisual) y de lógica algorítmica (tiempo de visualización).') +
+    sec('d', 'Lo que pasa después', 'El conflicto migra a video',
+      `<div class="tiktok"><div class="tt-top"><span>Siguiendo</span><b>Para ti</b></div><div class="reel" tabindex="0" aria-label="Videos de TikTok, deslizá para ver más">
+      ${clip('Stitch', '🙄', 'Me dijeron que mi ansiedad es “de cristal” y que mire un recurso de ayuda acá.', '@lu.opina (ficticia)')}
+      ${clip('Parodia', '🎭', 'Sketch: el policía de la ansiedad te pide el recurso de ayuda antes de abrir el celular.', '@humor.federal (ficticia)')}
+      ${clip('Opinión en 30 s', '🗣️', 'Opinión rápida: ¿campaña útil o gasto público? Dejame tu bando en comentarios.', '@debate.tv (ficticia)')}
+      </div></div>`) +
+    SEC_O('Así va quedando el mensaje'),
+  ask: 'El debate ya está en tu pestaña “Para ti” de TikTok. ¿Qué hacés?',
+  c: [
+    ['Hacer un stitch o una parodia', 'El formato corto premia la reacción facial y el tono: el contexto cae a los primeros segundos. El sistema optimiza tiempo de visualización, no comprensión.', [9, 12, 10]],
+    ['Subir un video de opinión de 30 segundos', 'Opinar sobre una opinión es una cadena: tu video queda anclado al conflicto y no al tema de fondo. La pelea se vuelve contenido.', [8, 10, 9]],
+    ['Reenviar un video por mensajería privada', 'El reenvío saca el contenido del alcance de cualquier auditoría: circula sin contexto y sin forma de corregirlo.', [7, 5, 8]],
+    ['Hacer un video informativo con fuentes', 'El contenido informativo compite con lo emocional y casi nunca retiene lo suficiente para ser empujado. Aun así, deja un registro más sólido del tema.', [-2, 4, 5]]
+  ]
+},
+{
+  name: 'Medios', floor: [84, 76, 82],
+  scene: () => head(5, 'Salto a los medios masivos', 'El debate llega a la televisión y a los portales. Los titulares ya no cubren la salud mental sino la pelea.',
+      'Inversión de agenda: los medios cubren la pelea, no el problema. El espectáculo reemplaza al tema original.') +
+    sec('d', 'Lo que pasa después', 'La agenda se invierte',
+      `<div class="tv"><div class="screen" aria-hidden="true">📺</div><div class="chy">Pelea feroz en redes sociales</div><div class="tick">NotiVisión 24 (ficticio) · Qué dicen los jóvenes y la política del hashtag del momento</div></div>
+      <ul class="news">
+        <li>Escándalo en redes: la campaña que dividió a los jóvenes<span>Portal NoticiasYa (ficticio)</span></li>
+        <li>“Generación de cristal”: el hashtag que incendió la red<span>Portal NoticiasYa (ficticio)</span></li>
+        <li>Quién está detrás del posteo que enfureció a la política<span>Stream Directo Argentina (ficticio)</span></li>
+      </ul>`) +
+    SEC_O('Así va quedando el mensaje'),
+  ask: 'Lo ves en la tele y en los portales. ¿Qué hacés?',
+  c: [
+    ['Ver el programa y comentar en vivo en X', 'La “segunda pantalla” realimenta el ciclo: lo que se dice en X vuelve a la tele como “la reacción de las redes”.', [6, 8, 7]],
+    ['Compartir la nota del portal', 'Compartir el titular amplifica el encuadre del conflicto. El link de ayuda original ya no aparece en ninguna de las notas.', [5, 6, 8]],
+    ['Revisar si las notas hablan de salud mental y cuestionar la cobertura', 'Cuestionar la agenda es valioso, pero el medio mide el reclamo como una reacción más: se vuelve parte de la pelea que cubre.', [1, 4, 3]],
+    ['Cerrar la app y apagar la tele', 'Desconectarse reduce el ruido personal, pero la agenda mediática sigue su curso sin tu mirada crítica.', [2, 2, 3]]
+  ]
+},
+{
+  name: 'Cierre', floor: [0, 0, 0],
+  scene: () => head(6, 'El cierre', 'Pasaron 72 horas. El tema ya no es la ansiedad ni las pantallas. Queda una última decisión y después, la auditoría de tu recorrido.',
+      'Auditoría: medir resonancia no es medir impacto. Sin indicadores de sentido, solo vemos cuánto ruido se hizo, no qué quedó del mensaje.') +
+    sec('d', 'Lo que pasa después', 'Hoy',
+      tweet('NotiVisión 24', '@notivision24', 'Ya nadie habla del tema de fondo. Lo que se discute ahora es quién ganó la pelea en redes.', { c: '#d4121f', tag: 'medio ficticio' })) +
+    SEC_O('Así va quedando el mensaje'),
+  ask: 'Última decisión. ¿Qué hacés con lo que pasó?',
+  c: [
+    ['Entrar al sitio de la ONG y buscar los recursos reales', 'Ir a la fuente es el gesto que el sistema menos premia, y el único que conecta con el propósito de la campaña.', [-8, -6, -4]],
+    ['Compartir el recurso de ayuda con tus contactos', 'Compartir el recurso sin ruido repone una parte del sentido, aunque por canales privados donde la medición no llega.', [-5, -3, -2]],
+    ['Pasar al próximo tema de tendencia', 'El feed ya tiene otra tendencia. El ciclo termina sin dejar consecuencias para el sistema, pero tampoco para el tema de fondo.', [2, 2, 0]],
+    ['Pedir a los medios que cubran salud mental', 'Pedir cobertura es útil, pero sucede dentro del mismo circuito que invirtió la agenda.', [-3, 1, 2]]
+  ]
+}
+];
+
+const TRENDS = [
+  [['Salud mental', '2,1 mil'], ['#FinDeSemanaLargo', '48 mil'], ['Medialunas', '5,3 mil'], ['#MateCebado', '9 mil']],
+  [['#GeneraciónDeCristal', '31 mil'], ['Gasto público', '18 mil'], ['Salud mental', '9,8 mil'], ['#FinDeSemanaLargo', '41 mil']],
+  [['Conocé recursos de ayuda acá', '64 mil'], ['#GeneraciónDeCristal', '88 mil'], ['Plantilla del momento', '22 mil'], ['Salud mental', '6 mil']],
+  [['#StitchDeCristal', '120 mil'], ['Conocé recursos de ayuda acá', '97 mil'], ['#GeneraciónDeCristal', '101 mil'], ['Salud mental', '4 mil']],
+  [['Pelea feroz en redes', '210 mil'], ['#GeneraciónDeCristal', '150 mil'], ['Conocé recursos de ayuda acá', '70 mil'], ['Salud mental', '3 mil']],
+  [['Pelea feroz en redes', '95 mil'], ['Nueva polémica del día', '60 mil'], ['#GeneraciónDeCristal', '40 mil'], ['Salud mental', '2 mil']]
+];
+
+/* ---------- Grafo de red ---------- */
+const NODES = [
+  { id: 'ong', t: 'ong', st: 0, x: 160, y: 120, r: 22, n: 'Posteo de la ONG (ficticia)', d: 'El posteo original. A medida que la historia crece, queda diminuto frente a quienes lo citan.' },
+  { id: 'p1', t: 'pol', st: 1, x: 70, y: 55, r: 13, n: '@RadarLibertario_', d: 'Cuenta política ficticia. Cita el posteo para atacar el gasto público.', from: 'ong' },
+  { id: 'p2', t: 'pol', st: 1, x: 255, y: 50, r: 14, n: '@TribunaFederal_', d: 'Cuenta política ficticia. Acusa de “generación de cristal”.', from: 'ong' },
+  { id: 'p3', t: 'pol', st: 1, x: 250, y: 185, r: 11, n: '@ElBarbijoOpina', d: 'Cuenta de choque ficticia. Repite el discurso en tono de burla.', from: 'ong' },
+  { id: 'm1', t: 'pol', st: 2, x: 60, y: 175, r: 12, n: '@memes_del_dia', d: 'Cuenta de memes ficticia. Convierte la frase en plantilla fuera de contexto.', from: 'p1' },
+  { id: 'm2', t: 'pol', st: 2, x: 160, y: 28, r: 9, n: 'Cuenta de humor político', d: 'Cuenta ficticia que usa la plantilla para chistes partidarios.', from: 'p2' },
+  { id: 't1', t: 'pol', st: 3, x: 22, y: 115, r: 11, n: '@lu.opina (stitch)', d: 'Creadora ficticia de TikTok. Recrea el conflicto en video corto.', from: 'm1' },
+  { id: 't2', t: 'pol', st: 3, x: 298, y: 118, r: 10, n: '@humor.federal (parodia)', d: 'Creador ficticio de TikTok. Su parodia circula sin ningún enlace al original.', from: 'p3' },
+  { id: 'e1', t: 'med', st: 4, x: 110, y: 214, r: 18, n: 'NotiVisión 24 (ficticio)', d: 'Canal de noticias ficticio. Titula “Pelea feroz en redes sociales”, no cubre salud mental.', from: 't1' },
+  { id: 'e2', t: 'med', st: 4, x: 205, y: 218, r: 15, n: 'Portal NoticiasYa (ficticio)', d: 'Portal ficticio que titula sobre el escándalo y no menciona el link de ayuda.', from: 'p2' },
+  { id: 'e3', t: 'med', st: 4, x: 288, y: 82, r: 13, n: 'Stream Directo Argentina (ficticio)', d: 'Canal de streaming ficticio que comenta la polémica en vivo.', from: 't2' }
+];
+const COL = { ong: 'var(--blue)', pol: 'var(--red)', med: 'var(--yel)' };
+const NS = 'http://www.w3.org/2000/svg';
+const net = $('#net');
+const el = (tag, attrs = {}) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+const byId = Object.fromEntries(NODES.map(n => [n.id, n]));
+NODES.forEach(n => { if (n.from) { const f = byId[n.from]; net.appendChild(el('line', { x1: f.x, y1: f.y, x2: n.x, y2: n.y, class: 'edge', 'data-id': n.id })); } });
+NODES.forEach(n => {
+  const g = el('g', { class: 'node', tabindex: '0', role: 'button', 'aria-label': n.n, 'data-id': n.id });
+  g.appendChild(el('circle', { cx: n.x, cy: n.y, r: n.r, fill: COL[n.t] }));
+  const tx = el('text', { x: n.x, y: n.y + n.r + 9 }); tx.textContent = n.t === 'ong' ? 'ONG' : ''; g.appendChild(tx);
+  const show = () => inspect(n.id);
+  g.addEventListener('click', show); g.addEventListener('focus', show); g.addEventListener('mouseenter', show);
+  g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); } });
+  net.appendChild(g);
+});
+function inspect(id) {
+  const n = byId[id];
+  document.querySelectorAll('.node').forEach(g => g.classList.toggle('sel', g.dataset.id === id));
+  const kind = n.t === 'ong' ? 'Posteo original' : n.t === 'pol' ? 'Cuenta política o de choque' : 'Medio o streaming';
+  $('#inspect').innerHTML = `<b>${n.n}</b> <span class="mu">(${kind})</span><br>${n.d}`;
+}
+function paintGraph(stage) {
+  NODES.forEach(n => {
+    const on = n.st <= stage;
+    const g = net.querySelector(`.node[data-id="${n.id}"]`);
+    g.classList.toggle('on', on);
+    const e = net.querySelector(`.edge[data-id="${n.id}"]`); if (e) e.classList.toggle('on', on);
+    if (n.t === 'ong') {
+      const r = Math.max(6, 22 - stage * 3.2);
+      g.querySelector('circle').setAttribute('r', r);
+      g.querySelector('text').setAttribute('y', n.y + r + 9);
+    }
+  });
+}
+
+/* ---------- Estado ---------- */
+let S = null;          // sesión de juego
+let timers = [];       // temporizadores de la animación del perfil
+const clearTimers = () => { timers.forEach(clearTimeout); timers.forEach(clearInterval); timers = []; };
+const fresh = (handle, age) => ({ handle, age, stage: 0, m: [4, 3, 2], hist: [[4, 3, 2]], picks: [], rows: [], sys: [0, 0, 0], up: [0, 0, 0], dn: [0, 0, 0], locked: false });
+
+function setPhase(p, title) {
+  document.body.dataset.phase = p;
+  $('#htitle').textContent = title;
+  const game = p === 'game' || p === 'audit';
+  $('#minibar').hidden = !game;
+  $('#restart').hidden = p === 'intro';
+  $('#steps').hidden = !game;
+  paintTrends(game && S ? Math.min(S.stage, 5) : 0);
+}
+function paintTrends(i) {
+  $('#trends').innerHTML = `<h2>Tendencias en Argentina</h2>` + TRENDS[i].map(t => `<div class="trend"><small>Tendencia en Argentina</small><b>${t[0]}</b><small>${t[1]} posteos</small></div>`).join('');
+}
+
+/* ---------- Portada ---------- */
+function showIntro() {
+  clearTimers(); S = null;
+  $('#navuser').hidden = true;
+  setPhase('intro', 'Inicio');
+  $('#view').innerHTML = `<div class="intro">
+    <h1>Un posteo. Miles de caminos. ¿Qué queda realmente de los mensajes?</h1>
+    <p class="lead">Un simulador sobre cómo una campaña de interés público se viraliza en una red como X, cambia de sentido, migra a TikTok y termina en los medios. Vos decidís cada paso.</p>
+    <form class="box" id="form" novalidate>
+      <h2>Creá tu perfil</h2>
+      <label for="u">Nombre de usuario</label>
+      <div class="field"><span aria-hidden="true">@</span><input id="u" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="tu_usuario" aria-describedby="err"></div>
+      <p class="small">De 3 a 15 caracteres. Letras, números y guion bajo (_). Los espacios y símbolos se corrigen solos.</p>
+      <label for="a">Edad</label>
+      <input id="a" type="number" inputmode="numeric" min="18" max="99" placeholder="23" aria-describedby="err">
+      <p class="small">Tenés que tener 18 años o más.</p>
+      <p class="err" id="err" role="alert"></p>
+      <button class="btn" type="button" id="create">Crear mi perfil</button>
+      <p class="small" style="margin-top:.8rem"><b>Sin registro.</b> Podés usar un usuario inventado. No pedimos mail ni contraseña, y tu usuario y tu edad no se guardan: solo se usan durante esta sesión.</p>
+    </form></div>`;
+  const create = () => {
+    const raw = $('#u').value.trim().replace(/^@/, '');
+    const u = raw.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_').replace(/[^A-Za-z0-9_]/g, '').slice(0, 15);
+    const a = parseInt($('#a').value, 10);
+    const err = $('#err');
+    const fail = (msg, id) => { err.textContent = msg; err.classList.add('on'); const f = $(id); f.setAttribute('aria-invalid', 'true'); f.focus(); err.scrollIntoView({ block: 'center' }); };
+    $('#u').removeAttribute('aria-invalid'); $('#a').removeAttribute('aria-invalid'); err.classList.remove('on'); err.textContent = '';
+    if (u.length < 3) { fail('Escribí un usuario de al menos 3 caracteres (letras, números o guion bajo).', '#u'); return; }
+    if (!Number.isInteger(a)) { fail('Escribí tu edad en números.', '#a'); return; }
+    if (a < 18) { fail('Este simulador está pensado para personas de 18 años o más.', '#a'); return; }
+    if (a > 99) { fail('Ingresá una edad válida.', '#a'); return; }
+    $('#u').value = u;
+    showProfile(u, a);
+  };
+  // No dependemos del envío nativo del formulario (algunos visores embebidos lo bloquean).
+  $('#form').addEventListener('submit', e => { e.preventDefault(); create(); });
+  $('#create').addEventListener('click', create);
+  ['#u', '#a'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); create(); } }));
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+/* ---------- Perfil (se va completando) ---------- */
+function showProfile(handle, age) {
+  S = fresh(handle, age);
+  setPhase('profile', 'Tu perfil');
+  let h = 0; for (const ch of handle) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const following = 240 + h % 260, followers = 120 + (h >> 3) % 380;
+  const bio = 'Estudio, laburo y scrolleo más de lo que debería. Fan del mate y de los audios de WhatsApp.';
+  const inSeg = age <= 30;
+  $('#navuser').hidden = false;
+  $('#navuser').innerHTML = `${av('linear-gradient(135deg,#1d9bf0,#7856ff)', handle[0].toUpperCase())}<div><b>${handle}</b><br><span class="mu">@${handle}</span></div>`;
+  $('#view').innerHTML = `<article class="prof">
+    <div class="banner" data-s="1"></div>
+    <div class="prow"><span class="avbig" data-s="2" aria-hidden="true">${handle[0].toUpperCase()}</span><button class="btn sec" disabled data-s="2">Editar perfil</button></div>
+    <div class="pinfo">
+      <h2 data-s="3">${handle}</h2><p class="mu" data-s="3">@${handle}</p>
+      <p class="bio" id="bio" data-s="4" aria-label="${bio}"></p>
+      <p class="mu meta" data-s="4">📍 Buenos Aires · 🎂 ${age} años · Se unió en marzo de 2021</p>
+      <p class="counts" data-s="5"><b id="c1">0</b> Siguiendo <b id="c2">0</b> Seguidores</p>
+    </div>
+    <div class="pinned" data-s="6">
+      <p class="pin">📌 Fijado · Tendencia (cuenta educativa)</p>
+      <h3>Qué vas a hacer en este simulador</h3>
+      <p>Vas a cruzarte con un posteo de una organización ficticia sobre salud mental y ansiedad por pantallas. En 6 etapas elegís cómo reaccionar entre 4 opciones.</p>
+      <p>Después de cada decisión, vas a ver cómo el algoritmo la modula. Tres indicadores muestran qué le pasa al mensaje: pérdida de sentido, captura afectiva y vulnerabilidad mediática.</p>
+      <p>Al final, un tablero de auditoría te cuenta qué parte del resultado fue de tu recorrido y qué parte puso el sistema.</p>
+      <div class="edu"><b>Fines educativos.</b> Personas, cuentas, medios, memes y datos son inventados. ${inSeg ? 'Con tus ' + age + ' años, entrás en el segmento de 18 a 30 años que estudia este simulador.' : 'Con tus ' + age + ' años quedás fuera del segmento de 18 a 30 que estudia el simulador, pero el mecanismo es el mismo.'}</div>
+      <button class="btn" id="go">Empezar</button>
+    </div>
+  </article>`;
+  $('#go').addEventListener('click', startGame);
+  const show = n => document.querySelectorAll(`[data-s="${n}"]`).forEach(e => e.classList.add('show'));
+  const type = () => {
+    const b = $('#bio'); let i = 0;
+    const id = setInterval(() => { if (!b) return; b.textContent = bio.slice(0, ++i); if (i >= bio.length) clearInterval(id); }, 22);
+    timers.push(id);
+  };
+  const count = () => {
+    let k = 0; const id = setInterval(() => {
+      k++; const f = k / 20;
+      const c1 = $('#c1'), c2 = $('#c2'); if (!c1) return;
+      c1.textContent = Math.round(following * f); c2.textContent = Math.round(followers * f);
+      if (k >= 20) clearInterval(id);
+    }, 40);
+    timers.push(id);
+  };
+  if (prefersReduced) {
+    [1, 2, 3, 4, 5, 6].forEach(show); $('#bio').textContent = bio; $('#c1').textContent = following; $('#c2').textContent = followers;
+  } else {
+    [1, 2, 3, 4, 5, 6].forEach(n => timers.push(setTimeout(() => { show(n); if (n === 4) type(); if (n === 5) count(); }, n * 650 - 300)));
+  }
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+/* ---------- Juego ---------- */
+function startGame() {
+  clearTimers();
+  const { handle, age } = S; S = fresh(handle, age);
+  $('#view').innerHTML = `<div id="scene"></div><div id="ask"></div><div class="choices" id="choices"></div>`;
+  $('#inspect').textContent = 'Tocá un nodo para ver quién es.';
+  renderStage();
+}
+function paintMeters() {
+  const [s, c, v] = S.m;
+  [s, c, v].forEach((val, i) => {
+    const g = $('#g' + i), r = Math.round(val);
+    g.querySelector('output').textContent = r;
+    const b = g.querySelector('.bar'); b.setAttribute('aria-valuenow', r);
+    const f = b.querySelector('i'); f.style.width = r + '%'; f.style.background = `hsl(${Math.round(150 - val * 1.5)} 65% 45%)`;
+    g.querySelector('.read').textContent = READ[i](val);
+    $('#mb' + i).textContent = r + '%';
+  });
+  const mix = $('#g1').querySelectorAll('.mix span');
+  [100 - c, c * .35, c * .35, c * .30].forEach((w, i) => mix[i].style.width = w + '%');
+  const d = $('#decay');
+  if (d) {
+    d.innerHTML = WORDS.map((w, i) => s > TH[i] ? `<del>${w}</del>${REPL[i] ? `<ins>${REPL[i]}</ins>` : ''}` : w).join(' ');
+    $('#ostate').textContent = `Estado del mensaje: ${Math.round(s)}% perdido. ${READ[0](s)}`;
+  }
+}
+function paintSteps() {
+  $('#steps').innerHTML = STAGES.map((st, i) => `<li class="${i < S.stage ? 'done' : ''}" ${i === S.stage ? 'aria-current="step"' : ''} title="${st.name}"></li>`).join('');
+}
+function renderStage() {
+  const st = STAGES[S.stage];
+  S.m = S.m.map((v, i) => { const n = clamp(Math.max(v, st.floor[i])); S.sys[i] += n - v; return n; });
+  S.locked = false;
+  setPhase('game', `Etapa ${S.stage + 1} de 6 · ${st.name}`);
+  $('#scene').innerHTML = st.scene();
+  $('#ask').innerHTML = `<div class="decide"><p class="small">Tu decisión</p><h3 class="ask">${st.ask}</h3></div>`;
+  $('#choices').innerHTML = st.c.map((c, i) => `<button class="ch" data-i="${i}"><span class="L">${'ABCD'[i]}</span><span>${c[0]}</span></button>`).join('');
+  paintSteps(); paintMeters(); paintGraph(S.stage);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+$('#view').addEventListener('click', e => {
+  const b = e.target.closest('.ch'); if (!b || !S || S.locked) return;
+  S.locked = true;
+  document.querySelectorAll('.ch').forEach(x => x.disabled = true);
+  const st = STAGES[S.stage], idx = +b.dataset.i, c = st.c[idx];
+  const before = S.m.slice();
+  S.m = S.m.map((v, i) => clamp(v + c[2][i]));
+  const actual = S.m.map((v, i) => v - before[i]);
+  actual.forEach((d, i) => { if (d > 0) S.up[i] += d; else S.dn[i] += -d; });
+  S.picks.push(idx); S.rows.push({ stage: S.stage, idx, d: actual });
+  S.hist.push(S.m.slice());
+  paintMeters();
+  const last = S.stage === STAGES.length - 1;
+  $('#mn').textContent = c[1];
+  $('#mc').innerHTML = S.m.map((v, i) => {
+    const d = Math.round(v - before[i]);
+    return `<span class="chip ${d > 0 ? 'up' : d < 0 ? 'down' : ''}">${METRIC[i]} ${d > 0 ? '+' : ''}${d} → ${Math.round(v)}%</span>`;
+  }).join('');
+  $('#mgo').textContent = last ? 'Ver mi tablero de auditoría' : 'Siguiente etapa';
+  $('#modal').showModal();
+  $('#mgo').focus();
+});
+$('#mgo').addEventListener('click', () => $('#modal').close());
+$('#modal').addEventListener('close', () => {
+  if (!S || !S.locked) return;
+  if (S.stage === STAGES.length - 1) { audit(); return; }
+  S.stage++; renderStage();
+});
+
+/* ---------- Estadísticas locales y anónimas ---------- */
+function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || { n: 0, st: {} }; } catch (e) { return { n: 0, st: {} }; } }
+function saveRun() {
+  const d = loadStore(); d.n++;
+  S.picks.forEach((p, i) => { d.st[i] = d.st[i] || [0, 0, 0, 0]; d.st[i][p]++; });
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch (e) { /* sin almacenamiento */ }
+  if (ENDPOINT) { try { fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decisiones: S.picks }), keepalive: true }); } catch (e) { /* ignorar */ } }
+  return d;
+}
+
+/* ---------- Tablero de auditoría ---------- */
+function chartSVG() {
+  const W = 320, H = 140, px = 24, py = 12, n = S.hist.length;
+  const X = i => px + i * (W - px - 8) / (n - 1), Y = v => H - 18 - v * (H - 18 - py) / 100;
+  const cols = ['var(--tx)', 'var(--red)', 'var(--yel)'];
+  let g = [0, 50, 100].map(v => `<line x1="${px}" x2="${W - 8}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--bd)"/><text x="2" y="${Y(v) + 3}" font-size="8" fill="var(--mu)">${v}</text>`).join('');
+  [0, 1, 2].forEach(k => { g += `<polyline fill="none" stroke="${cols[k]}" stroke-width="2.2" points="${S.hist.map((h, i) => X(i) + ',' + Y(h[k])).join(' ')}"/>`; });
+  g += S.hist.map((_, i) => `<text x="${X(i)}" y="${H - 5}" font-size="8" fill="var(--mu)" text-anchor="middle">${i === 0 ? 'Inicio' : i}</text>`).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución de los tres indicadores por etapa">${g}</svg>
+  <div class="legend" style="margin-top:.4rem"><span><i style="background:var(--tx)"></i>Pérdida de sentido</span><span><i style="background:var(--red)"></i>Captura afectiva</span><span><i style="background:var(--yel)"></i>Vulnerabilidad mediática</span></div>`;
+}
+function audit() {
+  const [s, c, v] = S.m, h = S.handle;
+  const store = saveRun();
+  const total = S.picks.length;
+  const amplified = S.rows.filter(r => STAGES[r.stage].c[r.idx][2][1] >= 6).length;
+  const pctAmp = Math.round(amplified / total * 100);
+  const share = i => { const d = S.up[i] + S.sys[i]; return d ? Math.round(S.up[i] / d * 100) : 0; };
+  const contribS = share(0);
+  const ranked = S.rows.map(r => ({ ...r, w: r.d[0] + r.d[1] })).sort((a, b) => b.w - a.w);
+  const worst = ranked[0], best = ranked[ranked.length - 1];
+  const lab = r => `Etapa ${r.stage + 1} (${STAGES[r.stage].name}): “${STAGES[r.stage].c[r.idx][0]}”`;
+  const msg = amplified === 0
+    ? `@${h}, ninguna de tus ${total} decisiones alimentó el conflicto. Aun así, el mensaje de la ONG perdió un <em>${Math.round(s)}%</em> de su sentido: tu recorrido explica el <em>${contribS}%</em> de esa pérdida; el resto lo puso el sistema.`
+    : `@${h}, <em>${amplified} de tus ${total} decisiones (${pctAmp}%)</em> alimentaron el conflicto. El mensaje de la ONG terminó con un <em>${Math.round(s)}%</em> de pérdida de sentido: tu recorrido explica el <em>${contribS}%</em> de esa pérdida; el resto lo puso el sistema por sí solo.`;
+  const rows = [0, 1, 2].map(i => {
+    const sh = share(i), gross = S.up[i] + S.sys[i] || 1;
+    return `<tr><th scope="row">${METRIC[i]}</th><td><b>${Math.round(S.m[i])}%</b></td>
+      <td>Tu aporte: <b style="font-size:1rem">${sh}%</b><br><span class="mu">Sistema: ${100 - sh}%${S.dn[i] ? ` · Frenaste ${Math.round(S.dn[i])} pts` : ''}</span>
+      <div class="split" role="img" aria-label="Tu aporte ${sh}%, sistema ${100 - sh}%"><i style="width:${S.up[i] / gross * 100}%;background:var(--blue)"></i><i style="width:${S.sys[i] / gross * 100}%;background:var(--mu)"></i></div></td></tr>`;
+  }).join('');
+  const route = S.rows.map(r => tweet(h, '@' + h, `<span class="mu">Etapa ${r.stage + 1} · ${STAGES[r.stage].name}</span><br>${'ABCD'[r.idx]}. ${STAGES[r.stage].c[r.idx][0]}`, { a: h[0].toUpperCase(), c: 'linear-gradient(135deg,#1d9bf0,#7856ff)', cls: 'mine' })).join('');
+  const stats = STAGES.map((st, i) => {
+    const arr = store.st[i] || [0, 0, 0, 0], tot = arr.reduce((a, b) => a + b, 0) || 1;
+    return `<div class="srow"><b>${i + 1}. ${st.name}</b><div class="sb">${arr.map((x, j) => `<div class="${S.picks[i] === j ? 'me' : ''}"><span>${'ABCD'[j]}</span><i style="width:${Math.max(1, x / tot * 100) * .75}%"></i><span>${Math.round(x / tot * 100)}%</span></div>`).join('')}</div></div>`;
+  }).join('');
+  const seg = S.age <= 30 ? `A tus ${S.age} años, estás dentro del segmento de 18 a 30 años que estudia este simulador.` : `A tus ${S.age} años estás fuera del segmento de 18 a 30 años, pero el mecanismo es el mismo.`;
+
+  S.stage = STAGES.length;
+  setPhase('audit', `Auditoría de @${h}`);
+  paintSteps(); paintGraph(5);
+  $('#view').innerHTML = `<div class="aud">
+    <p class="kick">Etapa 6 de 6 · terminaste</p><h2 class="stage-h">Tablero de auditoría de @${h}</h2>
+    <p class="lead2">${seg} Estos porcentajes salen de tus decisiones y del modelo del simulador. No son mediciones reales de ninguna campaña.</p>
+    <section class="cartel"><h2>⚠️ Diagnóstico de tu recorrido</h2><p>${msg}</p></section>
+
+    <h3 class="t">Cuánto pesó tu recorrido y cuánto el sistema</h3>
+    <table class="mt"><thead><tr><th>Indicador</th><th>Final</th><th>Reparto del aumento</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="small" style="margin-top:.4rem">El reparto no incluye el punto de partida. “Sistema” es lo que sube cuando la historia avanza por su cuenta (citas políticas, memes, TikTok, medios).</p>
+
+    <h3 class="t">Evolución por etapa</h3>${chartSVG()}
+
+    <section class="sec r"><h3 class="sec-h"><span class="dot" aria-hidden="true"></span>Tu recorrido<small>Lo que hiciste en cada etapa</small></h3>${route}</section>
+
+    ${SEC_O('Cómo quedó el mensaje al final')}
+
+    <h3 class="t">Lo que más pesó en tu recorrido</h3>
+    <ul class="takes">
+      <li><b>Lo que más amplificó el conflicto:</b> ${lab(worst)} (${worst.d[0] + worst.d[1] > 0 ? '+' : ''}${Math.round(worst.d[0] + worst.d[1])} pts entre sentido y captura).</li>
+      <li><b>Lo que más lo frenó:</b> ${lab(best)} (${best.d[0] + best.d[1] > 0 ? '+' : ''}${Math.round(best.d[0] + best.d[1])} pts entre sentido y captura).</li>
+    </ul>
+
+    <h3 class="t">Estadísticas de comportamiento</h3>
+    <p class="small">Distribución anónima de decisiones en este navegador (${store.n} ${store.n === 1 ? 'partida' : 'partidas'}). Tu elección aparece en azul. Para ver un grupo completo hay que conectar un contador propio (ver ENDPOINT en el código).</p>
+    <div class="stats" style="margin-top:.5rem">${stats}</div>
+
+    <h3 class="t">Qué te llevás</h3>
+    <ol class="takes">
+      <li>Una reacción rápida (cita, repost, captura) pesa más para el algoritmo que una lectura atenta. Antes de reaccionar, abrí el link.</li>
+      <li>Compartir sin contexto saca al mensaje de su origen. Preferí compartir el recurso original.</li>
+      <li>Un meme o un stitch parecen inofensivos, pero cada versión nueva alimenta el formato y aleja el mensaje de su propósito.</li>
+      <li>Cuando un tema salta a los medios, preguntate qué se está cubriendo: el problema o la pelea.</li>
+    </ol>
+    <div class="actions"><button class="btn" id="again">Volver a jugar</button><button class="btn sec" id="prn">Guardar o imprimir</button></div>
+  </div>`;
+  paintMeters();
+  $('#again').onclick = () => { const { handle, age } = S; S = fresh(handle, age); startGame(); };
+  $('#prn').onclick = () => window.print();
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+$('#restart').addEventListener('click', showIntro);
+showIntro();
+})();
+</script>
+</body>
+</html>
