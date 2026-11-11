@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Un posteo. Miles de caminos. ¿Qué queda realmente de los mensajes?</title>
-<meta name="description" content="Simulador educativo: cómo una campaña de interés público en una red tipo X es capturada por la economía del afecto, distorsionada por el algoritmo y trasladada a TikTok y a los medios masivos.">
+<meta name="description" content="Prototipo que reúne datos anónimos sobre cómo las personas interactúan en redes con contenidos de interés público, para que ONGs e instituciones puedan investigar cómo circulan sus mensajes: del posteo en una red tipo X a la economía del afecto, el algoritmo, TikTok y los medios.">
 <style>
 :root{
   --bg:#000; --bg2:#16181c; --bd:#2f3336; --tx:#e7e9ea; --mu:#8b98a5;
@@ -251,8 +251,8 @@ dialog::backdrop{background:#000a}
 
 
 /* ===== Consentimiento ===== */
-.consent{border:1.5px solid var(--bd);border-radius:12px;padding:.8rem .9rem 1rem;margin:1.1rem 0 0;background:var(--bg)}
-.consent legend{font-weight:800;padding:0 .4rem;font-size:1rem}
+.consent{border:1.5px solid var(--bd);border-radius:12px;padding:1rem .9rem 1rem;margin:1.1rem 0 0;background:var(--bg)}
+.consent h3{font-size:1.05rem;font-weight:800;margin:0 0 .5rem}
 .consent p{font-size:.9rem;margin:.3rem 0}
 .consent dl{margin:.6rem 0 .2rem;font-size:.86rem}
 .consent dt{font-weight:700;margin-top:.5rem}
@@ -404,6 +404,16 @@ dialog#luv[open]{display:flex;flex-direction:column}
 .eyes{transform-box:fill-box;transform-origin:center;animation:blink 4.2s infinite}
 @keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 #luv.paused *{animation-play-state:paused!important}
+a.btn{display:inline-block;text-decoration:none}
+.resource{border:2px solid var(--blue);border-radius:16px;padding:1rem;margin-top:1.6rem;background:var(--bg2)}
+.resource h3{font-size:1.1rem;margin-bottom:.4rem}
+.resource p{margin:.45rem 0;font-weight:600}
+.resource .small{font-weight:400;margin-top:.5rem}
+.crisis{border-left:4px solid var(--red);background:var(--bg);border-radius:0 12px 12px 0;padding:.7rem .9rem;margin:.9rem 0}
+.crisis p{margin:.25rem 0}
+.crisis ul{margin:.4rem 0 0;padding-left:1.1rem;font-size:.92rem}
+.crisis li{margin:.3rem 0}
+.crisis a{color:var(--tx);font-weight:700}
 .lv-doc .edit{font-size:.82rem;color:#444;font-style:italic}
 /* Etapa 5: el medio levanta el video de Lu */
 .tv .screen{display:flex;gap:1rem;align-items:center;justify-content:center}
@@ -439,7 +449,7 @@ dialog#luv[open]{display:flex;flex-direction:column}
       </div>
     </div>
     <div id="view"></div>
-    <p class="small foot">Simulación con fines educativos. Personas, cuentas, medios, memes y cifras de la historia son ficticios. Los datos que vos aceptes compartir sí son reales (ver “Tus datos y tu consentimiento” en la portada) y se almacenan de forma anónima en una planilla a la que accede solo el equipo del proyecto. La interfaz imita el formato de X solo como referencia, sin afiliación.</p>
+    <p class="small foot">Prototipo para reunir datos sobre cómo las personas interactúan en redes, pensado para ONGs e instituciones. Personas, cuentas, medios, memes y cifras de la historia son ficticios. Los datos que vos aceptes compartir sí son reales (ver “Tus datos y tu consentimiento” en la portada) y se almacenan de forma anónima en una planilla a la que accede solo el equipo del proyecto. La interfaz imita el formato de X solo como referencia, sin afiliación.</p>
   </div>
 
   <aside class="right" aria-label="Indicadores y tendencias">
@@ -492,7 +502,7 @@ dialog#luv[open]{display:flex;flex-direction:column}
 
 <dialog id="luv" aria-labelledby="lv-title">
   <div class="lv-top">
-    <button class="back" id="lv-back" type="button">← Volver al simulador</button>
+    <button class="back" id="lv-back" type="button">← Salir del video</button>
     <span id="lv-title" class="sr" style="position:absolute;left:-9999px">Video de @lu.opina (ficticia)</span>
     <div class="lv-tabs" role="group" aria-label="Vista"><button type="button" id="lv-tv" aria-pressed="true">Video</button><button type="button" id="lv-ts" aria-pressed="false">Guion</button></div>
   </div>
@@ -509,7 +519,7 @@ dialog#luv[open]{display:flex;flex-direction:column}
       <div class="lv-hearts" aria-hidden="true"><i>♥</i><i>♥</i><i>♥</i></div>
       <div class="lv-side" aria-hidden="true"><div><div class="fol">L</div></div><div>♡<small>12,4 mil</small></div><div>💬<small>1.980</small></div><div>↗<small>Enviar</small></div><div class="disc">♫</div></div>
       <p class="lv-cap" id="lv-voz"></p>
-      <div class="lv-info"><b>@lu.opina</b> <span>(ficticia)</span><p>¿Y vos qué hubieras hecho? #simulación #redes</p><div class="lv-snd"><span class="eq"><i></i><i></i><i></i></span>sonido original · @lu.opina</div></div>
+      <div class="lv-info"><b>@lu.opina</b> <span>(ficticia)</span><p>¿Y vos qué hubieras hecho? #saludmental #redes</p><div class="lv-snd"><span class="eq"><i></i><i></i><i></i></span>sonido original · @lu.opina</div></div>
     </div>
     <div class="lv-ctl">
       <button class="pp" id="lv-pp" type="button" aria-label="Pausar">❚❚</button>
@@ -528,10 +538,10 @@ dialog#luv[open]{display:flex;flex-direction:column}
 // URL de la aplicación web de Google Apps Script que escribe en la planilla del equipo
 // (ver google-apps-script.gs y sus instrucciones). Mientras esté vacía, el simulador funciona
 // igual pero NO envía nada a ningún lado: la pantalla de auditoría lo avisa.
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzdbI1U3P_M4DMxFdIBNbV_39nfu0envgTifVw5eVzjOF2yOW9PK56MGpd0_K0EcD2Exw/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxgU4y9I-AQ911erI4AeTdAO_OhY1OLzvFic-sgVJqWIWQdYAXB33nm8MvsgYd1h7J6vA/exec';
 // Si cambian el texto del consentimiento de la portada, cambien también esta versión:
 // queda registrada en la planilla junto a cada partida.
-const CONSENT_VERSION = 'v1';
+const CONSENT_VERSION = 'v3';
 const STORE_KEY = 'tendencia-resonancia-v2';
 
 const $ = s => document.querySelector(s);
@@ -582,10 +592,10 @@ const LU = [
     pant: 'Posteo real abierto y comentarios de sus seguidores',
     edit: 'Corte con flash. Fondo verde azulado. Insignia “en vivo” y comentarios de seguidores. Sticker “fuente”.',
     caps: [[20, 'Esto nos incumbe a todos:'], [22, 'si revisamos de dónde viene la información, evitamos que se salga de control.']] },
-  { t0: 26, t1: 30, rol: 'Vuelve al simulador', pose: 'point', ret: true,
-    plano: 'Lu señala hacia abajo y en pantalla aparece el link de su bio: “simulación”. Ese link lleva al posteo de X con el que empieza el simulador.',
-    pant: 'Link de la bio: “simulación”',
-    edit: 'Corte con flash. Fondo violeta. Flecha animada hacia el link. Botón final para volver al simulador.',
+  { t0: 26, t1: 30, rol: 'Vuelve al posteo', pose: 'point', ret: true,
+    plano: 'Lu señala hacia abajo y en pantalla aparece el link de su bio: “link al posteo”, que lleva al posteo de la ONG con el que empieza todo.',
+    pant: 'Link de la bio: “link al posteo”',
+    edit: 'Corte con flash. Fondo violeta. Flecha animada hacia el link. Botón final para ver el posteo.',
     caps: [[26, '¿Vos qué hubieras hecho?'], [28, 'Te invito a revisarlo en el link.']] }
 ];
 LU.forEach(f => f.voz = f.caps.map(c => c[1]).join(' '));
@@ -624,7 +634,7 @@ const luGirl = (pose, screen, cls = 'lv-girl') => {
   </g></svg>`;
 };
 const luEntry = () => `<div class="lu-entry"><div class="lu-thumb" aria-hidden="true">🙄<span>0:30</span></div>
-  <div><b>@lu.opina responde al hilo</b><p class="small">Video simulado de 30 segundos. Al final te devuelve al simulador para que sigas con tu decisión.</p>
+  <div><b>@lu.opina responde al hilo</b><p class="small">Video simulado de 30 segundos. Al final te lleva de vuelta al posteo para que sigas con tu decisión.</p>
   <div class="actions"><button class="btn" type="button" id="lu-open">▶ Ver el video</button><button class="btn sec" type="button" id="lu-script">Ver el guion</button></div></div></div>`;
 
 /* ---------- Etapas ---------- */
@@ -688,7 +698,7 @@ const STAGES = [
       ${clip('Parodia', '🎭', 'Sketch: el policía de la ansiedad te pide el recurso de ayuda antes de abrir el celular.', '@humor.federal (ficticia)')}
       ${clip('Opinión en 30 s', '🗣️', 'Opinión rápida: ¿campaña útil o gasto público? Dejame tu bando en comentarios.', '@debate.tv (ficticia)')}
       </div></div>`) +
-    sec('d', 'El video de Lu', 'Un video que te devuelve al simulador', luEntry()) +
+    sec('d', 'El video de Lu', 'Un video que te devuelve al posteo', luEntry()) +
     SEC_O('Así va quedando el mensaje'),
   ask: 'El debate ya está en tu pestaña “Para ti” de TikTok. ¿Qué hacés?',
   c: [
@@ -823,8 +833,8 @@ function showIntro() {
   setPhase('intro', 'Inicio');
   $('#view').innerHTML = `<div class="intro">
     <h1>Un posteo. Miles de caminos. ¿Qué queda realmente de los mensajes?</h1>
-    <p class="lead">Un simulador sobre cómo una campaña de interés público se viraliza en una red como X, cambia de sentido, migra a TikTok y termina en los medios. Vos decidís cada paso.</p>
-    <p class="lead" style="margin-top:-.6rem">Es un prototipo educativo. Si querés, tus decisiones —sin tu nombre— se suman a una planilla del equipo para estudiar cómo reacciona la gente. Es opcional y lo decidís abajo.</p>
+    <p class="lead">Un prototipo que reúne datos sobre cómo las personas interactúan en redes con una campaña de interés público: cómo se viraliza en una red como X, cambia de sentido, migra a TikTok y termina en los medios. Vos decidís cada paso.</p>
+    <p class="lead" style="margin-top:-.6rem">Con tu permiso, tus decisiones —sin tu nombre— se reúnen de forma anónima para que ONGs e instituciones puedan investigar cómo circulan sus mensajes en redes. Es opcional y lo decidís abajo.</p>
     <form class="box" id="form" novalidate>
       <h2>Creá tu perfil</h2>
       <label for="u">Nombre de usuario</label>
@@ -834,13 +844,13 @@ function showIntro() {
       <input id="a" type="number" inputmode="numeric" min="18" max="99" placeholder="23" aria-describedby="err">
       <p class="small">Tenés que tener 18 años o más.</p>
       <p class="err" id="err" role="alert"></p>
-      <fieldset class="consent" aria-describedby="cdesc">
-        <legend>Tus datos y tu consentimiento</legend>
-        <p id="cdesc">Si aceptás, al terminar se envían de forma anónima tus 6 decisiones, los indicadores finales, tu tramo de edad (18 a 30 o 31 o más) y un código de partida al azar. Tus datos personales no serán compartidos: no enviamos tu usuario, tu edad exacta, tu mail ni tu IP. Podés jugar igual sin aceptar.</p>
-        <label class="optin" for="consent"><input type="checkbox" id="consent"><span>Acepto compartir mis decisiones de forma anónima con el equipo del proyecto, en las condiciones de arriba. <span class="mu" style="font-weight:400">(Opcional)</span></span></label>
-      </fieldset>
+      <div class="consent" role="group" aria-labelledby="ctit" aria-describedby="cdesc">
+        <h3 id="ctit">Tus datos y tu consentimiento</h3>
+        <p id="cdesc">Si aceptás, al terminar se envían de forma anónima tu edad, tus 6 decisiones, los indicadores finales y un código de partida al azar. Tus datos personales no serán compartidos: no enviamos tu usuario, tu mail ni tu IP, y la edad se registra sin ningún dato que te identifique. Esta información se reúne para investigaciones y para que ONGs e instituciones entiendan cómo interactúan las personas con sus mensajes en redes. Podés jugar igual sin aceptar.</p>
+        <label class="optin" for="consent"><input type="checkbox" id="consent"><span>Acepto compartir mis decisiones de forma anónima para investigaciones y para ONGs e instituciones, en las condiciones de arriba. <span class="mu" style="font-weight:400">(Opcional)</span></span></label>
+      </div>
       <button class="btn" type="button" id="create" style="margin-top:1rem">Crear mi perfil</button>
-      <p class="small" style="margin-top:.8rem"><b>Sin registro.</b> Podés usar un usuario inventado. No pedimos mail ni contraseña, y tu usuario y tu edad exacta no se guardan en ningún lado: solo se usan durante esta sesión.</p>
+      <p class="small" style="margin-top:.8rem"><b>Sin registro.</b> Podés usar un usuario inventado. No pedimos mail ni contraseña, y tu usuario no se guarda en ningún lado: solo se usa durante esta sesión.</p>
     </form></div>`;
   const create = () => {
     const raw = $('#u').value.trim().replace(/^@/, '');
@@ -851,7 +861,7 @@ function showIntro() {
     $('#u').removeAttribute('aria-invalid'); $('#a').removeAttribute('aria-invalid'); err.classList.remove('on'); err.textContent = '';
     if (u.length < 3) { fail('Escribí un usuario de al menos 3 caracteres (letras, números o guion bajo).', '#u'); return; }
     if (!Number.isInteger(a)) { fail('Escribí tu edad en números.', '#a'); return; }
-    if (a < 18) { fail('Este simulador está pensado para personas de 18 años o más.', '#a'); return; }
+    if (a < 18) { fail('Este prototipo está pensado para personas de 18 años o más.', '#a'); return; }
     if (a > 99) { fail('Ingresá una edad válida.', '#a'); return; }
     $('#u').value = u;
     CONSENT = $('#consent').checked;
@@ -884,12 +894,12 @@ function showProfile(handle, age) {
       <p class="counts" data-s="5"><b id="c1">0</b> Siguiendo <b id="c2">0</b> Seguidores</p>
     </div>
     <div class="pinned" data-s="6">
-      <p class="pin">📌 Fijado · Tendencia (cuenta educativa)</p>
-      <h3>Qué vas a hacer en este simulador</h3>
+      <p class="pin">📌 Fijado · Tendencia (cuenta del prototipo)</p>
+      <h3>Qué vas a hacer en este prototipo</h3>
       <p>Vas a cruzarte con un posteo de una organización ficticia sobre salud mental y ansiedad por pantallas. En 6 etapas elegís cómo reaccionar entre 4 opciones.</p>
       <p>Después de cada decisión, vas a ver cómo el algoritmo la modula. Tres indicadores muestran qué le pasa al mensaje: pérdida de sentido, captura afectiva y vulnerabilidad mediática.</p>
       <p>Al final, un tablero de auditoría te cuenta qué parte del resultado fue de tu recorrido y qué parte puso el sistema.</p>
-      <div class="edu"><b>Fines educativos.</b> Personas, cuentas, medios, memes y cifras de la historia son inventados. <b>Tus datos:</b> ${CONSENT ? 'aceptaste compartir tus decisiones de forma anónima al terminar cada partida.' : 'elegiste no compartir nada.'} ${inSeg ? 'Con tus ' + age + ' años, entrás en el segmento de 18 a 30 años que estudia este simulador.' : 'Con tus ' + age + ' años quedás fuera del segmento de 18 a 30 que estudia el simulador, pero el mecanismo es el mismo.'}</div>
+      <div class="edu"><b>Prototipo de recolección de datos.</b> Reúne, con tu consentimiento, información anónima sobre cómo interactuás en redes, para investigaciones y para ONGs e instituciones. Personas, cuentas, medios, memes y cifras de la historia son inventados. <b>Tus datos:</b> ${CONSENT ? 'aceptaste compartir tus decisiones de forma anónima al terminar cada partida.' : 'elegiste no compartir nada.'} ${inSeg ? 'Con tus ' + age + ' años, entrás en el segmento de 18 a 30 años que este prototipo busca relevar.' : 'Con tus ' + age + ' años quedás fuera del segmento de 18 a 30 que este prototipo busca relevar, pero el mecanismo es el mismo.'}</div>
       <button class="btn" id="go">Empezar</button>
     </div>
   </article>`;
@@ -1046,18 +1056,18 @@ function audit() {
     const arr = store.st[i] || [0, 0, 0, 0], tot = arr.reduce((a, b) => a + b, 0) || 1;
     return `<div class="srow"><b>${i + 1}. ${st.name}</b><div class="sb">${arr.map((x, j) => `<div class="${S.picks[i] === j ? 'me' : ''}"><span>${'ABCD'[j]}</span><i style="width:${Math.max(1, x / tot * 100) * .75}%"></i><span>${Math.round(x / tot * 100)}%</span></div>`).join('')}</div></div>`;
   }).join('');
-  const payload = { consentimiento: CONSENT_VERSION, idPartida: S.runId, segmentoEdad: S.age <= 30 ? '18-30' : '31+', decisiones: S.picks.map(p => 'ABCD'[p]), sentidoFinal: Math.round(s), capturaFinal: Math.round(c), vulnerabilidadFinal: Math.round(v), aporteSentidoPct: contribS };
+  const payload = { consentimiento: CONSENT_VERSION, idPartida: S.runId, edad: S.age, segmentoEdad: S.age <= 30 ? '18-30' : '31+', decisiones: S.picks.map(p => 'ABCD'[p]), sentidoFinal: Math.round(s), capturaFinal: Math.round(c), vulnerabilidadFinal: Math.round(v), aporteSentidoPct: contribS };
   const shareBox = CONSENT
     ? `<section class="shared on" aria-live="polite"><p><b>Gracias por compartir tus respuestas.</b> <span id="sharestate">${ENDPOINT ? 'Enviando…' : 'Modo de prueba: no se envió nada.'}</span></p></section>`
     : `<section class="shared"><p><b>No aceptaste compartir tus respuestas.</b> No se envió nada. Las estadísticas de abajo salen solo de este navegador.</p></section>`;
-  const seg = S.age <= 30 ? `A tus ${S.age} años, estás dentro del segmento de 18 a 30 años que estudia este simulador.` : `A tus ${S.age} años estás fuera del segmento de 18 a 30 años, pero el mecanismo es el mismo.`;
+  const seg = S.age <= 30 ? `A tus ${S.age} años, estás dentro del segmento de 18 a 30 años que este prototipo busca relevar.` : `A tus ${S.age} años estás fuera del segmento de 18 a 30 años, pero el mecanismo es el mismo.`;
 
   S.stage = STAGES.length;
   setPhase('audit', `Auditoría de @${h}`);
   paintSteps(); paintGraph(5);
   $('#view').innerHTML = `<div class="aud">
     <p class="kick">Etapa 6 de 6 · terminaste</p><h2 class="stage-h">Tablero de auditoría de @${h}</h2>
-    <p class="lead2">${seg} Estos porcentajes salen de tus decisiones y del modelo del simulador. No son mediciones reales de ninguna campaña.</p>
+    <p class="lead2">${seg} Estos porcentajes salen de tus decisiones y del modelo del prototipo. No son mediciones reales de ninguna campaña.</p>
     <section class="cartel"><h2>⚠️ Diagnóstico de tu recorrido</h2><p>${msg}</p></section>
 
     <h3 class="t">Cuánto pesó tu recorrido y cuánto el sistema</h3>
@@ -1089,6 +1099,20 @@ function audit() {
       <li>Un meme o un stitch parecen inofensivos, pero cada versión nueva alimenta el formato y aleja el mensaje de su propósito.</li>
       <li>Cuando un tema salta a los medios, preguntate qué se está cubriendo: el problema o la pelea.</li>
     </ol>
+    <section class="resource" aria-labelledby="restit"><h3 id="restit">Antes de irte</h3>
+      <p>Si necesitás información sobre esto, no dudes en buscarla desde la primera fuente.</p>
+      <p>Recordá investigar más allá de lo que consumís en redes. Sé responsable.</p>
+      <div class="crisis" role="note">
+        <p>Si estás pasando por un momento muy difícil o pensás en hacerte daño, hablar con alguien ayuda. Podés llamar gratis a la línea de prevención del suicidio:</p>
+        <ul>
+          <li><b>Línea 135</b> (Centro de Asistencia al Suicida, organización sin fines de lucro): <a href="tel:135">135</a>, gratis desde CABA y Gran Buenos Aires. Desde todo el país: <a href="tel:+541152751135">(011) 5275-1135</a> o <a href="tel:08003451435">0800-345-1435</a>. Atiende de 8 a 24 hs, todos los días.</li>
+          <li><b>Línea Nacional de Salud Mental:</b> <a href="tel:08009990091">0800-999-0091</a>, gratuita y las 24 hs.</li>
+          <li>Ante una emergencia o un riesgo inmediato: <a href="tel:911">911</a> o <a href="tel:107">107</a> (SAME).</li>
+        </ul>
+      </div>
+      <a class="btn" href="https://aquiestoy.chat" target="_blank" rel="noopener noreferrer">Visitar Aquí Estoy Chat</a>
+      <p class="small">Es una organización real, no la ONG ficticia de este prototipo. Ofrece apoyo emocional gratuito y anónimo por WhatsApp.</p>
+    </section>
     <div class="actions"><button class="btn" id="again">Volver a jugar</button><button class="btn sec" id="prn">Guardar o imprimir</button></div>
   </div>`;
   paintMeters();
@@ -1109,7 +1133,7 @@ const LU_VIS = [
   () => `${POSTRADAR}<span class="lv-stk" style="bottom:12.6rem;left:3%;--r:-7deg">💬 ¿Qué pensás?</span><div class="lv-row">${luGirl('phone', 'radar')}<div class="lv-clock" id="lv-clock" role="timer" aria-label="Reloj de 5 segundos"><b id="lv-clk">5</b><small>segundos</small></div></div>`,
   () => `<span class="lv-stk big" style="top:3%;right:6%;--r:8deg">⚠️</span>${POSTONG()}${luGirl('phone', 'ong')}`,
   () => `${POSTONG('<div class="small" style="margin-top:.3rem">↗ Posteo real, abierto en vivo</div>')}<div class="lv-cm"><span>👀 ¿esto es real?</span><span>💬 yo tampoco abrí el link</span></div><span class="lv-stk" style="bottom:12.6rem;left:3%;--r:-6deg">✅ fuente</span>${luGirl('phone', 'real')}`,
-  () => `${luGirl('point')}<span class="lv-arrow" aria-hidden="true">↓</span><span class="small" style="color:#ccc">Link en la bio de @lu.opina</span><span class="lv-pill">🔗 simulación</span><button class="btn" type="button" id="lv-cta" style="background:#fff;color:#000">▶ Volver al simulador</button>`
+  () => `${luGirl('point')}<span class="lv-arrow" aria-hidden="true">↓</span><span class="small" style="color:#ccc">Link en la bio de @lu.opina</span><span class="lv-pill">🔗 link al posteo</span><button class="btn" type="button" id="lv-cta" style="background:#fff;color:#000">▶ Ver el posteo</button>`
 ];
 function luScene() { const i = LU.findIndex(f => LV.t < f.t1); return i < 0 ? LU.length - 1 : i; }
 function luPaint() {
@@ -1157,7 +1181,7 @@ function luScript() {
     <p class="meta2">Personaje ficticio · TikTok · vertical 9:16 · 30 segundos · con subtítulos · sin música con derechos</p>
     ${LU.map((f, i) => `<section class="sc1 ${f.ret ? 'ret' : ''}"><div class="tc2">${f.t0}–${f.t1} s<small>Escena ${i + 1}</small>${luGirl(f.pose, scr[i], 'gi')}</div>
       <dl><div><dt>${f.rol}</dt><dd>${f.plano}</dd></div><div><dt>Voz de Lu</dt><dd class="v">${f.voz}</dd></div><div><dt>En pantalla</dt><dd>${f.pant}</dd></div><div><dt>Edición y gráficos</dt><dd class="edit">${f.edit}</dd></div></dl></section>`).join('')}
-    <p class="nota"><b>Cómo vuelve al simulador:</b> la última escena muestra el link de la bio de Lu, “simulación”, que lleva al posteo de X con el que empieza el simulador (el vínculo es narrativo, no un link literal). En el juego, ese regreso es la decisión de la etapa 4.</p>
+    <p class="nota"><b>Cómo vuelve al posteo:</b> la última escena muestra el link de la bio de Lu, “link al posteo”, que lleva al posteo de la ONG con el que empieza todo (el vínculo es narrativo, no un link literal). En el prototipo, ese regreso es la decisión de la etapa 4.</p>
     <div class="actions"><button class="btn" type="button" id="lv-seev" style="background:#161616;color:#fff">▶ Ver el video</button></div></div>`;
   $('#lv-seev').addEventListener('click', () => { luTab('video'); LV.t = 0; LV.scene = -1; luPaint(); luPlay(!prefersReduced); });
 }
