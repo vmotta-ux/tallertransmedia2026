@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Aviso para el equipo docente: las partidas de quienes aceptan compartir sus respuestas se envían de forma anónima
+     a una planilla de Google Sheets de acceso restringido, administrada por el equipo del proyecto (ver ENDPOINT en el script). -->
 <html lang="es-AR">
 <head>
 <meta charset="utf-8">
@@ -247,6 +249,168 @@ dialog::backdrop{background:#000a}
 .takes li{margin:.45rem 0}
 .actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
 
+
+/* ===== Consentimiento ===== */
+.consent{border:1.5px solid var(--bd);border-radius:12px;padding:.8rem .9rem 1rem;margin:1.1rem 0 0;background:var(--bg)}
+.consent legend{font-weight:800;padding:0 .4rem;font-size:1rem}
+.consent p{font-size:.9rem;margin:.3rem 0}
+.consent dl{margin:.6rem 0 .2rem;font-size:.86rem}
+.consent dt{font-weight:700;margin-top:.5rem}
+.consent dd{margin:.1rem 0 0;color:var(--mu)}
+.optin{display:flex;gap:.7rem;align-items:flex-start;margin:.9rem 0 0;padding:.7rem .8rem;border:1.5px solid var(--bd);border-radius:10px;font-weight:600;cursor:pointer}
+.optin:has(input:checked){border-color:var(--blue);background:var(--bg2)}
+.optin input{width:1.3rem;height:1.3rem;flex:none;margin:.1rem 0 0;padding:0;accent-color:var(--blue)}
+.shared{border:2px solid var(--bd);border-radius:12px;padding:.8rem .9rem;background:var(--bg2)}
+.shared.on{border-color:var(--blue)}
+.shared code{font:700 1.05rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em}
+.shared pre{margin:.5rem 0 0;padding:.6rem;border:1px solid var(--bd);border-radius:8px;background:var(--bg);font:.75rem/1.4 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+
+/* ===== Video de Lu (simulado) ===== */
+.lu-entry{display:flex;gap:.9rem;align-items:center;border:1px solid var(--bd);border-radius:16px;padding:.8rem;background:var(--bg2)}
+.lu-thumb{flex:none;position:relative;width:4.6rem;aspect-ratio:9/14;border-radius:12px;display:grid;place-items:center;font-size:2rem;color:#fff;background:linear-gradient(160deg,#25f4ee55,#fe2c5566 70%),#111}
+.lu-thumb span{position:absolute;bottom:.3rem;right:.35rem;font-size:.62rem;background:#000a;border-radius:4px;padding:0 .25rem}
+.lu-entry p{margin:.15rem 0 .6rem}
+.lu-entry .actions{margin-top:0}
+dialog#luv{width:min(450px,100vw);height:min(100dvh,880px);max-height:100dvh;border:0;border-radius:0;background:#050505;color:#fff;padding:0;overflow:hidden}
+@media(min-width:520px){dialog#luv{border-radius:22px;border:1px solid #333}}
+dialog#luv::backdrop{background:#000d}
+dialog#luv[open]{display:flex;flex-direction:column}
+.lv-top{flex:none;display:flex;align-items:center;gap:.5rem;padding:max(.6rem,env(safe-area-inset-top,0px)) .7rem .5rem}
+.lv-top .back{background:#ffffff1f;border:0;color:#fff;border-radius:999px;padding:.4rem .8rem;font-weight:700;font-size:.85rem}
+.lv-tabs{margin-left:auto;display:flex;gap:.2rem;background:#ffffff14;border-radius:999px;padding:.15rem}
+.lv-tabs button{background:none;border:0;color:#bbb;border-radius:999px;padding:.3rem .8rem;font-weight:700;font-size:.85rem}
+.lv-tabs button[aria-pressed=true]{background:#fff;color:#000}
+.lv-prog{flex:none;display:flex;gap:3px;padding:0 .8rem .5rem}
+.lv-prog i{display:block;height:3px;border-radius:2px;background:#ffffff30;overflow:hidden}
+.lv-prog i b{display:block;height:100%;width:0;background:#fff}
+.lv-screen{position:relative;flex:1;min-height:0;margin:0 .7rem;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#25f4ee33,#fe2c5533 70%),#111}
+.lv-stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;padding:4.6rem 3.4rem 8rem 1rem}
+.lv-stage>*{animation:lvin .5s ease both}
+@keyframes lvin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.lv-user{position:absolute;top:.8rem;left:.9rem;right:.9rem;display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;z-index:2;text-shadow:0 1px 3px #000}
+.lv-user .av{width:2rem;height:2rem;font-size:.8rem}
+.lv-user small{font-weight:400;color:#ddd}
+.lv-side{position:absolute;right:.6rem;bottom:7.2rem;display:grid;gap:.9rem;text-align:center;font-size:1.4rem;z-index:2}
+.lv-side small{display:block;font-size:.65rem}
+.lv-chip{position:absolute;left:.9rem;top:3.4rem;z-index:2;background:#fff;color:#000;border-radius:6px;padding:.2rem .5rem;font-size:.78rem;font-weight:800;max-width:70%;animation:lvin .4s ease both}
+.lv-sub{position:absolute;left:.8rem;right:3.6rem;bottom:.9rem;z-index:2}
+.lv-sub p{background:#000c;border-radius:8px;padding:.45rem .6rem;font-size:.95rem;line-height:1.3;font-weight:600}
+.lv-sub small{display:block;margin-top:.3rem;font-size:.72rem;color:#ccc}
+.lv-ctl{flex:none;display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem max(.7rem,env(safe-area-inset-bottom,0px))}
+.lv-ctl button{background:#ffffff1f;border:0;color:#fff;border-radius:999px;min-width:2.6rem;height:2.6rem;font-weight:700}
+.lv-ctl .pp{background:#fff;color:#000;padding:0 1rem}
+.lv-ctl .sc{display:flex;gap:.25rem;margin-left:auto}
+.lv-ctl .sc button{min-width:2.1rem;height:2.1rem;font-size:.8rem}
+.lv-ctl .sc button[aria-current]{background:#fff;color:#000}
+.lv-time{font-size:.8rem;color:#bbb;font-variant-numeric:tabular-nums}
+.lv-card{width:100%;max-width:19rem;background:#fff;color:#111;border-radius:14px;padding:.7rem .8rem;font-size:.9rem;line-height:1.3;box-shadow:0 8px 24px #0008}
+.lv-card .who{display:flex;align-items:center;gap:.45rem;font-size:.8rem;margin-bottom:.35rem}
+.lv-card .who .av{width:1.6rem;height:1.6rem;font-size:.7rem}
+.lv-card.ong{border:3px solid #1d9bf0}
+.lv-card .mu{color:#536471}
+.lv-face{font-size:4.4rem;line-height:1;filter:drop-shadow(0 4px 10px #0008)}
+.lv-meme{width:100%;max-width:15rem;border-radius:10px;overflow:hidden;background:#222;text-align:center;font:900 .95rem/1.1 Impact,"Arial Narrow Bold","Arial Black",sans-serif;text-transform:uppercase;text-shadow:2px 2px 0 #000;padding:.5rem;box-shadow:0 6px 18px #0008}
+.lv-meme+.lv-meme{margin-top:-.2rem}
+.lv-browser{width:100%;max-width:19rem;background:#fff;color:#111;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px #0008;font-size:.82rem}
+.lv-browser .url{background:#e9eef1;padding:.4rem .6rem;font-size:.72rem;color:#536471}
+.lv-browser ul{margin:0;padding:.7rem 1rem .8rem 1.6rem;display:grid;gap:.3rem}
+.lv-browser h4{margin:0;padding:.7rem 1rem 0;font-size:.95rem}
+.lv-end{display:grid;gap:.7rem;justify-items:center;text-align:center}
+.lv-end h3{font-size:1.5rem;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+.lv-end .go{background:#fff;color:#000;border:0;border-radius:999px;padding:.75rem 1.4rem;font-weight:800;font-size:1rem}
+.lv-end .bio{color:#ccc;font-size:.85rem;min-height:0;margin:0}
+.lv-sticker{border:2px dashed #ffffff88;border-radius:10px;padding:.3rem .7rem;font-size:.8rem;transform:rotate(-3deg)}
+.lv-doc{position:absolute;inset:0;overflow:auto;padding:1rem 1rem 1.2rem;background:#f7f7f4;color:#161616}
+.lv-doc h2{font-size:1.25rem;line-height:1.15;margin-bottom:.2rem}
+.lv-doc .meta2{font-size:.78rem;color:#555;margin-bottom:.9rem}
+.lv-doc .sc1{display:grid;grid-template-columns:4.3rem 1fr;gap:.2rem .8rem;padding:.75rem 0;border-top:1.5px solid #161616}
+.lv-doc .sc1.ret{background:#e8f3fd;margin:0 -.5rem;padding:.75rem .5rem;border-top-color:#1d9bf0}
+.lv-doc .tc2{font:700 .9rem ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.lv-doc .tc2 small{display:block;font:600 .7rem system-ui;color:#555}
+.lv-doc dl{margin:0;display:grid;gap:.4rem;font-size:.86rem}
+.lv-doc dt{font-size:.7rem;font-weight:700;color:#555}
+.lv-doc dd{margin:0}
+.lv-doc dd.v{font-weight:600}
+.lv-doc .nota{border-left:3px solid #1d9bf0;padding:.4rem .7rem;margin:.9rem 0 0;font-size:.84rem;background:#fff}
+@media (prefers-color-scheme:light){.lu-thumb{color:#fff}}
+.lv-girl{display:block;flex:1 1 auto;min-height:0;width:100%;max-height:250px}
+.lv-row{display:flex;align-items:center;justify-content:center;gap:.8rem;width:100%;flex:1 1 auto;min-height:0;max-height:250px}
+.lv-row .lv-girl{width:auto;max-width:62%;height:100%;max-height:250px}
+.mouth{transform-box:fill-box;transform-origin:center;animation:talk .32s ease-in-out infinite alternate}
+@keyframes talk{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+#luv.paused .mouth{animation-play-state:paused}
+.lv-clock{flex:none;width:4.6rem;height:4.6rem;border-radius:50%;border:4px solid #fff;display:grid;place-content:center;text-align:center;line-height:1;background:#000a;opacity:.55;transition:opacity .3s}
+.lv-clock.run{opacity:1;border-color:#fe2c55}
+.lv-clock b{font-size:2rem;font-variant-numeric:tabular-nums}
+.lv-clock small{font-size:.65rem;color:#ccc}
+.lv-cm{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center}
+.lv-cm span{background:#ffffff26;border-radius:999px;padding:.2rem .6rem;font-size:.75rem}
+.lv-live{position:absolute;top:.9rem;right:.9rem;z-index:3;background:#fe2c55;border-radius:6px;padding:.15rem .5rem;font-size:.72rem;font-weight:800}
+.lv-pill{background:#ffffff26;border:1px solid #ffffff55;border-radius:999px;padding:.35rem .9rem;font-size:.82rem}
+.lv-arrow{font-size:1.6rem;animation:bob .8s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(-4px)}to{transform:translateY(5px)}}
+.lv-doc .sc1{grid-template-columns:6.4rem 1fr}
+.lv-doc .gi{width:100%;height:auto;margin-top:.4rem;border-radius:10px;background:#1b1b1f}
+
+
+
+/* ===== Edición del video de Lu ===== */
+.lv-stage{padding:3.2rem 3.4rem 11.5rem 1rem;z-index:1}
+.lv-cam{position:absolute;inset:0;z-index:1}
+@keyframes push{from{transform:scale(1)}to{transform:scale(1.07)}}
+.lv-bg{position:absolute;inset:0;z-index:0}
+.lv-bg::before{content:"";position:absolute;top:-3rem;left:-3rem;width:10rem;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffffffcc 0,#ffffff55 30%,transparent 65%);filter:blur(6px)}
+.bg0{background:radial-gradient(circle at 60% 35%,#ff7ab866,transparent 60%),linear-gradient(180deg,#34154f,#12081f)}
+.bg1{background:radial-gradient(circle at 40% 40%,#fe2c5555,transparent 60%),linear-gradient(180deg,#2a1230,#0d0a18)}
+.bg2{background:radial-gradient(circle at 50% 40%,#1d9bf077,transparent 60%),linear-gradient(180deg,#10253f,#080b16)}
+.bg3{background:radial-gradient(circle at 50% 45%,#25f4ee66,transparent 60%),linear-gradient(180deg,#0f3340,#07121a)}
+.bg4{background:radial-gradient(circle at 50% 35%,#7856ff88,transparent 60%),linear-gradient(180deg,#26194d,#0c0a1c)}
+.lv-bokeh{position:absolute;inset:0;z-index:0;pointer-events:none}
+.lv-bokeh i{position:absolute;border-radius:50%;filter:blur(5px);opacity:.45;animation:floaty 5s ease-in-out infinite alternate}
+@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-16px)}}
+.lv-vig{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,#0009 100%),linear-gradient(180deg,#0006 0,transparent 18%,transparent 60%,#000a 100%)}
+.lv-cut{position:absolute;inset:0;z-index:6;background:#fff;opacity:0;pointer-events:none;animation:cutf .4s ease-out both}
+@keyframes cutf{0%{opacity:.9}100%{opacity:0}}
+.lv-tt{position:absolute;top:.7rem;left:0;right:0;z-index:4;display:flex;justify-content:center;gap:1rem;font-weight:700;font-size:.85rem;color:#ffffffaa;text-shadow:0 1px 3px #000}
+.lv-tt b{color:#fff;border-bottom:2px solid #fff}
+.lv-live{top:2.5rem;right:.8rem;z-index:5}
+.lv-hearts{position:absolute;inset:0;z-index:4;pointer-events:none}
+.lv-hearts i{position:absolute;right:1.3rem;bottom:5.2rem;color:#fe2c55;font-style:normal;font-size:1.2rem;opacity:0;animation:rise 3.2s ease-in infinite}
+.lv-hearts i:nth-child(2){animation-delay:1s;right:1.9rem}
+.lv-hearts i:nth-child(3){animation-delay:2s;right:.9rem}
+@keyframes rise{0%{opacity:0;transform:translate(0,0) scale(.6)}15%{opacity:.95}100%{opacity:0;transform:translate(-16px,-170px) scale(1.25)}}
+.lv-side{z-index:4;bottom:.9rem;gap:.75rem;font-size:1.5rem;text-shadow:0 1px 4px #000}
+.lv-side .fol{position:relative;width:2.3rem;height:2.3rem;margin:0 auto .2rem;border-radius:50%;border:2px solid #fff;background:linear-gradient(135deg,#fe2c55,#7856ff);display:grid;place-items:center;font:700 .9rem system-ui}
+.lv-side .fol::after{content:"+";position:absolute;bottom:-.55rem;left:50%;transform:translateX(-50%);width:1.1rem;height:1.1rem;border-radius:50%;background:#fe2c55;font-size:.8rem;line-height:1.1rem}
+.disc{width:2.2rem;height:2.2rem;margin:.2rem auto 0;border-radius:50%;background:conic-gradient(#222,#555,#222,#555,#222);border:6px solid #111;display:grid;place-items:center;font-size:.7rem;animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lv-cap{position:absolute;left:.8rem;right:3.6rem;bottom:6.2rem;z-index:4;margin:0;text-align:center;font:900 1.2rem/1.2 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff;text-shadow:2px 0 0 #000,-2px 0 0 #000,0 2px 0 #000,0 -2px 0 #000,0 3px 8px #000;pointer-events:none;min-height:2.4em}
+.lv-cap span{display:inline-block;transition:transform .12s}
+.lv-cap span.a{color:#ffe14d;transform:scale(1.12)}
+.lv-info{position:absolute;left:.8rem;right:3.6rem;bottom:.8rem;z-index:4;font-size:.9rem;line-height:1.25;text-shadow:0 1px 4px #000}
+.lv-info b{font-weight:800}
+.lv-info span{color:#ddd;font-size:.8rem}
+.lv-info p{margin:.15rem 0 .4rem;font-size:.82rem}
+.lv-snd{display:flex;align-items:center;gap:.45rem;font-size:.76rem;color:#eee}
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:.85rem}
+.eq i{display:block;width:3px;background:#fff;border-radius:1px;animation:eq .6s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{from{height:20%}to{height:100%}}
+.lv-stk{position:absolute;z-index:3;font-size:1.05rem;font-weight:800;background:#fff;color:#111;border-radius:12px;padding:.25rem .65rem;box-shadow:0 4px 12px #0007;transform:rotate(var(--r,-6deg));animation:stk .5s cubic-bezier(.3,1.7,.5,1) .35s both}
+.lv-stk.big{font-size:2.2rem;background:none;box-shadow:none;padding:0;filter:drop-shadow(0 3px 6px #0008)}
+@keyframes stk{from{opacity:0;transform:rotate(var(--r,-6deg)) scale(.2)}to{opacity:1;transform:rotate(var(--r,-6deg)) scale(1)}}
+.breathe{animation:breathe 2.4s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.eyes{transform-box:fill-box;transform-origin:center;animation:blink 4.2s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+#luv.paused *{animation-play-state:paused!important}
+.lv-doc .edit{font-size:.82rem;color:#444;font-style:italic}
+/* Etapa 5: el medio levanta el video de Lu */
+.tv .screen{display:flex;gap:1rem;align-items:center;justify-content:center}
+.pip{position:relative;width:5.2rem;aspect-ratio:9/13;border-radius:10px;border:2px solid #fff;display:grid;place-items:center;font-size:1.8rem;background:linear-gradient(160deg,#25f4ee55,#fe2c5577 70%),#111}
+.pip small{position:absolute;left:0;right:0;bottom:.15rem;font-size:.5rem;line-height:1.1;text-align:center;padding:0 .15rem}
+.pip::before{content:"VIDEO";position:absolute;top:.2rem;left:.2rem;background:#d4121f;color:#fff;font:800 .5rem system-ui;padding:0 .25rem;border-radius:2px}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{.sticky,.nav,.right,.actions{display:none}.app{display:block}}
 </style>
@@ -275,7 +439,7 @@ dialog::backdrop{background:#000a}
       </div>
     </div>
     <div id="view"></div>
-    <p class="small foot">Simulación con fines educativos. Personas, cuentas, medios, memes y datos son ficticios. La interfaz imita el formato de X solo como referencia, sin afiliación.</p>
+    <p class="small foot">Simulación con fines educativos. Personas, cuentas, medios, memes y cifras de la historia son ficticios. Los datos que vos aceptes compartir sí son reales (ver “Tus datos y tu consentimiento” en la portada) y se almacenan de forma anónima en una planilla a la que accede solo el equipo del proyecto. La interfaz imita el formato de X solo como referencia, sin afiliación.</p>
   </div>
 
   <aside class="right" aria-label="Indicadores y tendencias">
@@ -326,14 +490,48 @@ dialog::backdrop{background:#000a}
   </div>
 </dialog>
 
+<dialog id="luv" aria-labelledby="lv-title">
+  <div class="lv-top">
+    <button class="back" id="lv-back" type="button">← Volver al simulador</button>
+    <span id="lv-title" class="sr" style="position:absolute;left:-9999px">Video de @lu.opina (ficticia)</span>
+    <div class="lv-tabs" role="group" aria-label="Vista"><button type="button" id="lv-tv" aria-pressed="true">Video</button><button type="button" id="lv-ts" aria-pressed="false">Guion</button></div>
+  </div>
+  <div id="lv-videoview" style="display:flex;flex-direction:column;flex:1;min-height:0">
+    <div class="lv-prog" id="lv-prog" aria-hidden="true"></div>
+    <div class="lv-screen">
+      <div class="lv-bg bg0" id="lv-bg"></div>
+      <div class="lv-bokeh" id="lv-bokeh" aria-hidden="true"></div>
+      <div class="lv-cam" id="lv-cam"><div class="lv-stage" id="lv-stage"></div></div>
+      <div class="lv-vig" aria-hidden="true"></div>
+      <div class="lv-cut" id="lv-cut" aria-hidden="true"></div>
+      <div class="lv-tt" aria-hidden="true"><span>Siguiendo</span><b>Para ti</b></div>
+      <div class="lv-live" id="lv-live" hidden>● EN VIVO · 1,2 mil</div>
+      <div class="lv-hearts" aria-hidden="true"><i>♥</i><i>♥</i><i>♥</i></div>
+      <div class="lv-side" aria-hidden="true"><div><div class="fol">L</div></div><div>♡<small>12,4 mil</small></div><div>💬<small>1.980</small></div><div>↗<small>Enviar</small></div><div class="disc">♫</div></div>
+      <p class="lv-cap" id="lv-voz"></p>
+      <div class="lv-info"><b>@lu.opina</b> <span>(ficticia)</span><p>¿Y vos qué hubieras hecho? #simulación #redes</p><div class="lv-snd"><span class="eq"><i></i><i></i><i></i></span>sonido original · @lu.opina</div></div>
+    </div>
+    <div class="lv-ctl">
+      <button class="pp" id="lv-pp" type="button" aria-label="Pausar">❚❚</button>
+      <span class="lv-time" id="lv-time">0:00 / 0:30</span>
+      <div class="sc" id="lv-sc" role="group" aria-label="Ir a la escena"></div>
+    </div>
+  </div>
+  <div id="lv-scriptview" style="position:relative;flex:1;min-height:0;margin:0 .7rem .7rem;border-radius:18px;overflow:hidden" hidden></div>
+</dialog>
+
 <script>
 (() => {
 'use strict';
 
 /* ---------- Configuración ---------- */
-// Para juntar datos de un grupo completo, poné acá la URL de un contador propio.
-// Solo se enviaría { decisiones: [...] }, sin usuario, edad ni ningún identificador.
-const ENDPOINT = '';
+// URL de la aplicación web de Google Apps Script que escribe en la planilla del equipo
+// (ver google-apps-script.gs y sus instrucciones). Mientras esté vacía, el simulador funciona
+// igual pero NO envía nada a ningún lado: la pantalla de auditoría lo avisa.
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzdbI1U3P_M4DMxFdIBNbV_39nfu0envgTifVw5eVzjOF2yOW9PK56MGpd0_K0EcD2Exw/exec';
+// Si cambian el texto del consentimiento de la portada, cambien también esta versión:
+// queda registrada en la planilla junto a cada partida.
+const CONSENT_VERSION = 'v1';
 const STORE_KEY = 'tendencia-resonancia-v2';
 
 const $ = s => document.querySelector(s);
@@ -361,6 +559,73 @@ const SEC_O = (sub = 'El que desencadena todo') => sec('o', 'Posteo original', s
 const head = (n, title, lead, theory) => `<p class="kick">Etapa ${n} de 6</p><h2 class="stage-h">${title}</h2><p class="lead2">${lead}</p><details class="more"><summary>Concepto detrás de esta etapa</summary><p>${theory}</p></details>`;
 const meme = (a, b, ico) => `<div class="meme"><div class="m1">${a}</div><div class="pic" aria-hidden="true">${ico}</div><div class="m2">${b}</div><div class="cap">@memes_del_dia (ficticia)</div></div>`;
 const clip = (badge, face, txt, who) => `<div class="clip"><span class="badge">${badge}</span><span class="face" aria-hidden="true">${face}</span><p>${txt}</p><small>${who} · sonido original</small></div>`;
+
+const LU_END = 30;
+const LU = [
+  { t0: 0, t1: 3, rol: 'Gancho', pose: 'talk',
+    plano: 'Primer plano de Lu hablando a cámara.',
+    pant: 'Lu a cámara, con subtítulos de lo que dice',
+    edit: 'Apertura con flash y zoom lento hacia Lu. Sticker 🤔. Subtítulos que se resaltan palabra por palabra.',
+    caps: [[0, '¿Alguna vez dudaste si lo que consumimos es 100% real?']] },
+  { t0: 3, t1: 13, rol: 'El conflicto', pose: 'phone',
+    plano: 'Lu muestra su celular a la cámara y en pantalla aparece el posteo de @RadarLibertario_. Al final aparece un reloj con cuenta regresiva de 5 segundos.',
+    pant: 'Posteo de @RadarLibertario_ y reloj de 5 segundos',
+    edit: 'Corte con flash. Sticker “¿Qué pensás?”. Reloj de 5 segundos con cuenta regresiva al final.',
+    caps: [[3, 'Si te cruzás con este posteo, ¿qué pensás primero?'], [6.5, 'Escribilo en comentarios: tenés 5 segundos.']] },
+  { t0: 13, t1: 20, rol: 'El giro', pose: 'phone',
+    plano: 'Lu sigue hablándole a la cámara y mostrando su celular. En pantalla aparece el posteo inicial de la ONG.',
+    pant: 'Posteo inicial de la ONG',
+    edit: 'Corte con flash. Cambio de fondo a azul. Sticker de alerta sobre el posteo.',
+    caps: [[13, '¿Listo? Seguro nada coincide:'], [15, 'una ONG habló de la ansiedad por pantallas y el debate dio vuelta todo.']] },
+  { t0: 20, t1: 26, rol: 'Recupera el sentido', pose: 'phone',
+    plano: 'Lu abre el posteo real en cámara, con sus seguidores mirando.',
+    pant: 'Posteo real abierto y comentarios de sus seguidores',
+    edit: 'Corte con flash. Fondo verde azulado. Insignia “en vivo” y comentarios de seguidores. Sticker “fuente”.',
+    caps: [[20, 'Esto nos incumbe a todos:'], [22, 'si revisamos de dónde viene la información, evitamos que se salga de control.']] },
+  { t0: 26, t1: 30, rol: 'Vuelve al simulador', pose: 'point', ret: true,
+    plano: 'Lu señala hacia abajo y en pantalla aparece el link de su bio: “simulación”. Ese link lleva al posteo de X con el que empieza el simulador.',
+    pant: 'Link de la bio: “simulación”',
+    edit: 'Corte con flash. Fondo violeta. Flecha animada hacia el link. Botón final para volver al simulador.',
+    caps: [[26, '¿Vos qué hubieras hecho?'], [28, 'Te invito a revisarlo en el link.']] }
+];
+LU.forEach(f => f.voz = f.caps.map(c => c[1]).join(' '));
+
+// Ilustración de Lu. pose: talk | phone | point. screen: radar | ong | real (qué muestra su celular)
+const luGirl = (pose, screen, cls = 'lv-girl') => {
+  const skin = '#f2c6a0', hair = '#3a2418', hood = '#7856ff';
+  const arm = (d) => `<path d="${d}" stroke="${hood}" stroke-width="21" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const hand = (x, y, r = 10) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${skin}"/>`;
+  let arms = arm('M52 172 Q34 208 44 240') + hand(44, 244);
+  let front = '';
+  if (pose === 'talk') arms += arm('M148 172 Q182 186 172 138') + hand(172, 130, 11);
+  if (pose === 'point') arms += arm('M148 172 Q178 214 170 250') + hand(170, 254, 10) + `<rect x="166" y="256" width="9" height="16" rx="4.5" fill="${skin}"/>`;
+  if (pose === 'phone') {
+    const scr = {
+      radar: `<circle cx="120" cy="186" r="6" fill="#c0392b"/><rect x="129" y="182" width="30" height="4" rx="2" fill="#888"/><rect x="113" y="198" width="46" height="4" rx="2" fill="#555"/><rect x="113" y="207" width="46" height="4" rx="2" fill="#555"/><rect x="113" y="216" width="30" height="4" rx="2" fill="#555"/>`,
+      ong: `<rect x="112" y="173" width="48" height="52" rx="4" fill="none" stroke="#1d9bf0" stroke-width="3"/><circle cx="123" cy="186" r="6" fill="#1d9bf0"/><rect x="132" y="183" width="22" height="4" rx="2" fill="#888"/><rect x="118" y="199" width="36" height="4" rx="2" fill="#555"/><rect x="118" y="208" width="36" height="4" rx="2" fill="#555"/>`,
+      real: `<rect x="110" y="168" width="54" height="14" fill="#1d9bf0"/><rect x="114" y="190" width="46" height="4" rx="2" fill="#555"/><rect x="114" y="199" width="46" height="4" rx="2" fill="#555"/><rect x="114" y="212" width="32" height="8" rx="4" fill="#1d9bf0"/><text x="137" y="244" font-size="16" text-anchor="middle">🔗</text>`
+    }[screen] || '';
+    arms += arm('M148 172 Q172 200 162 224');
+    front = `<g transform="rotate(-8 137 210)"><rect x="104" y="160" width="66" height="100" rx="9" fill="#111" stroke="#ddd" stroke-width="2"/><rect x="109" y="166" width="56" height="88" rx="5" fill="#fff"/>${scr}</g>` + hand(164, 232, 9);
+  }
+  return `<svg class="${cls}" viewBox="0 0 200 272" role="img" aria-label="Dibujo de Lu: ${pose === 'talk' ? 'hablando a cámara' : pose === 'phone' ? 'mostrando su celular' : 'señalando hacia abajo'}">
+    <g class="breathe"><path d="M58 92 C48 36 152 36 142 92 L148 156 L52 156 Z" fill="${hair}"/>
+    <path d="M38 272 L46 182 Q52 150 100 146 Q148 150 154 182 L162 272 Z" fill="${hood}"/>
+    <path d="M86 150 Q100 166 114 150" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+    ${arms}
+    <rect x="92" y="116" width="16" height="32" rx="6" fill="${skin}"/>
+    <ellipse cx="100" cy="88" rx="34" ry="38" fill="${skin}"/>
+    <path d="M65 84 C64 46 136 46 135 84 C122 66 90 62 65 84 Z" fill="${hair}"/>
+    <g class="eyes"><circle cx="88" cy="92" r="3.2" fill="#2b1b12"/><circle cx="112" cy="92" r="3.2" fill="#2b1b12"/></g>
+    <path d="M82 85 Q88 81 94 85 M106 85 Q112 81 118 85" stroke="#2b1b12" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="80" cy="102" r="5" fill="#f08a8a" opacity=".35"/><circle cx="120" cy="102" r="5" fill="#f08a8a" opacity=".35"/>
+    <g class="mouth"><ellipse cx="100" cy="109" rx="8" ry="7" fill="#7a2233"/><ellipse cx="100" cy="112.5" rx="5" ry="3" fill="#e57a8a"/></g>
+    ${front}
+  </g></svg>`;
+};
+const luEntry = () => `<div class="lu-entry"><div class="lu-thumb" aria-hidden="true">🙄<span>0:30</span></div>
+  <div><b>@lu.opina responde al hilo</b><p class="small">Video simulado de 30 segundos. Al final te devuelve al simulador para que sigas con tu decisión.</p>
+  <div class="actions"><button class="btn" type="button" id="lu-open">▶ Ver el video</button><button class="btn sec" type="button" id="lu-script">Ver el guion</button></div></div></div>`;
 
 /* ---------- Etapas ---------- */
 // Opción: [texto, notificación algorítmica, [Δsentido, Δcaptura, Δvulnerabilidad]]
@@ -423,6 +688,7 @@ const STAGES = [
       ${clip('Parodia', '🎭', 'Sketch: el policía de la ansiedad te pide el recurso de ayuda antes de abrir el celular.', '@humor.federal (ficticia)')}
       ${clip('Opinión en 30 s', '🗣️', 'Opinión rápida: ¿campaña útil o gasto público? Dejame tu bando en comentarios.', '@debate.tv (ficticia)')}
       </div></div>`) +
+    sec('d', 'El video de Lu', 'Un video que te devuelve al simulador', luEntry()) +
     SEC_O('Así va quedando el mensaje'),
   ask: 'El debate ya está en tu pestaña “Para ti” de TikTok. ¿Qué hacés?',
   c: [
@@ -434,21 +700,23 @@ const STAGES = [
 },
 {
   name: 'Medios', floor: [84, 76, 82],
-  scene: () => head(5, 'Salto a los medios masivos', 'El debate llega a la televisión y a los portales. Los titulares ya no cubren la salud mental sino la pelea.',
+  scene: () => head(5, 'Salto a los medios masivos', 'El debate llega a la televisión y a los portales. Un canal levanta el video de Lu, pero lo recorta, y los titulares ya no cubren la salud mental sino la pelea.',
       'Inversión de agenda: los medios cubren la pelea, no el problema. El espectáculo reemplaza al tema original.') +
     sec('d', 'Lo que pasa después', 'La agenda se invierte',
-      `<div class="tv"><div class="screen" aria-hidden="true">📺</div><div class="chy">Pelea feroz en redes sociales</div><div class="tick">NotiVisión 24 (ficticio) · Qué dicen los jóvenes y la política del hashtag del momento</div></div>
+      `<div class="tv"><div class="screen" aria-hidden="true"><span>📺</span><div class="pip"><span>🙄</span><small>@lu.opina · video recortado</small></div></div><div class="chy">Pelea feroz en redes sociales</div><div class="tick">NotiVisión 24 (ficticio) · Mirá el video de la joven que reavivó la polémica</div></div>
+      <div class="info"><span aria-hidden="true">✂️</span><span>El canal levantó el video de @lu.opina, pero usó solo 10 de sus 30 segundos: dejó el posteo de Radar Libertario y sacó el final, donde ella pide revisar la fuente.</span></div>
       <ul class="news">
         <li>Escándalo en redes: la campaña que dividió a los jóvenes<span>Portal NoticiasYa (ficticio)</span></li>
         <li>“Generación de cristal”: el hashtag que incendió la red<span>Portal NoticiasYa (ficticio)</span></li>
         <li>Quién está detrás del posteo que enfureció a la política<span>Stream Directo Argentina (ficticio)</span></li>
+        <li>Una tiktoker reaviva la polémica con un video sobre el posteo de la ONG<span>Portal NoticiasYa (ficticio)</span></li>
       </ul>`) +
     SEC_O('Así va quedando el mensaje'),
   ask: 'Lo ves en la tele y en los portales. ¿Qué hacés?',
   c: [
     ['Ver el programa y comentar en vivo en X', 'La “segunda pantalla” realimenta el ciclo: lo que se dice en X vuelve a la tele como “la reacción de las redes”.', [6, 8, 7]],
     ['Compartir la nota del portal', 'Compartir el titular amplifica el encuadre del conflicto. El link de ayuda original ya no aparece en ninguna de las notas.', [5, 6, 8]],
-    ['Revisar si las notas hablan de salud mental y cuestionar la cobertura', 'Cuestionar la agenda es valioso, pero el medio mide el reclamo como una reacción más: se vuelve parte de la pelea que cubre.', [1, 4, 3]],
+    ['Revisar si las notas hablan de salud mental y si el video de Lu se mostró completo', 'Cuestionar la agenda es valioso, pero el medio mide el reclamo como una reacción más: se vuelve parte de la pelea que cubre.', [1, 4, 3]],
     ['Cerrar la app y apagar la tele', 'Desconectarse reduce el ruido personal, pero la agenda mediática sigue su curso sin tu mirada crítica.', [2, 2, 3]]
   ]
 },
@@ -474,7 +742,7 @@ const TRENDS = [
   [['#GeneraciónDeCristal', '31 mil'], ['Gasto público', '18 mil'], ['Salud mental', '9,8 mil'], ['#FinDeSemanaLargo', '41 mil']],
   [['Conocé recursos de ayuda acá', '64 mil'], ['#GeneraciónDeCristal', '88 mil'], ['Plantilla del momento', '22 mil'], ['Salud mental', '6 mil']],
   [['#StitchDeCristal', '120 mil'], ['Conocé recursos de ayuda acá', '97 mil'], ['#GeneraciónDeCristal', '101 mil'], ['Salud mental', '4 mil']],
-  [['Pelea feroz en redes', '210 mil'], ['#GeneraciónDeCristal', '150 mil'], ['Conocé recursos de ayuda acá', '70 mil'], ['Salud mental', '3 mil']],
+  [['Pelea feroz en redes', '210 mil'], ['#GeneraciónDeCristal', '150 mil'], ['Conocé recursos de ayuda acá', '70 mil'], ['Video de @lu.opina', '58 mil'], ['Salud mental', '3 mil']],
   [['Pelea feroz en redes', '95 mil'], ['Nueva polémica del día', '60 mil'], ['#GeneraciónDeCristal', '40 mil'], ['Salud mental', '2 mil']]
 ];
 
@@ -486,9 +754,9 @@ const NODES = [
   { id: 'p3', t: 'pol', st: 1, x: 250, y: 185, r: 11, n: '@ElBarbijoOpina', d: 'Cuenta de choque ficticia. Repite el discurso en tono de burla.', from: 'ong' },
   { id: 'm1', t: 'pol', st: 2, x: 60, y: 175, r: 12, n: '@memes_del_dia', d: 'Cuenta de memes ficticia. Convierte la frase en plantilla fuera de contexto.', from: 'p1' },
   { id: 'm2', t: 'pol', st: 2, x: 160, y: 28, r: 9, n: 'Cuenta de humor político', d: 'Cuenta ficticia que usa la plantilla para chistes partidarios.', from: 'p2' },
-  { id: 't1', t: 'pol', st: 3, x: 22, y: 115, r: 11, n: '@lu.opina (stitch)', d: 'Creadora ficticia de TikTok. Recrea el conflicto en video corto.', from: 'm1' },
+  { id: 't1', t: 'pol', st: 3, x: 22, y: 115, r: 11, n: '@lu.opina (stitch)', d: 'Creadora ficticia de TikTok. Recrea el conflicto en video corto. Su video llega a la TV, recortado.', from: 'm1' },
   { id: 't2', t: 'pol', st: 3, x: 298, y: 118, r: 10, n: '@humor.federal (parodia)', d: 'Creador ficticio de TikTok. Su parodia circula sin ningún enlace al original.', from: 'p3' },
-  { id: 'e1', t: 'med', st: 4, x: 110, y: 214, r: 18, n: 'NotiVisión 24 (ficticio)', d: 'Canal de noticias ficticio. Titula “Pelea feroz en redes sociales”, no cubre salud mental.', from: 't1' },
+  { id: 'e1', t: 'med', st: 4, x: 110, y: 214, r: 18, n: 'NotiVisión 24 (ficticio)', d: 'Canal de noticias ficticio. Levanta el video de @lu.opina recortado y titula “Pelea feroz en redes sociales”; no cubre salud mental.', from: 't1' },
   { id: 'e2', t: 'med', st: 4, x: 205, y: 218, r: 15, n: 'Portal NoticiasYa (ficticio)', d: 'Portal ficticio que titula sobre el escándalo y no menciona el link de ayuda.', from: 'p2' },
   { id: 'e3', t: 'med', st: 4, x: 288, y: 82, r: 13, n: 'Stream Directo Argentina (ficticio)', d: 'Canal de streaming ficticio que comenta la polémica en vivo.', from: 't2' }
 ];
@@ -531,7 +799,9 @@ function paintGraph(stage) {
 let S = null;          // sesión de juego
 let timers = [];       // temporizadores de la animación del perfil
 const clearTimers = () => { timers.forEach(clearTimeout); timers.forEach(clearInterval); timers = []; };
-const fresh = (handle, age) => ({ handle, age, stage: 0, m: [4, 3, 2], hist: [[4, 3, 2]], picks: [], rows: [], sys: [0, 0, 0], up: [0, 0, 0], dn: [0, 0, 0], locked: false });
+let CONSENT = false;   // el usuario aceptó compartir sus decisiones (se define en la portada)
+const newId = () => { const a = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let o = ''; const r = new Uint8Array(8); (crypto && crypto.getRandomValues) ? crypto.getRandomValues(r) : r.forEach((_, i) => r[i] = Math.random() * 256); r.forEach(n => o += a[n % a.length]); return o.slice(0, 4) + '-' + o.slice(4); };
+const fresh = (handle, age) => ({ runId: newId(), handle, age, stage: 0, m: [4, 3, 2], hist: [[4, 3, 2]], picks: [], rows: [], sys: [0, 0, 0], up: [0, 0, 0], dn: [0, 0, 0], locked: false });
 
 function setPhase(p, title) {
   document.body.dataset.phase = p;
@@ -548,12 +818,13 @@ function paintTrends(i) {
 
 /* ---------- Portada ---------- */
 function showIntro() {
-  clearTimers(); S = null;
+  clearTimers(); S = null; CONSENT = false;
   $('#navuser').hidden = true;
   setPhase('intro', 'Inicio');
   $('#view').innerHTML = `<div class="intro">
     <h1>Un posteo. Miles de caminos. ¿Qué queda realmente de los mensajes?</h1>
     <p class="lead">Un simulador sobre cómo una campaña de interés público se viraliza en una red como X, cambia de sentido, migra a TikTok y termina en los medios. Vos decidís cada paso.</p>
+    <p class="lead" style="margin-top:-.6rem">Es un prototipo educativo. Si querés, tus decisiones —sin tu nombre— se suman a una planilla del equipo para estudiar cómo reacciona la gente. Es opcional y lo decidís abajo.</p>
     <form class="box" id="form" novalidate>
       <h2>Creá tu perfil</h2>
       <label for="u">Nombre de usuario</label>
@@ -563,8 +834,13 @@ function showIntro() {
       <input id="a" type="number" inputmode="numeric" min="18" max="99" placeholder="23" aria-describedby="err">
       <p class="small">Tenés que tener 18 años o más.</p>
       <p class="err" id="err" role="alert"></p>
-      <button class="btn" type="button" id="create">Crear mi perfil</button>
-      <p class="small" style="margin-top:.8rem"><b>Sin registro.</b> Podés usar un usuario inventado. No pedimos mail ni contraseña, y tu usuario y tu edad no se guardan: solo se usan durante esta sesión.</p>
+      <fieldset class="consent" aria-describedby="cdesc">
+        <legend>Tus datos y tu consentimiento</legend>
+        <p id="cdesc">Si aceptás, al terminar se envían de forma anónima tus 6 decisiones, los indicadores finales, tu tramo de edad (18 a 30 o 31 o más) y un código de partida al azar. Tus datos personales no serán compartidos: no enviamos tu usuario, tu edad exacta, tu mail ni tu IP. Podés jugar igual sin aceptar.</p>
+        <label class="optin" for="consent"><input type="checkbox" id="consent"><span>Acepto compartir mis decisiones de forma anónima con el equipo del proyecto, en las condiciones de arriba. <span class="mu" style="font-weight:400">(Opcional)</span></span></label>
+      </fieldset>
+      <button class="btn" type="button" id="create" style="margin-top:1rem">Crear mi perfil</button>
+      <p class="small" style="margin-top:.8rem"><b>Sin registro.</b> Podés usar un usuario inventado. No pedimos mail ni contraseña, y tu usuario y tu edad exacta no se guardan en ningún lado: solo se usan durante esta sesión.</p>
     </form></div>`;
   const create = () => {
     const raw = $('#u').value.trim().replace(/^@/, '');
@@ -578,6 +854,7 @@ function showIntro() {
     if (a < 18) { fail('Este simulador está pensado para personas de 18 años o más.', '#a'); return; }
     if (a > 99) { fail('Ingresá una edad válida.', '#a'); return; }
     $('#u').value = u;
+    CONSENT = $('#consent').checked;
     showProfile(u, a);
   };
   // No dependemos del envío nativo del formulario (algunos visores embebidos lo bloquean).
@@ -592,7 +869,7 @@ function showProfile(handle, age) {
   S = fresh(handle, age);
   setPhase('profile', 'Tu perfil');
   let h = 0; for (const ch of handle) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  const following = 240 + h % 260, followers = 120 + (h >> 3) % 380;
+  const following = 240 + h % 260, followers = 120 + (h >>> 3) % 380;
   const bio = 'Estudio, laburo y scrolleo más de lo que debería. Fan del mate y de los audios de WhatsApp.';
   const inSeg = age <= 30;
   $('#navuser').hidden = false;
@@ -612,7 +889,7 @@ function showProfile(handle, age) {
       <p>Vas a cruzarte con un posteo de una organización ficticia sobre salud mental y ansiedad por pantallas. En 6 etapas elegís cómo reaccionar entre 4 opciones.</p>
       <p>Después de cada decisión, vas a ver cómo el algoritmo la modula. Tres indicadores muestran qué le pasa al mensaje: pérdida de sentido, captura afectiva y vulnerabilidad mediática.</p>
       <p>Al final, un tablero de auditoría te cuenta qué parte del resultado fue de tu recorrido y qué parte puso el sistema.</p>
-      <div class="edu"><b>Fines educativos.</b> Personas, cuentas, medios, memes y datos son inventados. ${inSeg ? 'Con tus ' + age + ' años, entrás en el segmento de 18 a 30 años que estudia este simulador.' : 'Con tus ' + age + ' años quedás fuera del segmento de 18 a 30 que estudia el simulador, pero el mecanismo es el mismo.'}</div>
+      <div class="edu"><b>Fines educativos.</b> Personas, cuentas, medios, memes y cifras de la historia son inventados. <b>Tus datos:</b> ${CONSENT ? 'aceptaste compartir tus decisiones de forma anónima al terminar cada partida.' : 'elegiste no compartir nada.'} ${inSeg ? 'Con tus ' + age + ' años, entrás en el segmento de 18 a 30 años que estudia este simulador.' : 'Con tus ' + age + ' años quedás fuera del segmento de 18 a 30 que estudia el simulador, pero el mecanismo es el mismo.'}</div>
       <button class="btn" id="go">Empezar</button>
     </div>
   </article>`;
@@ -675,7 +952,7 @@ function renderStage() {
   S.locked = false;
   setPhase('game', `Etapa ${S.stage + 1} de 6 · ${st.name}`);
   $('#scene').innerHTML = st.scene();
-  $('#ask').innerHTML = `<div class="decide"><p class="small">Tu decisión</p><h3 class="ask">${st.ask}</h3></div>`;
+  $('#ask').innerHTML = `<div class="decide"><p class="small">Tu decisión</p><h3 class="ask" tabindex="-1">${st.ask}</h3></div>`;
   $('#choices').innerHTML = st.c.map((c, i) => `<button class="ch" data-i="${i}"><span class="L">${'ABCD'[i]}</span><span>${c[0]}</span></button>`).join('');
   paintSteps(); paintMeters(); paintGraph(S.stage);
   window.scrollTo({ top: 0, behavior: 'auto' });
@@ -716,8 +993,21 @@ function saveRun() {
   const d = loadStore(); d.n++;
   S.picks.forEach((p, i) => { d.st[i] = d.st[i] || [0, 0, 0, 0]; d.st[i][p]++; });
   try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch (e) { /* sin almacenamiento */ }
-  if (ENDPOINT) { try { fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decisiones: S.picks }), keepalive: true }); } catch (e) { /* ignorar */ } }
   return d;
+}
+// Solo se llama si el usuario aceptó. Envía exactamente el objeto que se le muestra en pantalla.
+// Content-Type text/plain y no-cors: evita el preflight, que Apps Script no responde.
+async function sendRun(payload) {
+  if (!ENDPOINT) return 'off';
+  const opt = { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) };
+  try {
+    const r = await fetch(ENDPOINT, opt);                       // intento normal: permite leer la respuesta
+    const t = (await r.text()).trim();
+    return (t === 'ok' || t === 'duplicado') ? 'sent' : 'rejected';
+  } catch (e) {
+    try { await fetch(ENDPOINT, { ...opt, mode: 'no-cors', keepalive: true }); return 'unknown'; }  // respuesta opaca; el script ignora duplicados
+    catch (e2) { return 'fail'; }
+  }
 }
 
 /* ---------- Tablero de auditoría ---------- */
@@ -756,6 +1046,10 @@ function audit() {
     const arr = store.st[i] || [0, 0, 0, 0], tot = arr.reduce((a, b) => a + b, 0) || 1;
     return `<div class="srow"><b>${i + 1}. ${st.name}</b><div class="sb">${arr.map((x, j) => `<div class="${S.picks[i] === j ? 'me' : ''}"><span>${'ABCD'[j]}</span><i style="width:${Math.max(1, x / tot * 100) * .75}%"></i><span>${Math.round(x / tot * 100)}%</span></div>`).join('')}</div></div>`;
   }).join('');
+  const payload = { consentimiento: CONSENT_VERSION, idPartida: S.runId, segmentoEdad: S.age <= 30 ? '18-30' : '31+', decisiones: S.picks.map(p => 'ABCD'[p]), sentidoFinal: Math.round(s), capturaFinal: Math.round(c), vulnerabilidadFinal: Math.round(v), aporteSentidoPct: contribS };
+  const shareBox = CONSENT
+    ? `<section class="shared on" aria-live="polite"><p><b>Gracias por compartir tus respuestas.</b> <span id="sharestate">${ENDPOINT ? 'Enviando…' : 'Modo de prueba: no se envió nada.'}</span></p></section>`
+    : `<section class="shared"><p><b>No aceptaste compartir tus respuestas.</b> No se envió nada. Las estadísticas de abajo salen solo de este navegador.</p></section>`;
   const seg = S.age <= 30 ? `A tus ${S.age} años, estás dentro del segmento de 18 a 30 años que estudia este simulador.` : `A tus ${S.age} años estás fuera del segmento de 18 a 30 años, pero el mecanismo es el mismo.`;
 
   S.stage = STAGES.length;
@@ -783,8 +1077,10 @@ function audit() {
     </ul>
 
     <h3 class="t">Estadísticas de comportamiento</h3>
-    <p class="small">Distribución anónima de decisiones en este navegador (${store.n} ${store.n === 1 ? 'partida' : 'partidas'}). Tu elección aparece en azul. Para ver un grupo completo hay que conectar un contador propio (ver ENDPOINT en el código).</p>
+    <p class="small">Distribución anónima de decisiones en este navegador (${store.n} ${store.n === 1 ? 'partida' : 'partidas'}). Tu elección aparece en azul. Estas barras no incluyen a otras personas.</p>
     <div class="stats" style="margin-top:.5rem">${stats}</div>
+
+    <h3 class="t">Tus datos</h3>${shareBox}
 
     <h3 class="t">Qué te llevás</h3>
     <ol class="takes">
@@ -796,10 +1092,101 @@ function audit() {
     <div class="actions"><button class="btn" id="again">Volver a jugar</button><button class="btn sec" id="prn">Guardar o imprimir</button></div>
   </div>`;
   paintMeters();
+  if (CONSENT && ENDPOINT) sendRun(payload).then(r => { const el = $('#sharestate'); if (el) el.textContent = { sent: 'Se enviaron tus respuestas de forma anónima.', unknown: 'Se envió, pero no se pudo confirmar la recepción.', rejected: 'El envío fue rechazado por el receptor.', fail: 'No se pudo enviar (¿sin conexión?).' }[r] || ''; });
   $('#again').onclick = () => { const { handle, age } = S; S = fresh(handle, age); startGame(); };
   $('#prn').onclick = () => window.print();
   window.scrollTo({ top: 0, behavior: 'auto' });
 }
+
+/* ---------- Video simulado de Lu ---------- */
+const LV = { t: 0, on: false, timer: null, scene: -1, capKey: '' };
+const luv = $('#luv');
+const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+const POSTRADAR = `<div class="lv-card"><div class="who">${av('#c0392b', 'R')}<b>Radar Libertario</b> <span class="mu">@RadarLibertario_</span></div>Con la plata de los contribuyentes nos explican que mirar el celular da ansiedad. Generación de cristal total.</div>`;
+const POSTONG = (extra = '') => `<div class="lv-card ong"><div class="who">${av('var(--blue)', 'S')}<b>Red de Salud Mental Joven</b> <span class="mu">@SaludMentalJoven</span></div>${POST}${extra}</div>`;
+const LU_VIS = [
+  () => `<span class="lv-stk big" style="top:12%;right:14%;--r:10deg">🤔</span>${luGirl('talk')}`,
+  () => `${POSTRADAR}<span class="lv-stk" style="bottom:12.6rem;left:3%;--r:-7deg">💬 ¿Qué pensás?</span><div class="lv-row">${luGirl('phone', 'radar')}<div class="lv-clock" id="lv-clock" role="timer" aria-label="Reloj de 5 segundos"><b id="lv-clk">5</b><small>segundos</small></div></div>`,
+  () => `<span class="lv-stk big" style="top:3%;right:6%;--r:8deg">⚠️</span>${POSTONG()}${luGirl('phone', 'ong')}`,
+  () => `${POSTONG('<div class="small" style="margin-top:.3rem">↗ Posteo real, abierto en vivo</div>')}<div class="lv-cm"><span>👀 ¿esto es real?</span><span>💬 yo tampoco abrí el link</span></div><span class="lv-stk" style="bottom:12.6rem;left:3%;--r:-6deg">✅ fuente</span>${luGirl('phone', 'real')}`,
+  () => `${luGirl('point')}<span class="lv-arrow" aria-hidden="true">↓</span><span class="small" style="color:#ccc">Link en la bio de @lu.opina</span><span class="lv-pill">🔗 simulación</span><button class="btn" type="button" id="lv-cta" style="background:#fff;color:#000">▶ Volver al simulador</button>`
+];
+function luScene() { const i = LU.findIndex(f => LV.t < f.t1); return i < 0 ? LU.length - 1 : i; }
+function luPaint() {
+  const i = luScene(), f = LU[i];
+  if (i !== LV.scene) {
+    LV.scene = i; LV.capKey = '';
+    $('#lv-stage').innerHTML = LU_VIS[i]();
+    $('#lv-bg').className = 'lv-bg bg' + i;
+    const cam = $('#lv-cam'); cam.style.animation = 'none'; void cam.offsetWidth; cam.style.animation = `push ${f.t1 - f.t0}s ease-out both`;
+    const cutEl = $('#lv-cut'); cutEl.style.animation = 'none'; void cutEl.offsetWidth; cutEl.style.animation = '';
+    $('#lv-live').hidden = i !== 3;
+    document.querySelectorAll('#lv-sc button').forEach((b, k) => k === i ? b.setAttribute('aria-current', 'step') : b.removeAttribute('aria-current'));
+    const c = $('#lv-cta'); if (c) c.addEventListener('click', luBack);
+  }
+  let k = 0; f.caps.forEach((c, n) => { if (LV.t >= c[0]) k = n; });
+  const end = f.caps[k + 1] ? f.caps[k + 1][0] : f.t1, words = f.caps[k][1].split(' ');
+  const idx = Math.min(words.length - 1, Math.floor(clamp((LV.t - f.caps[k][0]) / (end - f.caps[k][0]) * 100) / 100 * words.length * .92));
+  const key = k + ':' + idx;
+  if (key !== LV.capKey) { LV.capKey = key; $('#lv-voz').innerHTML = words.map((w, n) => `<span class="${n === idx ? 'a' : ''}">${w}</span>`).join(' '); }
+  const clock = $('#lv-clock');
+  if (clock) { const run = LV.t >= 8; clock.classList.toggle('run', run); $('#lv-clk').textContent = run ? clamp(Math.ceil(13 - LV.t), 0, 5) : 5; }
+  document.querySelectorAll('#lv-prog i b').forEach((b, n) => { const d = LU[n]; b.style.width = clamp((LV.t - d.t0) / (d.t1 - d.t0) * 100) + '%'; });
+  $('#lv-time').textContent = `${fmt(LV.t)} / ${fmt(LU_END)}`;
+}
+function luPlay(on) {
+  LV.on = on; clearInterval(LV.timer);
+  luv.classList.toggle('paused', !on);
+  const b = $('#lv-pp');
+  if (on) {
+    if (LV.t >= LU_END) { LV.t = 0; LV.scene = -1; }
+    LV.timer = setInterval(() => { LV.t = Math.min(LU_END, LV.t + .1); luPaint(); if (LV.t >= LU_END) luPlay(false); }, 100);
+  }
+  b.textContent = on ? '❚❚' : (LV.t >= LU_END ? '↻ Repetir' : '▶'); b.setAttribute('aria-label', on ? 'Pausar' : (LV.t >= LU_END ? 'Repetir el video' : 'Reproducir'));
+}
+function luTab(tab) {
+  const v = tab === 'video';
+  $('#lv-videoview').hidden = !v; $('#lv-videoview').style.display = v ? 'flex' : 'none';
+  $('#lv-scriptview').hidden = v;
+  $('#lv-tv').setAttribute('aria-pressed', v); $('#lv-ts').setAttribute('aria-pressed', !v);
+  if (!v) luPlay(false);
+}
+function luScript() {
+  const scr = ['', 'radar', 'ong', 'real', ''];
+  $('#lv-scriptview').innerHTML = `<div class="lv-doc"><h2>Guion · Video de @lu.opina</h2>
+    <p class="meta2">Personaje ficticio · TikTok · vertical 9:16 · 30 segundos · con subtítulos · sin música con derechos</p>
+    ${LU.map((f, i) => `<section class="sc1 ${f.ret ? 'ret' : ''}"><div class="tc2">${f.t0}–${f.t1} s<small>Escena ${i + 1}</small>${luGirl(f.pose, scr[i], 'gi')}</div>
+      <dl><div><dt>${f.rol}</dt><dd>${f.plano}</dd></div><div><dt>Voz de Lu</dt><dd class="v">${f.voz}</dd></div><div><dt>En pantalla</dt><dd>${f.pant}</dd></div><div><dt>Edición y gráficos</dt><dd class="edit">${f.edit}</dd></div></dl></section>`).join('')}
+    <p class="nota"><b>Cómo vuelve al simulador:</b> la última escena muestra el link de la bio de Lu, “simulación”, que lleva al posteo de X con el que empieza el simulador (el vínculo es narrativo, no un link literal). En el juego, ese regreso es la decisión de la etapa 4.</p>
+    <div class="actions"><button class="btn" type="button" id="lv-seev" style="background:#161616;color:#fff">▶ Ver el video</button></div></div>`;
+  $('#lv-seev').addEventListener('click', () => { luTab('video'); LV.t = 0; LV.scene = -1; luPaint(); luPlay(!prefersReduced); });
+}
+function luOpen(tab) {
+  LV.t = 0; LV.scene = -1;
+  if (!$('#lv-bokeh').children.length) $('#lv-bokeh').innerHTML = [[8, 14, 46, '#ff7ab8'], [78, 8, 34, '#25f4ee'], [88, 40, 58, '#7856ff'], [14, 48, 40, '#ffd400'], [70, 62, 30, '#fe2c55'], [30, 22, 26, '#ffffff'], [52, 70, 44, '#1d9bf0'], [6, 78, 34, '#25f4ee'], [92, 80, 28, '#ff7ab8']]
+    .map((b, n) => `<i style="left:${b[0]}%;top:${b[1]}%;width:${b[2]}px;height:${b[2]}px;background:${b[3]};animation-delay:${-n * .7}s;animation-duration:${4 + n % 3}s"></i>`).join('');
+  $('#lv-prog').innerHTML = LU.map(f => `<i style="flex:${f.t1 - f.t0}"><b></b></i>`).join('');
+  $('#lv-sc').innerHTML = LU.map((f, i) => `<button type="button" data-i="${i}" aria-label="Escena ${i + 1}: ${f.rol}">${i + 1}</button>`).join('');
+  luScript(); luPaint();
+  luv.showModal();
+  if (tab === 'script') { luTab('script'); } else { luTab('video'); luPlay(!prefersReduced); $('#lv-pp').focus(); }
+}
+function luBack() {
+  luPlay(false); luv.close();
+  const a = $('#ask .ask'); if (!a) return;
+  a.scrollIntoView({ block: 'center', behavior: prefersReduced ? 'auto' : 'smooth' });
+  a.focus({ preventScroll: true });
+}
+$('#view').addEventListener('click', e => {
+  if (e.target.closest('#lu-open')) luOpen('video');
+  else if (e.target.closest('#lu-script')) luOpen('script');
+});
+$('#lv-back').addEventListener('click', luBack);
+$('#lv-tv').addEventListener('click', () => luTab('video'));
+$('#lv-ts').addEventListener('click', () => luTab('script'));
+$('#lv-pp').addEventListener('click', () => luPlay(!LV.on));
+$('#lv-sc').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; LV.t = LU[+b.dataset.i].t0; luPaint(); });
+luv.addEventListener('close', () => luPlay(false));
 
 $('#restart').addEventListener('click', showIntro);
 showIntro();
